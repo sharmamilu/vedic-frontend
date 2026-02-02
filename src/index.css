@@ -1,0 +1,97 @@
+/* Global CSS Variables and Reset */
+:root {
+  /* Color Palette */
+  --gold: #d4af37;
+  --dark-gold: #b8941f;
+  --purple: #6a5acd;
+  --green: #3cb371;
+  --earth: #8b4513;
+  --light-text: #5d4037;
+  --dark-text: #e6d8a9;
+  --dark-bg: #191932;
+  
+  /* Font Settings */
+  font-family: 'Cambria', 'Georgia', serif;
+  line-height: 1.5;
+  font-weight: 400;
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, 
+    rgba(255, 253, 245, 1) 0%,
+    rgba(255, 250, 240, 0.9) 100%);
+  color: var(--light-text);
+  font-family: 'Cambria', 'Georgia', serif;
+  transition: all 0.5s ease;
+}
+
+/* Dark Mode for Body */
+body.spiritual-dark-mode {
+  background: linear-gradient(180deg, 
+    var(--dark-bg) 0%,
+    rgba(40, 40, 70, 0.9) 100%);
+  color: var(--dark-text);
+}
+
+/* Theme Transition Effect */
+.theme-transition {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 0%, rgba(212, 175, 55, 0.3) 100%);
+  pointer-events: none;
+  z-index: 9999;
+  animation: themeTransition 0.6s ease-out forwards;
+}
+
+@keyframes themeTransition {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+/* Gentle Pulse Animation */
+@keyframes gentlePulse {
+  0%, 100% { 
+    transform: scale(1); 
+    opacity: 1;
+  }
+  50% { 
+    transform: scale(1.05); 
+    opacity: 0.8;
+  }
+}
+
+/* Base App Container */
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.App {
+  width: 100%;
+  min-height: 100vh;
+}
