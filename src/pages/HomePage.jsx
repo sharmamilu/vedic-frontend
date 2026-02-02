@@ -312,9 +312,6 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
               <div className="time-slot">{auspiciousTime}</div>
               <p>Best for meditation and spiritual practices</p>
             </div>
-            <button className="card-action">
-              Set Reminder <FaCalendarAlt />
-            </button>
           </div>
         </div>
       </section>

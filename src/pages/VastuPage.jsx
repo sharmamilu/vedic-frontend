@@ -39,7 +39,6 @@ import {
   GiWindHole,
 } from "react-icons/gi";
 import "../styles/VastuPage.css";
-import VastuCompass from "../components/VastuCompass";
 
 const VastuPage = ({ darkMode }) => {
   const [activeTab, setActiveTab] = useState("principles");
@@ -47,7 +46,6 @@ const VastuPage = ({ darkMode }) => {
   const [showRemedyModal, setShowRemedyModal] = useState(false);
   const [selectedRemedy, setSelectedRemedy] = useState(null);
   const [userRoom, setUserRoom] = useState("living-room");
-  const [showCompass, setShowCompass] = useState(false);
 
   // Vastu Principles Data
   const vastuPrinciples = [
@@ -370,9 +368,9 @@ const VastuPage = ({ darkMode }) => {
               </button>
               <button
                 className="vastu-btn-secondary"
-                onClick={() => setShowCompass(true)}
+                onClick={() => handleTabChange("remedies")}
               >
-                <GiDirectionSigns /> Live Compass Tool
+                <GiLotus /> View Remedies
               </button>
             </div>
           </div>
@@ -913,52 +911,9 @@ const VastuPage = ({ darkMode }) => {
                 </h3>
                 <p>{selectedRemedy.benefits}</p>
               </div>
-
-              <div className="modal-actions">
-                <button className="modal-action-btn">
-                  <FaCalendarAlt /> Set Reminder
-                </button>
-                <button className="modal-action-btn">
-                  <FaDownload /> Save Guide
-                </button>
-              </div>
             </div>
           </div>
         </div>
-      )}
-
-      {/* Compass Tool */}
-      {/* {showCompass && (
-        <div
-          className="compass-tool-overlay"
-          onClick={() => setShowCompass(false)}
-        >
-          <div className="compass-tool" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="compass-close"
-              onClick={() => setShowCompass(false)}
-            >
-              <FaArrowLeft />
-            </button>
-            <h2>Virtual Vastu Compass</h2>
-            <div className="compass-tool-content">
-              <p>Point your device North to align with Vastu directions</p>
-              <div className="compass-animation">
-                <div className="compass-needle"></div>
-              </div>
-              <button className="compass-action">
-                <FaCompass /> Calibrate Compass
-              </button>
-            </div>
-          </div>
-        </div>
-      )} */}
-
-      {showCompass && (
-        <VastuCompass
-          darkMode={darkMode}
-          onClose={() => setShowCompass(false)}
-        />
       )}
     </div>
   );
