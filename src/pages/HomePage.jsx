@@ -473,11 +473,8 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
               through spiritual guidance.
             </p>
             <div className="cta-buttons">
-              <button className="btn-primary">
+              <button className="btn-primary" onClick={handleClick}>
                 <FaSeedling /> Book Free Consultation
-              </button>
-              <button className="btn-secondary">
-                <FaWater /> Discover Our Courses
               </button>
             </div>
           </div>

@@ -61,12 +61,12 @@ const SpiritualNavbar = ({ darkMode, toggleDarkMode }) => {
       icon: <FaUserAlt />,
       path: "/consultation",
     },
-    {
-      id: "resources",
-      label: "Resources",
-      icon: <FaBookOpen />,
-      path: "/resources",
-    },
+    // {
+    //   id: "resources",
+    //   label: "Resources",
+    //   icon: <FaBookOpen />,
+    //   path: "/resources",
+    // },
   ];
 
   // Handle menu item click
@@ -187,7 +187,7 @@ const SpiritualNavbar = ({ darkMode, toggleDarkMode }) => {
       {/* Right Side Actions */}
       <div className="spiritual-actions">
         {/* Search Bar */}
-        <div className="spiritual-search">
+        {/* <div className="spiritual-search">
           <input
             type="text"
             placeholder="Search spiritual wisdom..."
@@ -199,7 +199,7 @@ const SpiritualNavbar = ({ darkMode, toggleDarkMode }) => {
           <button onClick={handleSearch} aria-label="Search">
             <FaSearch />
           </button>
-        </div>
+        </div> */}
 
         {/* Theme Toggle */}
         <button
