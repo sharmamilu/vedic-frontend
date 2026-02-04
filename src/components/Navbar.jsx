@@ -12,6 +12,7 @@ import {
   FaTimes,
   FaMoon,
   FaSun,
+  FaInfo,
   FaYinYang,
   FaGem,
 } from "react-icons/fa";
@@ -36,6 +37,7 @@ const SpiritualNavbar = ({ darkMode, toggleDarkMode }) => {
 
   const menuItems = [
     { id: "home", label: "Home", icon: <FaHome />, path: "/" },
+    { id: "about", label: "About", icon: <FaInfo />, path: "/about" },
     {
       id: "vastu",
       label: "Vastu",
