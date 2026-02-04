@@ -149,20 +149,17 @@ const SpiritualNavbar = ({ darkMode, toggleDarkMode }) => {
         ))}
       </div>
 
-      {/* Logo Section */}
-      <div className="spiritual-logo">
-        <div className="logo-symbol">
-          <FaYinYang />
-          <div className="lotus-flower">
-            <GiLotus />
-          </div>
-        </div>
-        <div className="logo-text">
-          <span className="logo-main">Divine</span>
-          <span className="logo-sub">Vastu & Spiritual</span>
+      {/* wrap the logo section within a circular aura */}
+      <div className="aura">
+        {/* Logo Section */}
+        <div className="spiritual-logo">
+          <img
+            src="/logo.png"
+            alt="Divine Vastu & Spiritual"
+            className="navbar-logo-image"
+          />
         </div>
       </div>
-
       {/* Navigation Menu */}
       <ul className={`spiritual-nav-menu ${isMenuOpen ? "active" : ""}`}>
         {menuItems.map((item) => (

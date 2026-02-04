@@ -33,45 +33,30 @@
   flex: 1;
   min-width: 250px;
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-.footer-logo .logo-symbol {
-  font-size: 3rem;
-  color: var(--green);
-  filter: drop-shadow(0 0 10px rgba(67, 160, 71, 0.3));
-  transition: color 0.3s ease;
+.footer-logo-image {
+  height: 80px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+  transition: all 0.3s ease;
 }
 
-.dark-mode .footer-logo .logo-symbol {
-  color: var(--gold);
-  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+.footer-logo-image:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 12px rgba(67, 160, 71, 0.3));
 }
 
-.footer-logo .logo-main {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--earth);
-  letter-spacing: 1px;
+.dark-mode .footer-logo-image {
+  filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.2));
 }
 
-.dark-mode .footer-logo .logo-main {
-  color: white;
-}
-
-.footer-logo .logo-sub {
-  color: var(--light-text);
-  font-size: 1rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  transition: color 0.3s ease;
-  opacity: 0.8;
-}
-
-.dark-mode .footer-logo .logo-sub {
-  color: var(--dark-text);
-  opacity: 0.8;
+.dark-mode .footer-logo-image:hover {
+  filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.4));
 }
 
 /* Links Section */

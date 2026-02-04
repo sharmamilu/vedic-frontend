@@ -7,13 +7,11 @@ const Footer = () => {
     <footer className="spiritual-footer">
       <div className="footer-content">
         <div className="footer-logo">
-          <div className="logo-symbol">
-            <GiLotus />
-          </div>
-          <div className="logo-text">
-            <span className="logo-main">Divine</span>
-            <span className="logo-sub">Vastu & Spiritual</span>
-          </div>
+          <img
+            src="/logo.png"
+            alt="Divine Vastu & Spiritual"
+            className="footer-logo-image"
+          />
         </div>
 
         <div className="footer-links">
