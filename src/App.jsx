@@ -4,6 +4,10 @@ import HomePage from "./pages/HomePage";
 import VastuPage from "./pages/VastuPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer";
+import AstrologyPage from "./pages/AstrologyPage";
+import MeditationPage from "./pages/MeditationPage";
+import EnergyPage from "./pages/EnergyPage";
+import ConsultationPage from "./pages/ConsultationPage";
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -34,6 +38,19 @@ const App = () => {
             }
           />
           <Route path="/vastu" element={<VastuPage darkMode={darkMode} />} />
+          <Route
+            path="/astrology"
+            element={<AstrologyPage darkMode={darkMode} />}
+          />
+          <Route
+            path="/meditation"
+            element={<MeditationPage darkMode={darkMode} />}
+          />
+          <Route path="/energy" element={<EnergyPage darkMode={darkMode} />} />
+          <Route
+            path="/consultation"
+            element={<ConsultationPage darkMode={darkMode} />}
+          />
         </Routes>
         <Footer />
       </div>

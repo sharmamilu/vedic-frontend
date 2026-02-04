@@ -28,8 +28,10 @@ import {
 import { IoMdFlower } from "react-icons/io";
 import { MdNaturePeople } from "react-icons/md";
 import "../styles/HomePage.css";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = ({ darkMode, toggleDarkMode }) => {
+  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("all");
   const [dailyHoroscope, setDailyHoroscope] = useState("");
   const [moonPhase, setMoonPhase] = useState("Waxing Crescent");
@@ -175,6 +177,11 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
     setAffirmation(affirmations[randomIndex]);
   };
 
+  const handleClick = () => {
+    console.log("clicked");
+    navigate("/consultation");
+  };
+
   // Fetch daily horoscope (simulated)
   useEffect(() => {
     // Simulate API call
@@ -217,7 +224,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
               Meditation, and Spiritual Healing tailored for your journey.
             </p>
             <div className="hero-buttons">
-              <button className="btn-primary">
+              <button className="btn-primary" onClick={handleClick}>
                 <GiLotus /> Begin Your Journey
               </button>
               <button className="btn-secondary">

@@ -25,6 +25,15 @@ const SpiritualNavbar = ({ darkMode, toggleDarkMode }) => {
   const [showEnergyOrbs, setShowEnergyOrbs] = useState(true);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // get the current path and set the active item
+    const currentPath = window.location.pathname;
+    const activeItem = menuItems.find((item) => item.path === currentPath);
+    if (activeItem) {
+      setActiveItem(activeItem.id);
+    }
+  }, [window.location.pathname]);
+
   const menuItems = [
     { id: "home", label: "Home", icon: <FaHome />, path: "/" },
     {
@@ -45,7 +54,7 @@ const SpiritualNavbar = ({ darkMode, toggleDarkMode }) => {
       icon: <GiMeditation />,
       path: "/meditation",
     },
-    { id: "healing", label: "Energy", icon: <FaHands />, path: "/healing" },
+    { id: "energy", label: "Energy", icon: <FaHands />, path: "/energy" },
     {
       id: "consultation",
       label: "Consultation",

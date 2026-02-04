@@ -1,12 +1,12 @@
 /* Global CSS Variables and Reset */
 :root {
-  /* Color Palette */
-  --gold: #d4af37;
-  --dark-gold: #b8941f;
-  --purple: #6a5acd;
-  --green: #3cb371;
-  --earth: #8b4513;
-  --light-text: #5d4037;
+  /* Color Palette - Updated to Match VAHC Image */
+  --gold: #43A047; /* Replaced Gold with Vibrant Green */
+  --dark-gold: #2E7D32; /* Replaced Dark Gold with Darker Green */
+  --purple: #8E24AA; /* Updated to Vibrant Purple */
+  --green: #43A047; /* Primary Green */
+  --earth: #6A1B9A; /* Replaced Earth with Deep Purple */
+  --light-text: #4A148C; /* Dark Purple Text */
   --dark-text: #e6d8a9;
   --dark-bg: #191932;
   
@@ -32,9 +32,10 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  /* Updated Background to Light Lavender/White */
   background: linear-gradient(180deg, 
-    rgba(255, 253, 245, 1) 0%,
-    rgba(255, 250, 240, 0.9) 100%);
+    rgba(252, 245, 255, 1) 0%,
+    rgba(255, 255, 255, 0.9) 100%);
   color: var(--light-text);
   font-family: 'Cambria', 'Georgia', serif;
   transition: all 0.5s ease;

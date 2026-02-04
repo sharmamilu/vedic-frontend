@@ -57,7 +57,7 @@ const VastuPage = ({ darkMode }) => {
         "Vastu balances the five elements - Earth, Water, Fire, Air, and Space - in your living space.",
       details:
         "Each element corresponds to specific directions and rooms. Proper placement creates harmony and positive energy flow.",
-      color: "#d4af37",
+      color: "#43A047",
     },
     {
       id: 2,
@@ -67,7 +67,7 @@ const VastuPage = ({ darkMode }) => {
         "Each direction has specific energy influences and recommended placements.",
       details:
         "North for wealth, East for health, South for strength, West for prosperity, and Northeast for wisdom.",
-      color: "#3cb371",
+      color: "#8E24AA",
     },
     {
       id: 3,
@@ -77,7 +77,7 @@ const VastuPage = ({ darkMode }) => {
         "Smooth energy flow is essential for positive vibrations in your home.",
       details:
         "Ensure clutter-free spaces, proper ventilation, and unobstructed pathways for energy circulation.",
-      color: "#9370db",
+      color: "#2E7D32",
     },
     {
       id: 4,

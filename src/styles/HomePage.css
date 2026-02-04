@@ -2,8 +2,8 @@
 .homepage-container {
   min-height: 100vh;
   background: linear-gradient(180deg, 
-    rgba(255, 253, 245, 1) 0%,
-    rgba(255, 250, 240, 0.9) 100%);
+    rgba(252, 245, 255, 1) 0%,
+    rgba(255, 255, 255, 0.9) 100%);
   color: var(--light-text);
   font-family: 'Cambria', 'Georgia', serif;
   transition: all 0.5s ease;
@@ -165,12 +165,12 @@
 .btn-primary {
   background: linear-gradient(45deg, var(--gold), var(--dark-gold));
   color: white;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 4px 15px rgba(67, 160, 71, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 6px 20px rgba(67, 160, 71, 0.4);
 }
 
 .btn-secondary {
@@ -184,7 +184,7 @@
 }
 
 .btn-secondary:hover {
-  background: rgba(212, 175, 55, 0.1);
+  background: rgba(67, 160, 71, 0.1);
   transform: translateY(-3px);
 }
 
@@ -218,7 +218,7 @@
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 15px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(67, 160, 71, 0.2);
   min-width: 150px;
   transition: all 0.3s;
 }
@@ -302,7 +302,7 @@
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 30px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(67, 160, 71, 0.2);
   transition: all 0.3s;
 }
 
@@ -318,7 +318,7 @@
 .wisdom-card:hover {
   transform: translateY(-10px);
   border-color: var(--gold);
-  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+  box-shadow: 0 10px 30px rgba(67, 160, 71, 0.1);
 }
 
 .card-header {
@@ -424,7 +424,7 @@
   padding: 10px 20px;
   border-radius: 25px;
   background: transparent;
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(67, 160, 71, 0.3);
   color: var(--light-text);
   cursor: pointer;
   transition: all 0.3s;
@@ -442,7 +442,7 @@
 }
 
 .filter-btn:hover:not(.active) {
-  background: rgba(212, 175, 55, 0.1);
+  background: rgba(67, 160, 71, 0.1);
 }
 
 .services-grid {
@@ -458,7 +458,7 @@
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 30px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(67, 160, 71, 0.2);
   transition: all 0.3s;
 }
 
@@ -474,7 +474,7 @@
 .service-card:hover {
   transform: translateY(-10px);
   border-color: var(--gold);
-  box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15);
+  box-shadow: 0 15px 35px rgba(67, 160, 71, 0.15);
 }
 
 .service-icon {
@@ -511,7 +511,7 @@
 }
 
 .service-category {
-  background: rgba(212, 175, 55, 0.1);
+  background: rgba(67, 160, 71, 0.1);
   color: var(--earth);
   padding: 5px 15px;
   border-radius: 15px;
@@ -548,12 +548,12 @@
 .affirmation-container {
   max-width: 800px;
   margin: 0 auto;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(60, 179, 113, 0.1));
+  background: linear-gradient(135deg, rgba(67, 160, 71, 0.1), rgba(60, 179, 113, 0.1));
   border-radius: 30px;
   padding: 40px;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(67, 160, 71, 0.3);
 }
 
 .dark-mode .affirmation-container {
@@ -614,7 +614,7 @@
 }
 
 .refresh-affirmation:hover {
-  background: rgba(212, 175, 55, 0.1);
+  background: rgba(67, 160, 71, 0.1);
   transform: translateY(-2px);
 }
 
@@ -651,7 +651,7 @@
   backdrop-filter: blur(10px);
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(67, 160, 71, 0.2);
   transition: all 0.3s;
 }
 
@@ -667,7 +667,7 @@
 .article-card:hover {
   transform: translateY(-10px);
   border-color: var(--gold);
-  box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15);
+  box-shadow: 0 15px 35px rgba(67, 160, 71, 0.15);
 }
 
 .article-image {
@@ -781,7 +781,7 @@
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 30px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(67, 160, 71, 0.2);
   transition: all 0.3s;
 }
 
@@ -796,7 +796,7 @@
 
 .testimonial-card:hover {
   border-color: var(--gold);
-  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+  box-shadow: 0 10px 30px rgba(67, 160, 71, 0.1);
 }
 
 .testimonial-content {
@@ -864,7 +864,7 @@
 /* CTA Section */
 .cta-section {
   padding: 80px 20px;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(60, 179, 113, 0.1));
+  background: linear-gradient(135deg, rgba(67, 160, 71, 0.1), rgba(60, 179, 113, 0.1));
 }
 
 .dark-mode .cta-section {

@@ -1,0 +1,1267 @@
+/* Meditation Page Styles */
+.meditation-page-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, 
+    rgba(252, 245, 255, 1) 0%,
+    rgba(255, 255, 255, 0.9) 100%);
+  color: var(--light-text);
+  font-family: 'Cambria', 'Georgia', serif;
+  transition: all 0.5s ease;
+}
+
+.meditation-page-container.dark-mode {
+  background: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+/* Hero Section */
+.meditation-hero-section {
+  position: relative;
+  padding: 80px 20px 60px;
+  overflow: hidden;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.dark-mode .meditation-hero-section {
+  background: transparent;
+}
+
+.meditation-hero-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.meditation-floating-elements {
+  position: absolute;
+  inset: 0;
+}
+
+.meditation-floating-element {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.1;
+  color: var(--green);
+  animation: floatElement 20s infinite linear;
+}
+
+@keyframes floatElement {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.05; }
+  25% { transform: translateY(-40px) rotate(90deg); opacity: 0.1; }
+  50% { transform: translateY(0) rotate(180deg); opacity: 0.05; }
+  75% { transform: translateY(40px) rotate(270deg); opacity: 0.1; }
+  100% { transform: translateY(0) rotate(360deg); opacity: 0.05; }
+}
+
+.meditation-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.meditation-hero-text {
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .meditation-hero-text {
+  background: rgba(30, 30, 30, 0.9);
+}
+
+.meditation-hero-title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  color: var(--earth);
+}
+
+.dark-mode .meditation-hero-title {
+  color: var(--dark-text);
+}
+
+.meditation-highlight {
+  background: linear-gradient(45deg, var(--earth), var(--purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+}
+
+.dark-mode .meditation-highlight {
+  background: linear-gradient(45deg, #a29bfe, #74b9ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.meditation-hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  line-height: 1.6;
+  color: var(--light-text);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dark-mode .meditation-hero-subtitle {
+  color: var(--dark-text);
+}
+
+.meditation-hero-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.meditation-btn-primary, .meditation-btn-secondary {
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid;
+  min-width: 200px;
+  justify-content: center;
+}
+
+.meditation-btn-primary {
+  background: linear-gradient(45deg, var(--green), var(--gold));
+  color: white;
+  border: none;
+}
+
+.meditation-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(67, 160, 71, 0.3);
+}
+
+.meditation-btn-secondary {
+  background: transparent;
+  color: var(--earth);
+  border: 2px solid var(--green);
+}
+
+.dark-mode .meditation-btn-secondary {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+.meditation-btn-secondary:hover {
+  background: rgba(67, 160, 71, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Tabs Navigation */
+.meditation-tabs-container {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(142, 36, 170, 0.1);
+}
+
+.dark-mode .meditation-tabs-container {
+  background: rgba(26, 26, 46, 0.8);
+  border-color: rgba(142, 36, 170, 0.2);
+}
+
+.meditation-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.meditation-tab {
+  padding: 15px 25px;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  color: var(--light-text);
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.dark-mode .meditation-tab {
+  color: var(--dark-text);
+}
+
+.meditation-tab:hover {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+.dark-mode .meditation-tab:hover {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+.meditation-tab.active {
+  background: linear-gradient(45deg, var(--green), var(--gold));
+  color: white;
+  border-color: transparent;
+}
+
+.dark-mode .meditation-tab.active {
+  background: linear-gradient(45deg, var(--green), var(--gold));
+  border-color: transparent;
+}
+
+/* Main Content */
+.meditation-main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: var(--earth);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.dark-mode .section-header h2 {
+  color: var(--dark-text);
+}
+
+.section-header p {
+  font-size: 1.1rem;
+  color: var(--light-text);
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.dark-mode .section-header p {
+  color: var(--dark-text);
+}
+
+/* Techniques Section */
+.techniques-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.technique-card {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  border: 2px solid #E0E0E0;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.dark-mode .technique-card {
+  background: #2D2D2D;
+  border-color: #444;
+}
+
+.technique-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--green);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .technique-card:hover {
+  border-color: var(--green);
+}
+
+.technique-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.technique-icon {
+  font-size: 2.5rem;
+}
+
+.technique-info h3 {
+  font-size: 1.4rem;
+  color: var(--earth);
+  margin: 0 0 5px 0;
+}
+
+.dark-mode .technique-info h3 {
+  color: var(--dark-text);
+}
+
+.technique-meta {
+  display: flex;
+  gap: 10px;
+}
+
+.difficulty, .duration {
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-weight: 500;
+}
+
+.difficulty {
+  background: #FFF3E0;
+  color: #E65100;
+}
+
+.dark-mode .difficulty {
+  background: var(--light-text);
+  color: #FFB74D;
+}
+
+.duration {
+  background: rgba(67, 160, 71, 0.1);
+  color: var(--green);
+}
+
+.dark-mode .duration {
+  background: rgba(67, 160, 71, 0.1);
+  color: var(--green);
+}
+
+.technique-description {
+  color: var(--light-text);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.dark-mode .technique-description {
+  color: var(--dark-text);
+}
+
+.technique-learn-btn {
+  align-self: flex-start;
+  background: transparent;
+  border: none;
+  color: var(--green);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  transition: all 0.3s;
+}
+
+.technique-learn-btn:hover {
+  gap: 10px;
+  color: var(--dark-gold);
+}
+
+.dark-mode .technique-learn-btn {
+  color: var(--gold);
+}
+
+/* Technique CTA */
+.technique-cta {
+  background: linear-gradient(135deg, #E8F5E9, #F1F8E9);
+  border-radius: 20px;
+  padding: 40px;
+  border: 2px solid #C8E6C9;
+  text-align: center;
+}
+
+.dark-mode .technique-cta {
+  background: linear-gradient(135deg, var(--dark-gold), var(--green));
+  border-color: var(--green);
+}
+
+.technique-cta h3 {
+  color: var(--earth);
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.dark-mode .technique-cta h3 {
+  color: var(--dark-text);
+}
+
+.technique-cta p {
+  color: var(--light-text);
+  line-height: 1.6;
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dark-mode .technique-cta p {
+  color: var(--dark-text);
+}
+
+.cta-btn {
+  padding: 15px 30px;
+  background: linear-gradient(45deg, var(--green), var(--gold));
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s;
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(67, 160, 71, 0.3);
+}
+
+/* Paths Section */
+.paths-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.path-card {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  border: 2px solid #E0E0E0;
+}
+
+.dark-mode .path-card {
+  background: #2D2D2D;
+  border-color: #444;
+}
+
+.path-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #E0E0E0;
+}
+
+.dark-mode .path-header {
+  border-color: #444;
+}
+
+.path-icon {
+  font-size: 2.5rem;
+}
+
+.path-header h3 {
+  font-size: 1.6rem;
+  color: var(--earth);
+  margin: 0;
+}
+
+.dark-mode .path-header h3 {
+  color: var(--dark-text);
+}
+
+.path-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.path-step {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background: #F9F9F9;
+  border-radius: 10px;
+  border-left: 4px solid var(--green);
+}
+
+.dark-mode .path-step {
+  background: #333;
+  border-left-color: var(--green);
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  background: var(--green);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.dark-mode .step-number {
+  background: var(--green);
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-content h4 {
+  color: var(--earth);
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+}
+
+.dark-mode .step-content h4 {
+  color: var(--dark-text);
+}
+
+.step-description {
+  color: var(--light-text);
+  line-height: 1.6;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.dark-mode .step-description {
+  color: var(--dark-text);
+}
+
+.step-duration {
+  color: var(--green);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.dark-mode .step-duration {
+  color: var(--gold);
+}
+
+.step-focus {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.focus-tag {
+  background: #E8F5E9;
+  color: var(--green);
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.dark-mode .focus-tag {
+  background: var(--dark-gold);
+  color: var(--gold);
+}
+
+.path-recommendation {
+  padding: 15px;
+  background: rgba(67, 160, 71, 0.1);
+  border-radius: 10px;
+  color: var(--light-text);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.dark-mode .path-recommendation {
+  background: rgba(67, 160, 71, 0.15);
+  color: var(--dark-text);
+}
+
+/* Benefits Section */
+.benefits-tree {
+  background: white;
+  border-radius: 15px;
+  padding: 40px;
+  border: 2px solid #E0E0E0;
+  margin-bottom: 40px;
+}
+
+.dark-mode .benefits-tree {
+  background: #2D2D2D;
+  border-color: #444;
+}
+
+.tree-root {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+  border-bottom: 2px solid #E0E0E0;
+}
+
+.dark-mode .tree-root {
+  border-color: #444;
+}
+
+.root-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.tree-root h3 {
+  font-size: 1.8rem;
+  color: var(--earth);
+  margin: 0;
+}
+
+.dark-mode .tree-root h3 {
+  color: var(--dark-text);
+}
+
+.tree-branches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.tree-branch {
+  padding: 25px;
+  background: #F9F9F9;
+  border-radius: 10px;
+  border-left: 4px solid var(--green);
+}
+
+.dark-mode .tree-branch {
+  background: #333;
+  border-left-color: var(--green);
+}
+
+.branch-header h4 {
+  color: var(--earth);
+  font-size: 1.4rem;
+  margin: 0 0 20px 0;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.dark-mode .branch-header h4 {
+  color: var(--dark-text);
+  border-color: #444;
+}
+
+.branch-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.benefit-item {
+  display: flex;
+  gap: 15px;
+}
+
+.benefit-icon {
+  width: 24px;
+  height: 24px;
+  background: var(--green);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.dark-mode .benefit-icon {
+  background: var(--green);
+}
+
+.benefit-content h5 {
+  color: var(--earth);
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+}
+
+.dark-mode .benefit-content h5 {
+  color: var(--dark-text);
+}
+
+.benefit-content p {
+  color: var(--light-text);
+  line-height: 1.5;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.dark-mode .benefit-content p {
+  color: var(--dark-text);
+}
+
+.benefits-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.summary-card {
+  padding: 25px;
+  background: white;
+  border-radius: 10px;
+  border: 2px solid #E0E0E0;
+  text-align: center;
+}
+
+.dark-mode .summary-card {
+  background: #2D2D2D;
+  border-color: #444;
+}
+
+.summary-card h3 {
+  color: var(--earth);
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.dark-mode .summary-card h3 {
+  color: var(--dark-text);
+}
+
+.summary-card p {
+  color: var(--light-text);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.dark-mode .summary-card p {
+  color: var(--dark-text);
+}
+
+/* Tips Section */
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.tip-category {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  border: 2px solid #E0E0E0;
+}
+
+.dark-mode .tip-category {
+  background: #2D2D2D;
+  border-color: #444;
+}
+
+.category-header {
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #E0E0E0;
+}
+
+.dark-mode .category-header {
+  border-color: #444;
+}
+
+.category-header h3 {
+  font-size: 1.5rem;
+  color: var(--earth);
+  margin: 0;
+}
+
+.dark-mode .category-header h3 {
+  color: var(--dark-text);
+}
+
+.tip-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tip-list li {
+  color: var(--light-text);
+  padding: 12px 0;
+  padding-left: 25px;
+  position: relative;
+  border-bottom: 1px solid #F0F0F0;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.dark-mode .tip-list li {
+  color: var(--dark-text);
+  border-color: #444;
+}
+
+.tip-list li:last-child {
+  border-bottom: none;
+}
+
+.tip-icon {
+  position: absolute;
+  left: 0;
+  top: 12px;
+  color: var(--green);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.dark-mode .tip-icon {
+  color: var(--gold);
+}
+
+/* Expert Guidance */
+.expert-guidance {
+  background: linear-gradient(135deg, #E8F5E9, #F1F8E9);
+  border-radius: 20px;
+  padding: 40px;
+  border: 2px solid #C8E6C9;
+}
+
+.dark-mode .expert-guidance {
+  background: linear-gradient(135deg, var(--dark-gold), var(--green));
+  border-color: var(--green);
+}
+
+.guidance-content {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.guidance-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.guidance-text h3 {
+  color: var(--earth);
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.dark-mode .guidance-text h3 {
+  color: var(--dark-text);
+}
+
+.guidance-text p {
+  color: var(--light-text);
+  line-height: 1.6;
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+}
+
+.dark-mode .guidance-text p {
+  color: var(--dark-text);
+}
+
+.guidance-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+}
+
+.guidance-list li {
+  color: var(--light-text);
+  padding: 8px 0;
+  padding-left: 25px;
+  position: relative;
+  font-size: 1rem;
+}
+
+.dark-mode .guidance-list li {
+  color: var(--dark-text);
+}
+
+.guidance-list li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: bold;
+}
+
+.dark-mode .guidance-list li:before {
+  color: var(--gold);
+}
+
+.guidance-btn {
+  padding: 15px 30px;
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s;
+}
+
+.guidance-btn:hover {
+  background: var(--dark-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+}
+
+.guidance-image {
+  font-size: 8rem;
+  color: var(--green);
+  opacity: 0.7;
+}
+
+.dark-mode .guidance-image {
+  color: var(--gold);
+}
+
+/* Technique Modal */
+.technique-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+.technique-modal {
+  background: white;
+  border-radius: 20px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  border: 3px solid var(--green);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .technique-modal {
+  background: #2D2D2D;
+  border-color: var(--green);
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: var(--light-text);
+  font-size: 2rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 0.3s;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark-mode .modal-close {
+  color: var(--dark-text);
+}
+
+.modal-close:hover {
+  background: rgba(46, 125, 50, 0.1);
+  color: var(--green);
+}
+
+.modal-header {
+  padding: 40px 40px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 2px solid #E0E0E0;
+}
+
+.dark-mode .modal-header {
+  border-color: #444;
+}
+
+.modal-technique-icon {
+  font-size: 3rem;
+}
+
+.modal-technique-info h2 {
+  font-size: 1.8rem;
+  color: var(--earth);
+  margin: 0 0 10px 0;
+}
+
+.dark-mode .modal-technique-info h2 {
+  color: var(--dark-text);
+}
+
+.modal-technique-meta {
+  display: flex;
+  gap: 15px;
+}
+
+.modal-content {
+  padding: 30px 40px;
+}
+
+.modal-section {
+  margin-bottom: 30px;
+}
+
+.modal-section h3 {
+  color: var(--earth);
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.dark-mode .modal-section h3 {
+  color: var(--dark-text);
+  border-color: #444;
+}
+
+.modal-section p {
+  color: var(--light-text);
+  line-height: 1.6;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.dark-mode .modal-section p {
+  color: var(--dark-text);
+}
+
+.steps-list, .benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.steps-list li {
+  color: var(--light-text);
+  padding: 8px 0;
+  padding-left: 25px;
+  position: relative;
+  line-height: 1.5;
+  font-size: 1rem;
+  counter-increment: step;
+}
+
+.dark-mode .steps-list li {
+  color: var(--dark-text);
+}
+
+.steps-list li:before {
+  content: counter(step) ".";
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: bold;
+}
+
+.dark-mode .steps-list li:before {
+  color: var(--gold);
+}
+
+.benefits-list li {
+  color: var(--light-text);
+  padding: 8px 0;
+  padding-left: 30px;
+  position: relative;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.dark-mode .benefits-list li {
+  color: var(--dark-text);
+}
+
+.benefit-icon {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  color: var(--green);
+  font-size: 0.9rem;
+}
+
+.dark-mode .benefit-icon {
+  color: var(--gold);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.modal-action-btn {
+  flex: 1;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s;
+}
+
+.modal-action-btn:not(.secondary) {
+  background: var(--green);
+  color: white;
+}
+
+.modal-action-btn:not(.secondary):hover {
+  background: var(--dark-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+}
+
+.modal-action-btn.secondary {
+  background: transparent;
+  color: var(--green);
+  border: 2px solid var(--green);
+}
+
+.modal-action-btn.secondary:hover {
+  background: rgba(46, 125, 50, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .meditation-hero-title {
+    font-size: 2.2rem;
+  }
+  
+  .meditation-hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .meditation-hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .meditation-btn-primary, .meditation-btn-secondary {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  
+  .techniques-grid,
+  .tree-branches,
+  .benefits-summary,
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .path-step {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .guidance-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .guidance-image {
+    font-size: 6rem;
+  }
+  
+  .modal-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px 20px;
+  }
+  
+  .modal-content {
+    padding: 20px;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .meditation-hero-title {
+    font-size: 1.8rem;
+  }
+  
+  .meditation-hero-text {
+    padding: 25px;
+  }
+  
+  .meditation-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .meditation-tab {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
+  
+  .technique-card,
+  .path-card,
+  .benefits-tree,
+  .tip-category {
+    padding: 20px;
+  }
+}
