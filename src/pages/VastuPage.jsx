@@ -595,7 +595,7 @@ const VastuPage = ({ darkMode }) => {
             </div>
 
             {/* Compass Visualization */}
-            <div className="compass-visualization">
+            {/* <div className="compass-visualization">
               <h3>
                 <GiDirectionSigns /> Directional Compass
               </h3>
@@ -611,7 +611,7 @@ const VastuPage = ({ darkMode }) => {
                   ></div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </section>
         )}
 

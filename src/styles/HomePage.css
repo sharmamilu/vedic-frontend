@@ -245,161 +245,114 @@
   color: var(--dark-text);
 }
 
-/* Daily Wisdom Section */
-.daily-wisdom-section {
+/* Core Principles Section */
+.core-principles-section {
   padding: 80px 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.section-header {
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.section-header h2 {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
-  color: var(--earth);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-}
-
-.dark-mode .section-header h2 {
-  color: var(--gold);
-}
-
-.section-header p {
-  font-size: 1.1rem;
-  color: var(--light-text);
-  opacity: 0.8;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.dark-mode .section-header p {
-  color: var(--dark-text);
-}
-
-.wisdom-date {
-  font-size: 1rem;
-  color: var(--green);
-  margin-top: 10px;
-  font-style: italic;
-}
-
-.wisdom-cards {
+.principles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
   margin-top: 40px;
 }
 
-.wisdom-card {
-  background: rgba(255, 255, 255, 0.1);
+.principle-card {
+  background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
   border-radius: 20px;
-  padding: 30px;
-  border: 1px solid rgba(67, 160, 71, 0.2);
-  transition: all 0.3s;
+  padding: 40px 30px;
+  text-align: center;
+  border: 1px solid rgba(142, 36, 170, 0.1);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.dark-mode .wisdom-card {
+.dark-mode .principle-card {
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 215, 0, 0.3);
+  border-color: rgba(255, 215, 0, 0.2);
 }
 
-.dark-mode .wisdom-card:hover {
-  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
-}
-
-.wisdom-card:hover {
+.principle-card:hover {
   transform: translateY(-10px);
-  border-color: var(--gold);
-  box-shadow: 0 10px 30px rgba(67, 160, 71, 0.1);
+  background: white;
+  box-shadow: 0 15px 30px rgba(142, 36, 170, 0.1);
+  border-color: var(--green);
 }
 
-.card-header {
+.dark-mode .principle-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  border-color: var(--gold);
+}
+
+.principle-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 25px;
+  background: linear-gradient(135deg, rgba(67, 160, 71, 0.1), rgba(142, 36, 170, 0.1));
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 20px;
+  justify-content: center;
+  transition: all 0.4s ease;
 }
 
-.card-header svg {
-  font-size: 1.8rem;
-  color: var(--gold);
+.dark-mode .principle-icon-wrapper {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(147, 112, 219, 0.1));
 }
 
-.card-header h3 {
-  font-size: 1.3rem;
+.principle-card:hover .principle-icon-wrapper {
+  transform: scale(1.1) rotate(5deg);
+  background: linear-gradient(135deg, var(--green), var(--purple));
+}
+
+.dark-mode .principle-card:hover .principle-icon-wrapper {
+  background: linear-gradient(135deg, var(--gold), var(--purple));
+}
+
+.principle-icon {
+  font-size: 2.5rem;
   color: var(--earth);
+  transition: all 0.4s ease;
 }
 
-.dark-mode .card-header h3 {
+.dark-mode .principle-icon {
   color: var(--gold);
 }
 
-.horoscope-text {
+.principle-card:hover .principle-icon {
+  color: white;
+}
+
+.dark-mode .principle-card:hover .principle-icon {
+  color: black;
+}
+
+.principle-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--earth);
+  font-family: 'Cambria', 'Georgia', serif;
+}
+
+.dark-mode .principle-card h3 {
+  color: var(--gold);
+}
+
+.principle-card p {
   line-height: 1.6;
-  margin-bottom: 20px;
   color: var(--light-text);
-}
-
-.dark-mode .horoscope-text {
-  color: var(--dark-text);
-}
-
-.moon-phase-display {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.moon-visual {
-  font-size: 3rem;
-  margin-bottom: 10px;
-}
-
-.moon-details p {
-  margin: 5px 0;
-  color: var(--light-text);
+  font-size: 1rem;
   opacity: 0.8;
 }
 
-.dark-mode .moon-details p {
+.dark-mode .principle-card p {
   color: var(--dark-text);
-}
-
-.time-display {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.time-slot {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: var(--gold);
-  margin-bottom: 10px;
-}
-
-.card-action {
-  background: transparent;
-  border: none;
-  color: var(--green);
-  cursor: pointer;
-  font-size: 0.95rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 15px;
-  transition: all 0.3s;
-}
-
-.card-action:hover {
-  gap: 12px;
-  color: var(--gold);
+  opacity: 0.9;
 }
 
 /* Services Section */

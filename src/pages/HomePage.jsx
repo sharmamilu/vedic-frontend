@@ -18,6 +18,8 @@ import {
   FaHome,
   FaSeedling,
   FaWater,
+  FaScroll,
+  FaBalanceScale,
 } from "react-icons/fa";
 import {
   GiLotus,
@@ -33,9 +35,6 @@ import { useNavigate } from "react-router-dom";
 const Homepage = ({ darkMode, toggleDarkMode }) => {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("all");
-  const [dailyHoroscope, setDailyHoroscope] = useState("");
-  const [moonPhase, setMoonPhase] = useState("Waxing Crescent");
-  const [auspiciousTime, setAuspiciousTime] = useState("06:00 AM - 08:00 AM");
   const [affirmation, setAffirmation] = useState(
     "I am a channel for divine energy and wisdom",
   );
@@ -184,13 +183,6 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
 
   // Fetch daily horoscope (simulated)
   useEffect(() => {
-    // Simulate API call
-    setTimeout(() => {
-      setDailyHoroscope(
-        "Today is a day for introspection and connecting with your inner self. The planets align to support spiritual growth.",
-      );
-    }, 1000);
-
     // Change affirmation every 30 seconds
     const interval = setInterval(getRandomAffirmation, 30000);
     return () => clearInterval(interval);
@@ -261,64 +253,53 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       </section>
 
       {/* Daily Wisdom Section */}
-      <section className="daily-wisdom-section">
+      {/* Core Principles Section */}
+      <section className="core-principles-section">
         <div className="section-header">
           <h2>
-            <FaSun /> Today's Spiritual Guidance
+            <GiLotus /> Our Guiding Principles
           </h2>
-          <div className="wisdom-date">
-            {new Date().toLocaleDateString("en-US", {
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </div>
+          <p>
+            The foundation of our spiritual practice relies on three timeless
+            pillars
+          </p>
         </div>
 
-        <div className="wisdom-cards">
-          {/* Daily Horoscope */}
-          <div className="wisdom-card horoscope-card">
-            <div className="card-header">
-              <FaStarAndCrescent />
-              <h3>Daily Horoscope</h3>
+        <div className="principles-grid">
+          {/* Principle 1 */}
+          <div className="principle-card">
+            <div className="principle-icon-wrapper">
+              <FaScroll className="principle-icon" />
             </div>
-            <p className="horoscope-text">
-              {dailyHoroscope || "Loading your spiritual guidance for today..."}
+            <h3>Ancient Wisdom</h3>
+            <p>
+              Drawing from centuries-old Vedic texts and scriptures to provide
+              authentic guidance.
             </p>
-            <button className="card-action">
-              Read Full Horoscope <FaArrowRight />
-            </button>
           </div>
 
-          {/* Moon Phase */}
-          <div className="wisdom-card moon-card">
-            <div className="card-header">
-              <FaMoon />
-              <h3>Moon Phase</h3>
+          {/* Principle 2 */}
+          <div className="principle-card">
+            <div className="principle-icon-wrapper">
+              <FaBalanceScale className="principle-icon" />
             </div>
-            <div className="moon-phase-display">
-              <div className="moon-visual">{moonPhase}</div>
-              <div className="moon-details">
-                <p>Illumination: 45%</p>
-                <p>Next Full Moon: 7 days</p>
-              </div>
-            </div>
-            <button className="card-action">
-              View Lunar Calendar <FaCalendarAlt />
-            </button>
+            <h3>Holistic Balance</h3>
+            <p>
+              Harmonizing mind, body, and spirit to create a balanced state of
+              being.
+            </p>
           </div>
 
-          {/* Auspicious Time */}
-          <div className="wisdom-card time-card">
-            <div className="card-header">
-              <GiDirectionSigns />
-              <h3>Auspicious Time</h3>
+          {/* Principle 3 */}
+          <div className="principle-card">
+            <div className="principle-icon-wrapper">
+              <FaLeaf className="principle-icon" />
             </div>
-            <div className="time-display">
-              <div className="time-slot">{auspiciousTime}</div>
-              <p>Best for meditation and spiritual practices</p>
-            </div>
+            <h3>Natural Harmony</h3>
+            <p>
+              Aligning your life with the natural rhythms of the universe and
+              environment.
+            </p>
           </div>
         </div>
       </section>

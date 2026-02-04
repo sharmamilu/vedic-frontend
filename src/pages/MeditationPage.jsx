@@ -609,7 +609,7 @@ const MeditationPage = ({ darkMode }) => {
                   <ul className="tip-list">
                     {category.tips.map((tip, tipIndex) => (
                       <li key={tipIndex}>
-                        <span className="tip-icon">•</span>
+                        <span className="tip-icon-med">•</span>
                         {tip}
                       </li>
                     ))}
