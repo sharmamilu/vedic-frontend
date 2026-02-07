@@ -16,7 +16,7 @@
   margin-top: 10px;
   margin-left: 10px;
   overflow: hidden;
-  border-bottom: 3px solid #7B1FA2;
+  border-bottom: 3px solid #7b1fa2;
   box-shadow:
     0 4px 30px rgba(106, 27, 154, 0.15),
     0 2px 10px rgba(67, 160, 71, 0.1);
@@ -170,12 +170,15 @@
   position: relative;
   z-index: 3;
   gap: 15px;
+  /* border-radius: 100%; 
+   border: 1px solid #6A1B9A; */
 }
 
 .aura {
+  display: flex;
   z-index: 0.5;
-  border-radius: 100%;
-  border: 1px solid #6A1B9A;
+  /* border-radius: 100%; */
+  /* border: 1px solid #6A1B9A; */
 }
 .navbar-logo-image {
   height: 65px;
@@ -200,6 +203,70 @@
   filter: drop-shadow(0 3px 10px rgba(255, 215, 0, 0.4));
 }
 
+.aura-divider {
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(106, 27, 154, 0.4) 20%,
+    rgba(142, 36, 170, 0.5) 50%,
+    rgba(106, 27, 154, 0.4) 80%,
+    transparent 100%
+  );
+  align-self: center;
+  margin: 0 10px;
+}
+
+.dark-mode .aura-divider {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #ffd700 20%,
+    #9370db 50%,
+    #ffd700 80%,
+    transparent 100%
+  );
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: center;
+}
+
+.logo-main {
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #6a1b9a, #8e24aa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+
+.dark-mode .logo-main {
+  background: linear-gradient(45deg, #ffd700, #9370db);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.logo-sub {
+  font-size: 0.75rem;
+  color: #43a047;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.dark-mode .logo-sub {
+  color: #98fb98;
+}
+
 /* Navigation Menu */
 .spiritual-nav-menu {
   display: flex;
@@ -216,7 +283,7 @@
 }
 
 .nav-link {
-  color: #4A148C;
+  color: #4a148c;
   text-decoration: none;
   font-weight: 500;
   padding: 8px 12px;
@@ -238,7 +305,7 @@
   font-size: 1.3rem;
   margin-bottom: 5px;
   transition: all 0.3s;
-  color: #6A1B9A;
+  color: #6a1b9a;
 }
 
 .dark-mode .nav-icon {
@@ -264,7 +331,7 @@
 }
 
 .nav-link:hover {
-  color: #43A047;
+  color: #43a047;
   transform: translateY(-2px);
 }
 
@@ -287,7 +354,7 @@
     rgba(123, 31, 162, 0.1),
     rgba(67, 160, 71, 0.1)
   );
-  color: #6A1B9A;
+  color: #6a1b9a;
   font-weight: 600;
 }
 
@@ -329,7 +396,7 @@
   background: rgba(255, 255, 255, 0.8);
   border-radius: 50px;
   padding: 10px 20px;
-  border: 1px solid #7B1FA2;
+  border: 1px solid #7b1fa2;
   box-shadow: 0 2px 10px rgba(123, 31, 162, 0.1);
   transition: all 0.3s;
   position: relative;
@@ -348,7 +415,7 @@
 .spiritual-search input {
   background: transparent;
   border: none;
-  color: #4A148C;
+  color: #4a148c;
   padding: 5px 10px;
   width: 160px;
   outline: none;
@@ -372,7 +439,7 @@
 .spiritual-search button {
   background: transparent;
   border: none;
-  color: #6A1B9A;
+  color: #6a1b9a;
   cursor: pointer;
   font-size: 1.1rem;
   transition: all 0.3s;
@@ -689,6 +756,8 @@
   .spiritual-navbar {
     height: 70px;
     padding: 0 10px;
+    display: flex;
+    flex-wrap: nowrap;
   }
 
   /* Adjust logo size on mobile */
@@ -697,8 +766,25 @@
     max-width: 150px;
   }
 
+  /* Hide logo text on very small screens to save space */
+  .logo-text {
+    display: none;
+  }
+
+  /* Hide divider on mobile */
+  .aura-divider {
+    display: none;
+  }
+
+  /* Logo on the left */
+  .aura {
+    order: 1;
+  }
+
   .spiritual-actions {
     gap: 8px;
+    order: 3; /* Move to the right side on mobile */
+    margin-left: auto;
   }
 
   .spiritual-search {
@@ -718,6 +804,7 @@
 
   .mobile-toggle {
     font-size: 1.5rem;
+    order: 4; /* Position at the far right */
   }
 
   .spiritual-nav-menu {

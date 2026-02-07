@@ -1,5 +1,4 @@
 import React from "react";
-import { GiLotus } from "react-icons/gi";
 import "./Footer.css";
 
 const Footer = () => {
@@ -9,9 +8,13 @@ const Footer = () => {
         <div className="footer-logo">
           <img
             src="/logo.png"
-            alt="Divine Vastu & Spiritual"
+            alt="Vibrant Aura Holistic Center"
             className="footer-logo-image"
           />
+          <div className="footer-logo-text">
+            <span className="footer-logo-main">Vibrant Aura</span>
+            <span className="footer-logo-sub">Holistic Center</span>
+          </div>
         </div>
 
         <div className="footer-links">
@@ -41,7 +44,7 @@ const Footer = () => {
 
       <div className="footer-bottom">
         <p>
-          © {new Date().getFullYear()} Divine Vastu & Spiritual. All rights
+          © {new Date().getFullYear()} Vibrant Aura Holistic Center. All rights
           reserved.
         </p>
         <div className="footer-social">

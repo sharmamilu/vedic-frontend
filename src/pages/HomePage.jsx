@@ -181,7 +181,6 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
     navigate("/consultation");
   };
 
-  // Fetch daily horoscope (simulated)
   useEffect(() => {
     // Change affirmation every 30 seconds
     const interval = setInterval(getRandomAffirmation, 30000);
@@ -206,6 +205,10 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
 
         <div className="hero-content">
           <div className="hero-text">
+            <div className="hero-branding">
+              <span className="brand-name">Vibrant Aura</span>
+              <span className="brand-tagline">Holistic Center</span>
+            </div>
             <h1 className="hero-title">
               Discover Your
               <span className="highlight"> Spiritual</span>

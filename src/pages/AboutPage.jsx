@@ -21,91 +21,103 @@ import {
 import "../styles/AboutPage.css";
 
 const AboutPage = ({ darkMode }) => {
-  // Team Members Data
-  const teamMembers = [
+  // Core Modalities Data
+  const coreModalities = [
     {
       id: 1,
-      name: "Dr. Anjali Sharma",
-      role: "Lead Astrologer & Spiritual Guide",
-      experience: "25+ years",
-      specialization: "Vedic Astrology, Life Guidance",
-      icon: <GiCrystalBall />,
+      name: "Precision Healing",
+      description:
+        "Utilizing Acupuncture, Acupressure, and Marma Therapy to clear physical blockages and optimize the body's natural flow.",
+      icon: <GiStoneCrafting />,
       color: "#43A047",
     },
     {
       id: 2,
-      name: "Ravi Verma",
-      role: "Vastu Shastra Expert",
-      experience: "18+ years",
-      specialization: "Energy Balancing, Space Harmony",
-      icon: <GiAncientRuins />,
+      name: "Subtle Energy Arts",
+      description:
+        "Balancing the elements through Seed & Colour Therapy, Byol Magnets, and the deep cleansing power of Pranic Healing.",
+      icon: <GiCrystalBall />,
       color: "#8E24AA",
     },
     {
       id: 3,
-      name: "Priya Mehta",
-      role: "Meditation & Wellness Coach",
-      experience: "15+ years",
-      specialization: "Mindfulness, Stress Management",
+      name: "Advanced Quantum Shifts",
+      description:
+        "Experience the cutting edge of wellness with Neuro Chakra Quantum Healing, a method designed to realign your neurological pathways and energy centers.",
       icon: <GiMeditation />,
       color: "#2196F3",
     },
     {
       id: 4,
-      name: "Aarav Singh",
-      role: "Energy Healing Practitioner",
-      experience: "12+ years",
-      specialization: "Reiki, Chakra Healing",
-      icon: <GiStoneCrafting />,
+      name: "Intuitive Guidance",
+      description:
+        "Gaining clarity on life's path through Pendulum Dowsing, Astrology, and Numerology to ensure your external life matches your internal frequency.",
+      icon: <GiAncientRuins />,
       color: "#FF9800",
     },
   ];
 
-  // Values Data
-  const coreValues = [
+  // Why Choose Vibrant Aura
+  const whyChooseUs = [
     {
       id: 1,
-      title: "Authenticity",
-      description: "We provide genuine guidance without commercial pressure",
-      icon: <FaHeart />,
-      color: "#E91E63",
-    },
-    {
-      id: 2,
-      title: "Holistic Approach",
-      description: "Balancing mind, body, and spirit for complete wellness",
+      title: "Whole-Person Philosophy",
+      description:
+        "We address chronic pain, emotional stress, and spiritual growth in a supportive environment where science meets intuition.",
       icon: <FaBalanceScale />,
       color: "#43A047",
     },
     {
+      id: 2,
+      title: "Natural & Non-Invasive",
+      description:
+        "All our therapies are designed to work with your body's natural healing intelligence without invasive procedures.",
+      icon: <FaLeaf />,
+      color: "#2E7D32",
+    },
+    {
       id: 3,
-      title: "Ancient Wisdom",
-      description: "Blending traditional practices with modern understanding",
-      icon: <GiAncientRuins />,
-      color: "#8E24AA",
+      title: "Personalized Approach",
+      description:
+        "We don't believe in one-size-fits-all. Every treatment plan is customized to your unique energy signature.",
+      icon: <FaHeart />,
+      color: "#E91E63",
     },
     {
       id: 4,
-      title: "Compassion",
-      description: "Treating every individual with empathy and respect",
-      icon: <FaHandsHelping />,
-      color: "#2196F3",
+      title: "Ancient Meets Modern",
+      description:
+        "Bridging the gap between ancient wisdom and modern energetic science for comprehensive healing.",
+      icon: <GiAncientRuins />,
+      color: "#8E24AA",
     },
   ];
 
-  // Milestones Data
+  // Our Journey Milestones
   const milestones = [
     {
-      year: "2005",
-      event: "Founded with a vision to make ancient wisdom accessible",
+      year: "Foundation",
+      event:
+        "Established Vibrant Aura as a sanctuary for holistic healing and energy alignment",
     },
     {
-      year: "2010",
-      event: "Expanded team with certified experts from diverse traditions",
+      year: "Expansion",
+      event:
+        "Integrated advanced quantum healing modalities with traditional therapies",
     },
-    { year: "2015", event: "Reached 10,000+ guided individuals worldwide" },
-    { year: "2020", event: "Launched digital consultation platform" },
-    { year: "2024", event: "25+ expert team serving global community" },
+    {
+      year: "Innovation",
+      event: "Pioneered Neuro Chakra Quantum Healing techniques",
+    },
+    {
+      year: "Recognition",
+      event: "Became a trusted center for whole-person wellness",
+    },
+    {
+      year: "Today",
+      event:
+        "Empowering individuals to reclaim their radiance through natural healing",
+    },
   ];
 
   // Testimonials
@@ -139,12 +151,14 @@ const AboutPage = ({ darkMode }) => {
       <section className="about-hero-section">
         <div className="about-hero-content">
           <h1 className="about-hero-title">
-            Our Journey of
-            <span className="about-highlight"> Spiritual Guidance</span>
+            Welcome to
+            <span className="about-highlight"> Vibrant Aura</span>
           </h1>
           <p className="about-hero-subtitle">
-            For nearly two decades, we've been bridging ancient wisdom with
-            modern life, helping thousands find clarity, balance, and purpose.
+            True health isn't just the absence of illness—it's the perfect
+            alignment of body, mind, and soul. We are your sanctuary for moving
+            beyond surface-level symptoms and tapping into the profound healing
+            intelligence of the human energy system.
           </p>
         </div>
       </section>
@@ -158,10 +172,11 @@ const AboutPage = ({ darkMode }) => {
             </div>
             <h2>Our Mission</h2>
             <p>
-              To make authentic spiritual guidance accessible to everyone,
-              blending ancient practices with contemporary understanding to help
-              individuals navigate life's challenges with clarity and
-              confidence.
+              To empower every individual to take charge of their health through
+              natural, holistic, and vibrationally-aligned therapies. We bridge
+              the gap between ancient wisdom and modern energetic science,
+              offering a diverse spectrum of non-invasive therapies designed to
+              restore balance and ignite your inner vitality.
             </p>
           </div>
 
@@ -171,9 +186,10 @@ const AboutPage = ({ darkMode }) => {
             </div>
             <h2>Our Vision</h2>
             <p>
-              A world where spiritual wisdom empowers every individual to live
-              harmoniously, make conscious choices, and find inner peace amidst
-              life's complexities.
+              A world where every person recognizes and harnesses their innate
+              healing potential. We envision a future where the alignment of
+              body, mind, and soul is the foundation of true wellness, and where
+              ancient wisdom seamlessly integrates with modern science.
             </p>
           </div>
         </div>
@@ -184,21 +200,21 @@ const AboutPage = ({ darkMode }) => {
         <div className="story-container">
           <div className="story-content">
             <h2 className="section-title">
-              <GiSpiralBottle /> Our Humble Beginnings
+              <GiSpiralBottle /> Our Philosophy
             </h2>
             <p className="story-text">
-              What started as a small circle of spiritual seekers in 2005 has
-              grown into a trusted platform connecting people with authentic
-              guidance. Our founder, a lifelong practitioner of Vedic
-              traditions, recognized the need for genuine spiritual counsel in
-              today's fast-paced world.
+              At Vibrant Aura, we believe that true health isn't just the
+              absence of illness—it's the perfect alignment of body, mind, and
+              soul. Our centre is a sanctuary for those seeking to move beyond
+              surface-level symptoms and tap into the profound healing
+              intelligence of the human energy system.
             </p>
             <p className="story-text">
-              We began with simple meditation sessions and astrology
-              consultations, always prioritizing authenticity over
-              commercialization. As word spread about our genuine approach, more
-              experts joined our mission, each bringing decades of specialized
-              knowledge.
+              We don't believe in a one-size-fits-all approach. By blending
+              physical, energetic, and cosmic sciences, we create a personalized
+              roadmap for your wellbeing. Our approach is rooted in the
+              "Whole-Person" philosophy, providing a supportive environment
+              where science meets intuition.
             </p>
 
             <div className="milestones">
@@ -220,14 +236,15 @@ const AboutPage = ({ darkMode }) => {
       <section className="values-section">
         <div className="values-container">
           <h2 className="section-title">
-            <FaHeart /> Our Core Values
+            <FaHeart /> Why Choose Vibrant Aura?
           </h2>
           <p className="section-subtitle">
-            These principles guide everything we do and every connection we make
+            Our approach addresses the whole person—whether you're dealing with
+            chronic pain, emotional stress, or seeking spiritual growth
           </p>
 
           <div className="values-grid">
-            {coreValues.map((value) => (
+            {whyChooseUs.map((value) => (
               <div
                 key={value.id}
                 className="value-card"
@@ -248,14 +265,15 @@ const AboutPage = ({ darkMode }) => {
       <section className="team-section">
         <div className="team-container">
           <h2 className="section-title">
-            <FaUsers /> Meet Our Expert Guides
+            <FaUsers /> Our Core Modalities
           </h2>
           <p className="section-subtitle">
-            Certified practitioners with decades of combined experience
+            A diverse spectrum of non-invasive therapies designed to restore
+            balance and ignite your inner vitality
           </p>
 
           <div className="team-grid">
-            {teamMembers.map((member) => (
+            {coreModalities.map((member) => (
               <div
                 key={member.id}
                 className="team-card"
@@ -266,12 +284,8 @@ const AboutPage = ({ darkMode }) => {
                 </div>
                 <div className="team-info">
                   <h3>{member.name}</h3>
-                  <p className="team-role">{member.role}</p>
                   <div className="team-details">
-                    <span className="experience-badge">
-                      <FaAward /> {member.experience} experience
-                    </span>
-                    <p className="specialization">{member.specialization}</p>
+                    <p className="specialization">{member.description}</p>
                   </div>
                 </div>
               </div>
@@ -323,24 +337,25 @@ const AboutPage = ({ darkMode }) => {
               <FaMedal />
             </div>
             <div className="commitment-content">
-              <h2>Our Commitment to You</h2>
+              <h2>Ready to Reclaim Your Radiance?</h2>
               <p>
-                We promise to always provide guidance with integrity, respect
-                your journey, and maintain complete confidentiality. Your trust
-                is our most valued treasure.
+                Your journey toward a more vibrant version of yourself begins
+                with a single step. Let us help you unlock the healing potential
+                that already exists within you. We provide a supportive
+                environment where your body's natural intelligence can flourish.
               </p>
               <div className="commitment-stats">
                 <div className="stat-item">
-                  <span className="stat-number">19</span>
-                  <span className="stat-label">Years of Service</span>
+                  <span className="stat-number">100%</span>
+                  <span className="stat-label">Natural Therapies</span>
                 </div>
                 <div className="stat-item">
-                  <span className="stat-number">25+</span>
-                  <span className="stat-label">Expert Guides</span>
+                  <span className="stat-number">Non-Invasive</span>
+                  <span className="stat-label">Healing Methods</span>
                 </div>
                 <div className="stat-item">
-                  <span className="stat-number">10K+</span>
-                  <span className="stat-label">Lives Touched</span>
+                  <span className="stat-number">Personalized</span>
+                  <span className="stat-label">Treatment Plans</span>
                 </div>
               </div>
             </div>
@@ -351,13 +366,14 @@ const AboutPage = ({ darkMode }) => {
       {/* Call to Action */}
       <section className="about-cta-section">
         <div className="about-cta-content">
-          <h2>Ready to Begin Your Journey?</h2>
+          <h2>Begin Your Healing Journey Today</h2>
           <p>
-            Whether you seek clarity, balance, or spiritual growth, our experts
-            are here to guide you with authenticity and compassion.
+            Experience the perfect alignment of body, mind, and soul. Discover
+            how our blend of ancient wisdom and modern energetic science can
+            transform your wellbeing.
           </p>
           <a href="/consultation" className="about-cta-btn">
-            Request a Consultation
+            Book Your Session
           </a>
         </div>
       </section>

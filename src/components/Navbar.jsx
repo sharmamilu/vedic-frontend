@@ -93,29 +93,6 @@ const SpiritualNavbar = ({ darkMode, toggleDarkMode }) => {
     }
   };
 
-  // Handle search
-  const handleSearch = () => {
-    if (searchQuery.trim()) {
-      console.log(`Searching spiritual topics: ${searchQuery}`);
-
-      // Show search energy effect
-      const searchEnergy = document.createElement("div");
-      searchEnergy.className = "search-energy";
-      searchEnergy.innerHTML = `
-        <div class="energy-circle"></div>
-        <div class="energy-circle"></div>
-        <div class="energy-circle"></div>
-      `;
-      document.querySelector(".spiritual-search").appendChild(searchEnergy);
-
-      setTimeout(() => {
-        searchEnergy.remove();
-      }, 1500);
-
-      setSearchQuery("");
-    }
-  };
-
   // Generate floating Sanskrit symbols
   const sanskritSymbols = ["ॐ", "☸", "卐", "ॐ", "꧁", "꧂", "ॐ"];
 
@@ -157,9 +134,14 @@ const SpiritualNavbar = ({ darkMode, toggleDarkMode }) => {
         <div className="spiritual-logo">
           <img
             src="/logo.png"
-            alt="Divine Vastu & Spiritual"
+            alt="Vibrant Aura Holistic Center"
             className="navbar-logo-image"
           />
+        </div>
+        <div className="aura-divider"></div>
+        <div className="logo-text">
+          <span className="logo-main">Vibrant Aura</span>
+          <span className="logo-sub">Holistic Center</span>
         </div>
       </div>
       {/* Navigation Menu */}
