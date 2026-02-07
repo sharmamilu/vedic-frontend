@@ -1,167 +1,221 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { getAffirmations } from "../utils/apis";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
-  FaStarAndCrescent,
-  FaMoon,
-  FaSun,
   FaHands,
-  FaBookOpen,
-  FaPlayCircle,
+  FaHeartbeat,
+  FaSeedling,
+  FaMagnet,
+  FaPalette,
+  FaBrain,
+  FaWind,
+  FaFlask,
+  FaBalanceScale,
+  FaGem,
+  FaUser,
   FaCalendarAlt,
-  FaChartLine,
-  FaUsers,
   FaQuoteRight,
   FaArrowRight,
   FaLeaf,
-  FaGem,
+  FaBookOpen,
+  FaPlayCircle,
+  FaStar,
   FaHome,
-  FaSeedling,
   FaWater,
-  FaScroll,
-  FaBalanceScale,
+  FaFire,
+  FaSun,
+  FaMoon,
 } from "react-icons/fa";
 import {
   GiLotus,
-  GiMeditation,
   GiStoneSphere,
   GiDirectionSigns,
+  GiFlowerPot,
+  GiCrystalBall,
+  GiSpiralArrow,
 } from "react-icons/gi";
 import { IoMdFlower } from "react-icons/io";
-import { MdNaturePeople } from "react-icons/md";
+import { MdHealing, MdNature } from "react-icons/md";
+import { TbMassage } from "react-icons/tb";
+import { BsDroplet } from "react-icons/bs";
 import "../styles/HomePage.css";
-import { useNavigate } from "react-router-dom";
 
 const Homepage = ({ darkMode, toggleDarkMode }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [activeFilter, setActiveFilter] = useState("all");
   const [affirmation, setAffirmation] = useState(
-    "I am a channel for divine energy and wisdom",
+    "I am in perfect harmony with the universe's healing energy",
   );
 
-  // Services data
+  // Updated Services data based on actual offerings
   const services = [
     {
       id: 1,
-      title: "Vastu Consultation",
+      title: "Acupressure Therapy",
       description:
-        "Harmonize your living space with ancient Vastu principles for peace and prosperity.",
-      icon: <FaHome />,
-      color: "var(--gold)",
-      category: "vastu",
+        "Traditional healing technique using pressure points to relieve pain and restore energy flow.",
+      icon: <FaHands />,
+      color: "var(--earth)",
+      category: "therapy",
     },
     {
       id: 2,
-      title: "Birth Chart Analysis",
+      title: "Acupuncture Therapy",
       description:
-        "Detailed astrological reading based on your exact time, date, and place of birth.",
-      icon: <FaStarAndCrescent />,
-      color: "var(--purple)",
-      category: "astrology",
+        "Fine needles inserted at specific points to balance energy flow and promote natural healing.",
+      icon: <GiDirectionSigns />,
+      color: "#ff6b6b",
+      category: "therapy",
     },
     {
       id: 3,
-      title: "Meditation Guidance",
+      title: "Auricular Therapy",
       description:
-        "Personalized meditation techniques to calm your mind and elevate your spirit.",
-      icon: <GiMeditation />,
-      color: "var(--green)",
-      category: "meditation",
+        "Ear acupuncture therapy focusing on reflex points to treat various conditions.",
+      icon: <MdHealing />,
+      color: "var(--purple)",
+      category: "therapy",
     },
     {
       id: 4,
-      title: "Energy Healing",
+      title: "Byol Magnet Therapy",
       description:
-        "Reiki and pranic healing sessions to balance your chakras and life force.",
-      icon: <FaHands />,
-      color: "#ff6b6b",
-      category: "healing",
+        "Using magnetic fields to improve circulation, reduce inflammation, and accelerate healing.",
+      icon: <FaMagnet />,
+      color: "#3cb371",
+      category: "energy",
     },
     {
       id: 5,
-      title: "Yoga & Wellness",
+      title: "Seed Therapy",
       description:
-        "Holistic yoga practices for physical health and spiritual growth.",
-      icon: <GiLotus />,
-      color: "#3cb371",
-      category: "yoga",
+        "Application of seeds on pressure points to stimulate healing and balance body systems.",
+      icon: <FaSeedling />,
+      color: "var(--green)",
+      category: "therapy",
     },
     {
       id: 6,
-      title: "Spiritual Counseling",
+      title: "Colour Therapy",
       description:
-        "One-on-one guidance for your spiritual journey and life purpose.",
-      icon: <MdNaturePeople />,
-      color: "var(--earth)",
+        "Using colors and light to balance energy centers and promote physical and emotional healing.",
+      icon: <FaPalette />,
+      color: "#9370db",
+      category: "energy",
+    },
+    {
+      id: 7,
+      title: "Marma Therapy",
+      description:
+        "Ancient Ayurvedic vital point therapy for rejuvenation and healing.",
+      icon: <TbMassage />,
+      color: "var(--gold)",
+      category: "therapy",
+    },
+    {
+      id: 8,
+      title: "Neurochakra Quantum Healing",
+      description:
+        "Advanced healing combining neuroscience, chakra balancing, and quantum principles.",
+      icon: <FaBrain />,
+      color: "#00bcd4",
+      category: "healing",
+    },
+    {
+      id: 9,
+      title: "Pranic Healing",
+      description:
+        "Energy healing technique that cleanses and energizes the body's bio-magnetic field.",
+      icon: <FaWind />,
+      color: "#4caf50",
+      category: "healing",
+    },
+    {
+      id: 10,
+      title: "Bach Flower Remedy",
+      description:
+        "Natural flower essences to address emotional imbalances and promote wellbeing.",
+      icon: <GiFlowerPot />,
+      color: "#ff9800",
+      category: "natural",
+    },
+    {
+      id: 11,
+      title: "Pendulum Dowsing",
+      description:
+        "Ancient divination technique for energy assessment and decision guidance.",
+      icon: <GiSpiralArrow />,
+      color: "#795548",
+      category: "divination",
+    },
+    {
+      id: 12,
+      title: "Reiki Healing",
+      description:
+        "Japanese energy healing technique for stress reduction and relaxation.",
+      icon: <MdHealing />,
+      color: "#e91e63",
+      category: "healing",
+    },
+    {
+      id: 13,
+      title: "Astrology Consultation",
+      description:
+        "Detailed astrological readings and guidance based on your birth chart.",
+      icon: <GiCrystalBall />,
+      color: "#9c27b0",
+      category: "consultation",
+    },
+    {
+      id: 14,
+      title: "Numerology Consultation",
+      description:
+        "Personalized guidance based on the mystical significance of numbers.",
+      icon: <FaGem />,
+      color: "#2196f3",
       category: "consultation",
     },
   ];
 
-  // Featured articles
+  // Featured articles updated to match services
   const articles = [
     {
       id: 1,
-      title: "5 Vastu Tips for Positive Energy",
+      title: "Understanding Energy Healing",
       excerpt:
-        "Simple changes to attract abundance and harmony into your home.",
-      category: "Vastu",
-      readTime: "5 min",
-      image: "vastu-tips",
-    },
-    {
-      id: 2,
-      title: "Understanding Your Moon Sign",
-      excerpt: "How the moon influences your emotions and subconscious mind.",
-      category: "Astrology",
-      readTime: "7 min",
-      image: "moon-sign",
-    },
-    {
-      id: 3,
-      title: "Meditation for Beginners",
-      excerpt: "Step-by-step guide to starting your meditation practice today.",
-      category: "Meditation",
+        "Discover how different energy healing modalities work and which might be right for you.",
+      category: "Healing",
       readTime: "6 min",
-      image: "meditation-beginner",
-    },
-  ];
-
-  // Testimonials
-  const testimonials = [
-    {
-      id: 1,
-      name: "Priya Sharma",
-      role: "Yoga Instructor",
-      content:
-        "The Vastu consultation transformed my home into a sanctuary of peace. Highly recommended!",
-      avatar: "PS",
+      image: "energy-healing",
     },
     {
       id: 2,
-      name: "Raj Patel",
-      role: "Business Owner",
-      content:
-        "Birth chart analysis gave me clarity on my life path and business decisions.",
-      avatar: "RP",
+      title: "The Science Behind Acupressure",
+      excerpt:
+        "Learn how pressure point therapy can relieve pain and improve overall wellness.",
+      category: "Therapy",
+      readTime: "5 min",
+      image: "acupressure",
     },
     {
       id: 3,
-      name: "Anjali Mehta",
-      role: "Teacher",
-      content:
-        "Daily meditation guidance helped me find balance during stressful times.",
-      avatar: "AM",
+      title: "Chakra Balancing Techniques",
+      excerpt:
+        "Simple daily practices to balance your energy centers for better health.",
+      category: "Wellness",
+      readTime: "7 min",
+      image: "chakra-balancing",
     },
   ];
 
-  // Daily affirmations
+  // Daily affirmations updated
   const affirmations = [
-    "I am surrounded by divine light and protection.",
-    "My home is filled with positive energy and abundance.",
-    "I attract peace and harmony into my life daily.",
-    "My chakras are balanced and my energy flows freely.",
-    "I am connected to the universal wisdom and guidance.",
-    "Every day, I grow spiritually and emotionally.",
+    "My body is a temple of healing energy and vitality.",
+    "Every cell in my body vibrates with health and harmony.",
+    "I release all blockages and allow healing energy to flow freely.",
+    "I am connected to the universal source of healing and wisdom.",
+    "My chakras are balanced, and my energy flows in perfect harmony.",
+    "I attract health, vitality, and wellness into my life daily.",
   ];
 
   // Filter services
@@ -176,13 +230,34 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
     setAffirmation(affirmations[randomIndex]);
   };
 
-  const handleClick = () => {
-    console.log("clicked");
+  const handleConsultationClick = () => {
     navigate("/consultation");
   };
 
+  const scrollToServices = () => {
+    const servicesSection = document.getElementById("services-section");
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleServiceLearnMore = (serviceId) => {
+    navigate(`/services/${serviceId}`);
+  };
+
   useEffect(() => {
-    // Change affirmation every 30 seconds
+    const queryParams = new URLSearchParams(location.search);
+    const filterParam = queryParams.get("filter");
+    if (filterParam) {
+      setActiveFilter(filterParam);
+      // Small delay to ensure state update and then scroll
+      setTimeout(() => {
+        scrollToServices();
+      }, 100);
+    }
+  }, [location.search]);
+
+  useEffect(() => {
     const interval = setInterval(getRandomAffirmation, 30000);
     return () => clearInterval(interval);
   }, []);
@@ -193,7 +268,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       <section className="hero-section">
         <div className="hero-background">
           <div className="floating-symbols">
-            {["ॐ", "☸", "卐", "꧁", "꧂"].map((symbol, index) => (
+            {["☯", "♾️", "𓆃", "⚕️", "🌀"].map((symbol, index) => (
               <span key={index} className="floating-symbol">
                 {symbol}
               </span>
@@ -206,30 +281,30 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
         <div className="hero-content">
           <div className="hero-text">
             <div className="hero-branding">
-              <span className="brand-name">Vibrant Aura</span>
-              <span className="brand-tagline">Holistic Center</span>
+              <span className="brand-name">Holistic Harmony</span>
+              <span className="brand-tagline">Healing Center</span>
             </div>
             <h1 className="hero-title">
-              Discover Your
-              <span className="highlight"> Spiritual</span>
-              Path
+              Embrace
+              <span className="highlight"> Holistic Healing</span>
             </h1>
             <p className="hero-subtitle">
-              Ancient wisdom meets modern life. Experience Vastu, Astrology,
-              Meditation, and Spiritual Healing tailored for your journey.
+              Experience ancient and modern healing techniques combined for your
+              complete wellness journey. From energy healing to therapeutic
+              consultations, find your path to balance.
             </p>
             <div className="hero-buttons">
-              <button className="btn-primary" onClick={handleClick}>
-                <GiLotus /> Begin Your Journey
+              <button className="btn-primary" onClick={handleConsultationClick}>
+                <GiLotus /> Book Consultation
               </button>
-              <button className="btn-secondary">
-                <FaPlayCircle /> Watch Introduction
+              <button className="btn-secondary" onClick={scrollToServices}>
+                <FaPlayCircle /> View Services
               </button>
             </div>
           </div>
           <div className="hero-image">
             <div className="sacred-geometry">
-              <GiStoneSphere />
+              <GiLotus />
             </div>
           </div>
         </div>
@@ -237,94 +312,88 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
         {/* Quick Stats */}
         <div className="quick-stats">
           <div className="stat-item">
+            <div className="stat-number">14+</div>
+            <div className="stat-label">Healing Modalities</div>
+          </div>
+          <div className="stat-item">
             <div className="stat-number">5000+</div>
-            <div className="stat-label">Souls Guided</div>
+            <div className="stat-label">Sessions Completed</div>
           </div>
           <div className="stat-item">
-            <div className="stat-number">25+</div>
-            <div className="stat-label">Years Experience</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-number">98%</div>
+            <div className="stat-number">96%</div>
             <div className="stat-label">Client Satisfaction</div>
           </div>
           <div className="stat-item">
-            <div className="stat-number">24/7</div>
-            <div className="stat-label">Spiritual Support</div>
+            <div className="stat-number">15+</div>
+            <div className="stat-label">Years Experience</div>
           </div>
         </div>
       </section>
 
-      {/* Daily Wisdom Section */}
       {/* Core Principles Section */}
       <section className="core-principles-section">
         <div className="section-header">
           <h2>
-            <GiLotus /> Our Guiding Principles
+            <GiLotus /> Our Healing Philosophy
           </h2>
           <p>
-            The foundation of our spiritual practice relies on three timeless
-            pillars
+            Three fundamental principles guide every healing journey at our
+            center
           </p>
         </div>
 
         <div className="principles-grid">
-          {/* Principle 1 */}
-          <div className="principle-card">
-            <div className="principle-icon-wrapper">
-              <FaScroll className="principle-icon" />
-            </div>
-            <h3>Ancient Wisdom</h3>
-            <p>
-              Drawing from centuries-old Vedic texts and scriptures to provide
-              authentic guidance.
-            </p>
-          </div>
-
-          {/* Principle 2 */}
           <div className="principle-card">
             <div className="principle-icon-wrapper">
               <FaBalanceScale className="principle-icon" />
             </div>
             <h3>Holistic Balance</h3>
             <p>
-              Harmonizing mind, body, and spirit to create a balanced state of
-              being.
+              Addressing mind, body, and spirit as interconnected aspects of
+              complete wellness and healing.
             </p>
           </div>
 
-          {/* Principle 3 */}
           <div className="principle-card">
             <div className="principle-icon-wrapper">
-              <FaLeaf className="principle-icon" />
+              <MdNature className="principle-icon" />
             </div>
             <h3>Natural Harmony</h3>
             <p>
-              Aligning your life with the natural rhythms of the universe and
-              environment.
+              Utilizing natural energy flows and elements to restore the body's
+              innate healing capabilities.
+            </p>
+          </div>
+
+          <div className="principle-card">
+            <div className="principle-icon-wrapper">
+              <FaHeartbeat className="principle-icon" />
+            </div>
+            <h3>Personalized Care</h3>
+            <p>
+              Customized treatment plans based on individual energy patterns and
+              specific needs.
             </p>
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="services-section">
+      <section id="services-section" className="services-section">
         <div className="section-header">
-          <h2>Spiritual Services</h2>
-          <p>
-            Choose from our comprehensive range of spiritual guidance services
-          </p>
+          <h2>Healing Services & Therapies</h2>
+          <p>Explore our comprehensive range of holistic healing modalities</p>
         </div>
 
         {/* Service Filters */}
         <div className="service-filters">
           {[
             "all",
-            "vastu",
-            "astrology",
-            "meditation",
+            "therapy",
             "healing",
-            "yoga",
+            "energy",
+            "natural",
+            "divination",
             "consultation",
           ].map((filter) => (
             <button
@@ -332,9 +401,13 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
               className={`filter-btn ${activeFilter === filter ? "active" : ""}`}
               onClick={() => setActiveFilter(filter)}
             >
-              {filter === "all"
-                ? "All Services"
-                : filter.charAt(0).toUpperCase() + filter.slice(1)}
+              {filter === "all" && "All Services"}
+              {filter === "therapy" && "Therapies"}
+              {filter === "healing" && "Energy Healing"}
+              {filter === "energy" && "Energy Work"}
+              {filter === "natural" && "Natural Remedies"}
+              {filter === "divination" && "Divination"}
+              {filter === "consultation" && "Consultations"}
             </button>
           ))}
         </div>
@@ -349,8 +422,14 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
               <h3>{service.title}</h3>
               <p>{service.description}</p>
               <div className="service-footer">
-                <span className="service-category">{service.category}</span>
-                <button className="service-action">
+                <span className="service-category">
+                  {service.category.charAt(0).toUpperCase() +
+                    service.category.slice(1)}
+                </span>
+                <button
+                  className="service-action"
+                  onClick={() => handleServiceLearnMore(service.id)}
+                >
                   Learn More <FaArrowRight />
                 </button>
               </div>
@@ -367,7 +446,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
               <FaQuoteRight />
             </div>
             <div className="affirmation-text">
-              <h3>Daily Affirmation</h3>
+              <h3>Healing Affirmation of the Day</h3>
               <p className="affirmation">"{affirmation}"</p>
               <button
                 className="refresh-affirmation"
@@ -387,9 +466,9 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       <section className="articles-section">
         <div className="section-header">
           <h2>
-            <FaBookOpen /> Spiritual Wisdom
+            <FaBookOpen /> Wellness Wisdom
           </h2>
-          <p>Explore our collection of spiritual articles and guides</p>
+          <p>Explore articles and insights about holistic healing practices</p>
         </div>
 
         <div className="articles-grid">
@@ -397,7 +476,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
             <div key={article.id} className="article-card">
               <div className="article-image">
                 <img
-                  src={`/images/homepage/${article.image}.jpg`}
+                  src={`/images/homepage/vastu-tips.jpg`}
                   alt={article.title}
                   className="article-img"
                 />
@@ -419,51 +498,27 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="testimonials-section">
-        <div className="section-header">
-          <h2>
-            <FaUsers /> Spiritual Journeys
-          </h2>
-          <p>Stories of transformation from our spiritual community</p>
-        </div>
-
-        <div className="testimonials-grid">
-          {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="testimonial-card">
-              <div className="testimonial-content">
-                <div className="quote-icon">"</div>
-                <p>{testimonial.content}</p>
-              </div>
-              <div className="testimonial-author">
-                <div className="author-avatar">{testimonial.avatar}</div>
-                <div className="author-info">
-                  <h4>{testimonial.name}</h4>
-                  <p>{testimonial.role}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="cta-section">
         <div className="cta-container">
           <div className="cta-content">
-            <h2>Ready to Begin Your Spiritual Transformation?</h2>
+            <h2>Begin Your Healing Journey Today</h2>
             <p>
-              Join thousands who have found peace, purpose, and prosperity
-              through spiritual guidance.
+              Experience personalized healing tailored to your unique energy
+              patterns and wellness goals. Our expert practitioners are ready to
+              guide you.
             </p>
             <div className="cta-buttons">
-              <button className="btn-primary" onClick={handleClick}>
-                <FaSeedling /> Book Free Consultation
+              <button className="btn-primary" onClick={handleConsultationClick}>
+                <FaUser /> Book Free Assessment
+              </button>
+              <button className="btn-secondary">
+                <FaCalendarAlt /> View Schedule
               </button>
             </div>
           </div>
           <div className="cta-decoration">
-            <GiLotus />
+            <GiStoneSphere />
           </div>
         </div>
       </section>

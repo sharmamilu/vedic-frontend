@@ -123,7 +123,7 @@
 }
 
 .link-group h4::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: -5px;
@@ -159,7 +159,7 @@
 }
 
 .link-group a:hover::before {
-  content: '›';
+  content: "›";
   position: absolute;
   left: 0;
   color: var(--green);
@@ -242,7 +242,7 @@
     text-align: center;
     gap: 30px;
   }
-  
+
   .footer-links {
     justify-content: center;
     flex-direction: column;
