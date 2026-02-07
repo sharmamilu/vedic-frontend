@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
 import {
   FaUser,
   FaPhone,
@@ -6,304 +7,379 @@ import {
   FaCalendarAlt,
   FaCommentDots,
   FaCheckCircle,
-  FaUserFriends,
-  FaBookOpen,
-  FaStar,
-  FaLightbulb,
+  FaExclamationCircle,
 } from "react-icons/fa";
-import {
-  GiAstronautHelmet,
-  GiMeditation,
-  GiAncientColumns,
-  GiAbstract024,
-  GiCrystalBall,
-} from "react-icons/gi";
 import "../styles/ConsultationPage.css";
 
+// Initialize EmailJS
+emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+
 const ConsultationPage = ({ darkMode }) => {
+  const form = useRef();
   const [formData, setFormData] = useState({
-    // Basic Information
+    // Personal Information
     name: "",
-    email: "",
+    dob: "",
+    age: "",
+    timeOfBirth: "",
+    placeOfBirth: "",
     phone: "",
-    country: "",
+    email: "",
+    address: "",
 
     // Consultation Details
-    consultationType: "astrology",
-    consultationTopics: [],
+    consultationType: "",
+    consultationAreas: [],
     urgency: "within-week",
 
+    // Complaint/Concern
+    complaint: "",
+
     // Additional Information
-    concerns: "",
     preferredContactMethod: "email",
     bestTimeToContact: "morning",
-
-    // Preferences
-    preferredExpertGender: "no-preference",
-    language: "english",
     receiveUpdates: true,
   });
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [fieldTouched, setFieldTouched] = useState({});
 
-  // Consultation Types with Icons
-  const consultationTypes = [
-    {
-      id: "astrology",
-      name: "Astrology",
-      icon: <GiCrystalBall />,
-      description: "Birth chart analysis and predictions",
-      color: "#43A047",
-    },
-    {
-      id: "vastu",
-      name: "Vastu Shastra",
-      icon: <GiAncientColumns />,
-      description: "Home/office energy consultation",
-      color: "#8E24AA",
-    },
-    {
-      id: "meditation",
-      name: "Meditation",
-      icon: <GiMeditation />,
-      description: "Personal meditation guidance",
-      color: "#2196F3",
-    },
-    {
-      id: "energy",
-      name: "Energy Healing",
-      icon: <GiAbstract024 />,
-      description: "Chakra balancing & energy work",
-      color: "#FF9800",
-    },
-    {
-      id: "comprehensive",
-      name: "Comprehensive",
-      icon: <GiAstronautHelmet />,
-      description: "Complete life guidance package",
-      color: "#E91E63",
-    },
+  // Services offered (as dropdown options)
+  const services = [
+    "Acupressure Therapy",
+    "Acupuncture Therapy",
+    "Auricular Therapy",
+    "Byol Magnet Therapy",
+    "Seed Therapy",
+    "Colour Therapy",
+    "Marma Therapy",
+    "Neurochakra Quantum Healing",
+    "Pranic Healing",
+    "Bach Flower Remedy",
+    "Pendulum Dowsing",
+    "Reiki Healing",
+    "Astrology Consultation",
+    "Numerology Consultation",
   ];
 
-  // Consultation Topics (Checkboxes)
-  const consultationTopics = [
-    {
-      id: "career",
-      name: "Career Guidance",
-      icon: "💼",
-    },
-    {
-      id: "relationships",
-      name: "Relationships",
-      icon: "❤️",
-    },
-    {
-      id: "health",
-      name: "Health & Wellness",
-      icon: "🌱",
-    },
-    {
-      id: "finance",
-      name: "Finance",
-      icon: "💰",
-    },
-    {
-      id: "spiritual",
-      name: "Spiritual Growth",
-      icon: "✨",
-    },
-    {
-      id: "education",
-      name: "Education",
-      icon: "📚",
-    },
-    {
-      id: "family",
-      name: "Family Matters",
-      icon: "👨‍👩‍👧‍👦",
-    },
-    {
-      id: "property",
-      name: "Property & Investments",
-      icon: "🏠",
-    },
+  // Updated Consultation Areas based on services offered
+  const consultationAreas = [
+    "Pain Management & Relief",
+    "Stress & Anxiety Relief",
+    "Energy Balance & Healing",
+    "Emotional Well-being",
+    "Spiritual Growth",
+    "Life Guidance & Direction",
+    "Chronic Health Issues",
+    "Sleep & Relaxation",
+    "Relationship Harmony",
+    "Career & Success",
+    "Personal Transformation",
+    "General Wellness",
   ];
 
   // Urgency Options
   const urgencyOptions = [
-    { id: "within-48-hours", name: "Within 48 hours", icon: "⚡" },
-    { id: "within-week", name: "Within a week", icon: "📅" },
-    { id: "flexible", name: "Flexible timing", icon: "🕒" },
+    { id: "within-48-hours", label: "Within 48 hours" },
+    { id: "within-week", label: "Within a week" },
+    { id: "flexible", label: "Flexible timing" },
   ];
 
   // Contact Methods
   const contactMethods = [
-    { id: "email", name: "Email", icon: "📧" },
-    { id: "phone", name: "Phone Call", icon: "📞" },
-    { id: "whatsapp", name: "WhatsApp", icon: "💬" },
-    { id: "video", name: "Video Call", icon: "🎥" },
+    { id: "email", label: "Email" },
+    { id: "phone", label: "Phone Call" },
+    { id: "whatsapp", label: "WhatsApp" },
+    { id: "video", label: "Video Call" },
   ];
 
   // Best Time to Contact
   const contactTimes = [
-    { id: "morning", name: "Morning (9 AM - 12 PM)" },
-    { id: "afternoon", name: "Afternoon (12 PM - 4 PM)" },
-    { id: "evening", name: "Evening (4 PM - 8 PM)" },
-    { id: "flexible", name: "Anytime" },
+    { id: "morning", label: "Morning (9 AM - 12 PM)" },
+    { id: "afternoon", label: "Afternoon (12 PM - 4 PM)" },
+    { id: "evening", label: "Evening (4 PM - 8 PM)" },
+    { id: "flexible", label: "Anytime" },
   ];
 
-  // Validation Rules
-  const validationRules = {
-    name: { required: true, minLength: 2 },
-    email: { required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
-    phone: { required: true, pattern: /^[0-9+\-\s()]{8,}$/ },
-    consultationType: { required: true },
-    consultationTopics: { required: true, minItems: 1 },
+  // Helper Functions (keep all your existing helper functions here)
+  const validateDOB = (dob) => {
+    if (!dob) return "";
+
+    const date = new Date(dob);
+    const today = new Date();
+    const minDate = new Date();
+    minDate.setFullYear(minDate.getFullYear() - 120);
+    const maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() - 1);
+
+    if (date > today) return "Date of birth cannot be in the future";
+    if (date < minDate) return "Please enter a valid date (max 120 years old)";
+    if (date > maxDate) return "Please enter a valid date (min 1 year old)";
+
+    return "";
   };
 
-  const validateField = (name, value) => {
-    const rules = validationRules[name];
-    if (!rules) return true;
-
-    let error = "";
-
-    if (rules.required && !value) {
-      error = "This field is required";
-    } else if (rules.minLength && value.length < rules.minLength) {
-      error = `Minimum ${rules.minLength} characters required`;
-    } else if (rules.pattern && !rules.pattern.test(value)) {
-      error = "Please enter a valid value";
-    } else if (
-      rules.minItems &&
-      Array.isArray(value) &&
-      value.length < rules.minItems
-    ) {
-      error = `Please select at least ${rules.minItems} option`;
+  const validateAge = (age) => {
+    if (!age) return "";
+    const ageNum = parseInt(age);
+    if (isNaN(ageNum) || ageNum < 1 || ageNum > 120) {
+      return "Please enter a valid age (1-120)";
     }
+    return "";
+  };
 
-    return error;
+  const validatePhone = (phone) => {
+    if (!phone) return "Phone number is required";
+    const phoneRegex =
+      /^[\+]?[1-9][\d]{0,15}$|^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,4}[-\s\.]?[0-9]{1,9}$/;
+    const cleanPhone = phone.replace(/[^\d+]/g, "");
+
+    if (!phoneRegex.test(cleanPhone))
+      return "Please enter a valid phone number";
+    if (cleanPhone.length < 8) return "Phone number is too short";
+
+    return "";
+  };
+
+  const validateEmail = (email) => {
+    if (!email) return "Email is required";
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) return "Please enter a valid email address";
+    return "";
+  };
+
+  // Check if astrology/numerology fields are required
+  const isAstrologyNumerology = () => {
+    return (
+      formData.consultationType === "Astrology Consultation" ||
+      formData.consultationType === "Numerology Consultation"
+    );
+  };
+
+  // Handle field blur for immediate validation
+  const handleBlur = (fieldName) => {
+    setFieldTouched((prev) => ({ ...prev, [fieldName]: true }));
+    validateField(fieldName, formData[fieldName]);
   };
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
 
+    let processedValue = value;
+
+    if (name === "phone") {
+      processedValue = value.replace(/[^\d+\-()\s]/g, "");
+    }
+
+    if (name === "age") {
+      processedValue = value.replace(/\D/g, "");
+      if (processedValue.length > 3)
+        processedValue = processedValue.slice(0, 3);
+    }
+
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === "checkbox" ? checked : processedValue,
     }));
 
-    // Clear error for this field
     if (errors[name]) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: "",
-      }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+
+    if (fieldTouched[name]) {
+      validateField(name, type === "checkbox" ? checked : processedValue);
     }
   };
 
-  const handleTopicToggle = (topicId) => {
+  const validateField = (name, value) => {
+    let error = "";
+
+    switch (name) {
+      case "name":
+        if (!value.trim()) error = "Name is required";
+        else if (value.trim().length < 2)
+          error = "Name must be at least 2 characters";
+        break;
+      case "email":
+        error = validateEmail(value);
+        break;
+      case "phone":
+        error = validatePhone(value);
+        break;
+      case "dob":
+        if (value && !formData.age) error = validateDOB(value);
+        break;
+      case "age":
+        if (value && !formData.dob) error = validateAge(value);
+        break;
+      case "consultationType":
+        if (!value) error = "Please select a consultation type";
+        break;
+      case "complaint":
+        if (!value.trim()) error = "Concern description is required";
+        else if (value.trim().length < 10)
+          error =
+            "Please describe your concern in more detail (minimum 10 characters)";
+        break;
+      case "timeOfBirth":
+        if (isAstrologyNumerology() && !value)
+          error = "Time of Birth is required for this consultation type";
+        break;
+      case "placeOfBirth":
+        if (isAstrologyNumerology() && !value.trim())
+          error = "Place of Birth is required for this consultation type";
+        break;
+      default:
+        break;
+    }
+
+    if (error) {
+      setErrors((prev) => ({ ...prev, [name]: error }));
+    } else {
+      const newErrors = { ...errors };
+      delete newErrors[name];
+      setErrors(newErrors);
+    }
+
+    return !error;
+  };
+
+  const handleAreaToggle = (area) => {
     setFormData((prev) => {
-      const topics = [...prev.consultationTopics];
-      if (topics.includes(topicId)) {
+      const areas = [...prev.consultationAreas];
+      if (areas.includes(area)) {
         return {
           ...prev,
-          consultationTopics: topics.filter((id) => id !== topicId),
+          consultationAreas: areas.filter((a) => a !== area),
         };
       } else {
-        return { ...prev, consultationTopics: [...topics, topicId] };
+        return { ...prev, consultationAreas: [...areas, area] };
       }
     });
+  };
 
-    // Clear error for topics
-    if (errors.consultationTopics) {
-      setErrors((prev) => ({
-        ...prev,
-        consultationTopics: "",
-      }));
-    }
+  const formatPhoneNumber = (phone) => {
+    const cleaned = phone.replace(/\D/g, "");
+    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) return `(${match[1]}) ${match[2]}-${match[3]}`;
+    return phone;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    // Mark all fields as touched for validation
+    const allFields = [
+      "name",
+      "email",
+      "phone",
+      "consultationType",
+      "complaint",
+      ...(isAstrologyNumerology() ? ["timeOfBirth", "placeOfBirth"] : []),
+      ...(!formData.dob && !formData.age && isAstrologyNumerology()
+        ? ["dob"]
+        : []),
+    ];
+
+    setFieldTouched(
+      allFields.reduce((acc, field) => ({ ...acc, [field]: true }), {}),
+    );
+
+    // Validate all fields
+    const validationResults = allFields.map((field) =>
+      validateField(field, formData[field]),
+    );
+
+    // Validate DOB/Age for astrology/numerology
+    let dobAgeError = "";
+    if (isAstrologyNumerology() && !formData.dob && !formData.age) {
+      dobAgeError = "Please provide either Date of Birth or Age";
+      setErrors((prev) => ({ ...prev, dob: dobAgeError }));
+    }
+
+    // Check if any validation failed
+    const hasErrors = validationResults.includes(false) || dobAgeError;
+
+    if (hasErrors) {
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
-      // Validate all required fields
-      const formErrors = {};
-      Object.keys(validationRules).forEach((field) => {
-        const error = validateField(field, formData[field]);
-        if (error) {
-          formErrors[field] = error;
-        }
-      });
-
-      if (Object.keys(formErrors).length > 0) {
-        setErrors(formErrors);
-        setIsSubmitting(false);
-        return;
-      }
-
-      // Prepare payload
-      const payload = {
-        contactInfo: {
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          country: formData.country,
-        },
-        consultationDetails: {
-          type: formData.consultationType,
-          topics: formData.consultationTopics,
-          urgency: formData.urgency,
-          concerns: formData.concerns,
-        },
-        preferences: {
-          contactMethod: formData.preferredContactMethod,
-          bestTime: formData.bestTimeToContact,
-          expertGender: formData.preferredExpertGender,
-          language: formData.language,
-          receiveUpdates: formData.receiveUpdates,
-        },
-        metadata: {
-          submittedAt: new Date().toISOString(),
-          source: "website_consultation_form",
-        },
+      // Prepare email data
+      const emailData = {
+        to_name: import.meta.env.VITE_OWNER_NAME,
+        to_email: import.meta.env.VITE_OWNER_EMAIL,
+        from_name: formData.name.trim(),
+        from_email: formData.email.trim(),
+        reply_to: formData.email.trim(),
+        from_phone: formatPhoneNumber(formData.phone),
+        consultation_type: formData.consultationType,
+        concern: formData.complaint.trim(),
+        areas_of_discussion:
+          formData.consultationAreas.join(", ") || "None selected",
+        urgency:
+          urgencyOptions.find((opt) => opt.id === formData.urgency)?.label ||
+          formData.urgency,
+        date_of_birth: formData.dob || "Not provided",
+        age: formData.age || "Not provided",
+        time_of_birth: formData.timeOfBirth || "Not applicable",
+        place_of_birth: formData.placeOfBirth.trim() || "Not applicable",
+        address: formData.address.trim() || "Not provided",
+        preferred_contact:
+          contactMethods.find(
+            (method) => method.id === formData.preferredContactMethod,
+          )?.label || formData.preferredContactMethod,
+        best_time:
+          contactTimes.find((time) => time.id === formData.bestTimeToContact)
+            ?.label || formData.bestTimeToContact,
+        submission_date: new Date().toLocaleString(),
+        receive_updates: formData.receiveUpdates ? "Yes" : "No",
       };
 
-      // Log payload (Replace with actual API call)
-      console.log("Consultation Request Payload:", payload);
+      const result = await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        emailData,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      );
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Show success message
+      console.log("Email sent successfully:", result.text);
       setShowSuccess(true);
 
-      // Reset form after success
       setTimeout(() => {
         setFormData({
           name: "",
-          email: "",
+          dob: "",
+          age: "",
+          timeOfBirth: "",
+          placeOfBirth: "",
           phone: "",
-          country: "",
-          consultationType: "astrology",
-          consultationTopics: [],
+          email: "",
+          address: "",
+          consultationType: "",
+          consultationAreas: [],
           urgency: "within-week",
-          concerns: "",
+          complaint: "",
           preferredContactMethod: "email",
           bestTimeToContact: "morning",
-          preferredExpertGender: "no-preference",
-          language: "english",
           receiveUpdates: true,
         });
         setErrors({});
+        setFieldTouched({});
         setShowSuccess(false);
       }, 3000);
     } catch (error) {
       console.error("Submission error:", error);
-      setErrors({ submit: "Failed to submit. Please try again." });
+      setErrors({
+        submit:
+          error.status === 422
+            ? "There was an issue with your submission. Please check all fields and try again."
+            : "Failed to submit. Please check your internet connection and try again.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -317,12 +393,11 @@ const ConsultationPage = ({ darkMode }) => {
       <section className="consultation-hero-section">
         <div className="consultation-hero-content">
           <h1 className="consultation-hero-title">
-            Connect with Our
-            <span className="consultation-highlight"> Experts</span>
+            Book a<span className="consultation-highlight"> Consultation</span>
           </h1>
           <p className="consultation-hero-subtitle">
-            Share your details and our team will connect you with the perfect
-            expert for personalized guidance. No commitments, just genuine help.
+            Fill in your details to book a consultation session with our
+            experts.
           </p>
         </div>
       </section>
@@ -330,114 +405,42 @@ const ConsultationPage = ({ darkMode }) => {
       {/* Main Content */}
       <div className="consultation-main-content">
         <div className="consultation-container">
-          {/* Left Side: Benefits & Process */}
-          <div className="consultation-info-sidebar">
-            <div className="info-card">
-              <div className="info-icon">
-                <FaLightbulb />
-              </div>
-              <h3>How It Works</h3>
-              <ol className="process-steps">
-                <li>
-                  <span className="step-number">1</span>
-                  <span className="step-text">Fill this simple form</span>
-                </li>
-                <li>
-                  <span className="step-number">2</span>
-                  <span className="step-text">We match you with an expert</span>
-                </li>
-                <li>
-                  <span className="step-number">3</span>
-                  <span className="step-text">
-                    Expert contacts you within 24 hours
-                  </span>
-                </li>
-                <li>
-                  <span className="step-number">4</span>
-                  <span className="step-text">
-                    Discuss your concerns freely
-                  </span>
-                </li>
-              </ol>
-            </div>
-
-            <div className="info-card">
-              <div className="info-icon">
-                <FaUserFriends />
-              </div>
-              <h3>Why Connect With Us?</h3>
-              <ul className="benefits-list">
-                <li>
-                  <FaStar /> Free initial consultation
-                </li>
-                <li>
-                  <FaStar /> Certified experts with 10+ years experience
-                </li>
-                <li>
-                  <FaStar /> Personalized matching based on your needs
-                </li>
-                <li>
-                  <FaStar /> No pressure to commit
-                </li>
-                <li>
-                  <FaStar /> Complete confidentiality
-                </li>
-              </ul>
-            </div>
-
-            <div className="info-card">
-              <div className="info-icon">
-                <FaBookOpen />
-              </div>
-              <h3>Our Promise</h3>
-              <p className="promise-text">
-                We connect you with genuine experts who care about your
-                well-being. No commercial pressure, just authentic guidance.
-              </p>
-              <div className="expert-count">
-                <span className="count-number">25+</span>
-                <span className="count-label">Experts Ready to Help</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Side: Form */}
+          {/* Form Container */}
           <div className="consultation-form-container">
             {showSuccess ? (
               <div className="success-message">
                 <FaCheckCircle className="success-icon" />
-                <h2>Request Sent Successfully!</h2>
+                <h2>Request Submitted Successfully!</h2>
                 <p>
-                  Thank you for reaching out. Our team will contact you within
-                  24 hours.
+                  Our team will contact you within 24 hours to confirm your
+                  consultation.
                 </p>
                 <p>
-                  You'll hear from us via{" "}
-                  <strong>{formData.preferredContactMethod}</strong>.
+                  A confirmation email has been sent to our team. You'll hear
+                  from us soon.
                 </p>
                 <button
                   className="success-back-btn"
                   onClick={() => setShowSuccess(false)}
                 >
-                  Submit Another Request
+                  Book Another Consultation
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="consultation-form">
-                <h2 className="form-title">
-                  <FaCommentDots /> Consultation Request Form
-                </h2>
+              <form
+                ref={form}
+                onSubmit={handleSubmit}
+                className="consultation-form"
+                noValidate
+              >
+                <h2 className="form-title">Consultation Request Form</h2>
                 <p className="form-subtitle">
-                  Fill this form and our team will connect you with the right
-                  expert.
+                  Please fill in all required information for booking.
                 </p>
 
-                {/* Basic Information */}
+                {/* Personal Information Section */}
                 <div className="form-section">
-                  <h3 className="section-title">
-                    <FaUser /> Your Information
-                  </h3>
-
+                  <h3 className="section-title">Personal Information</h3>
                   <div className="form-grid">
                     <div className="form-group">
                       <label>
@@ -448,11 +451,143 @@ const ConsultationPage = ({ darkMode }) => {
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
+                        onBlur={() => handleBlur("name")}
                         className={`form-input ${errors.name ? "error" : ""}`}
                         placeholder="Enter your full name"
+                        required
                       />
                       {errors.name && (
-                        <span className="error-message">{errors.name}</span>
+                        <div className="error-message-with-icon">
+                          <FaExclamationCircle />
+                          <span>{errors.name}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="form-group">
+                      <label>Date of Birth</label>
+                      <div className="input-with-hint">
+                        <input
+                          type="date"
+                          name="dob"
+                          value={formData.dob}
+                          onChange={handleInputChange}
+                          onBlur={() => handleBlur("dob")}
+                          className={`form-input ${errors.dob ? "error" : ""}`}
+                          max={new Date().toISOString().split("T")[0]}
+                          min={
+                            new Date(
+                              new Date().setFullYear(
+                                new Date().getFullYear() - 120,
+                              ),
+                            )
+                              .toISOString()
+                              .split("T")[0]
+                          }
+                        />
+                        <small className="field-hint">
+                          Click calendar icon or use date picker
+                        </small>
+                      </div>
+                      {errors.dob && (
+                        <div className="error-message-with-icon">
+                          <FaExclamationCircle />
+                          <span>{errors.dob}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="form-group">
+                      <label>Age (if DOB unknown)</label>
+                      <div className="input-with-hint">
+                        <input
+                          type="text"
+                          inputMode="numeric"
+                          pattern="[0-9]*"
+                          name="age"
+                          value={formData.age}
+                          onChange={handleInputChange}
+                          onBlur={() => handleBlur("age")}
+                          className={`form-input ${errors.age ? "error" : ""}`}
+                          placeholder="Enter your age"
+                          maxLength={3}
+                        />
+                        <small className="field-hint">
+                          Numbers only (1-120)
+                        </small>
+                      </div>
+                      {errors.age && (
+                        <div className="error-message-with-icon">
+                          <FaExclamationCircle />
+                          <span>{errors.age}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {isAstrologyNumerology() && (
+                      <>
+                        <div className="form-group">
+                          <label>
+                            Time of Birth <span className="required">*</span>
+                          </label>
+                          <input
+                            type="time"
+                            name="timeOfBirth"
+                            value={formData.timeOfBirth}
+                            onChange={handleInputChange}
+                            onBlur={() => handleBlur("timeOfBirth")}
+                            className={`form-input ${errors.timeOfBirth ? "error" : ""}`}
+                          />
+                          {errors.timeOfBirth && (
+                            <div className="error-message-with-icon">
+                              <FaExclamationCircle />
+                              <span>{errors.timeOfBirth}</span>
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="form-group">
+                          <label>
+                            Place of Birth <span className="required">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            name="placeOfBirth"
+                            value={formData.placeOfBirth}
+                            onChange={handleInputChange}
+                            onBlur={() => handleBlur("placeOfBirth")}
+                            className={`form-input ${errors.placeOfBirth ? "error" : ""}`}
+                            placeholder="City, State, Country"
+                          />
+                          {errors.placeOfBirth && (
+                            <div className="error-message-with-icon">
+                              <FaExclamationCircle />
+                              <span>{errors.placeOfBirth}</span>
+                            </div>
+                          )}
+                        </div>
+                      </>
+                    )}
+
+                    <div className="form-group">
+                      <label>
+                        Contact Number <span className="required">*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        onBlur={() => handleBlur("phone")}
+                        className={`form-input ${errors.phone ? "error" : ""}`}
+                        placeholder="+1 (555) 123-4567"
+                        required
+                      />
+                      {errors.phone && (
+                        <div className="error-message-with-icon">
+                          <FaExclamationCircle />
+                          <span>{errors.phone}</span>
+                        </div>
                       )}
                     </div>
 
@@ -465,40 +600,28 @@ const ConsultationPage = ({ darkMode }) => {
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
+                        onBlur={() => handleBlur("email")}
                         className={`form-input ${errors.email ? "error" : ""}`}
                         placeholder="you@example.com"
+                        required
                       />
                       {errors.email && (
-                        <span className="error-message">{errors.email}</span>
+                        <div className="error-message-with-icon">
+                          <FaExclamationCircle />
+                          <span>{errors.email}</span>
+                        </div>
                       )}
                     </div>
 
-                    <div className="form-group">
-                      <label>
-                        Phone Number <span className="required">*</span>
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
+                    <div className="form-group full-width">
+                      <label>Current Address</label>
+                      <textarea
+                        name="address"
+                        value={formData.address}
                         onChange={handleInputChange}
-                        className={`form-input ${errors.phone ? "error" : ""}`}
-                        placeholder="+1 (555) 123-4567"
-                      />
-                      {errors.phone && (
-                        <span className="error-message">{errors.phone}</span>
-                      )}
-                    </div>
-
-                    <div className="form-group">
-                      <label>Country (Optional)</label>
-                      <input
-                        type="text"
-                        name="country"
-                        value={formData.country}
-                        onChange={handleInputChange}
-                        className="form-input"
-                        placeholder="Your country"
+                        className="form-textarea"
+                        placeholder="Your complete address..."
+                        rows={2}
                       />
                     </div>
                   </div>
@@ -507,133 +630,114 @@ const ConsultationPage = ({ darkMode }) => {
                 {/* Consultation Type */}
                 <div className="form-section">
                   <h3 className="section-title">
-                    <GiCrystalBall /> What type of guidance do you need?{" "}
-                    <span className="required">*</span>
+                    Consultation Type <span className="required">*</span>
                   </h3>
                   {errors.consultationType && (
-                    <span className="error-message block-error">
-                      {errors.consultationType}
-                    </span>
+                    <div className="error-message-with-icon block-error">
+                      <FaExclamationCircle />
+                      <span>{errors.consultationType}</span>
+                    </div>
                   )}
 
-                  <div className="type-grid">
-                    {consultationTypes.map((type) => (
-                      <div
-                        key={type.id}
-                        className={`type-card ${formData.consultationType === type.id ? "selected" : ""}`}
-                        style={{
-                          borderColor:
-                            formData.consultationType === type.id
-                              ? type.color
-                              : "",
-                        }}
-                        onClick={() => {
-                          setFormData((prev) => ({
-                            ...prev,
-                            consultationType: type.id,
-                          }));
-                          if (errors.consultationType) {
-                            setErrors((prev) => ({
-                              ...prev,
-                              consultationType: "",
-                            }));
-                          }
-                        }}
-                      >
-                        <div
-                          className="type-icon"
-                          style={{ color: type.color }}
-                        >
-                          {type.icon}
-                        </div>
-                        <div className="type-info">
-                          <h4>{type.name}</h4>
-                          <p>{type.description}</p>
-                        </div>
-                      </div>
+                  <div className="form-group">
+                    <select
+                      name="consultationType"
+                      value={formData.consultationType}
+                      onChange={handleInputChange}
+                      onBlur={() => handleBlur("consultationType")}
+                      className={`form-select ${errors.consultationType ? "error" : ""}`}
+                      required
+                    >
+                      <option value="">-- Select a service --</option>
+                      {services.map((service, index) => (
+                        <option key={index} value={service}>
+                          {service}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {isAstrologyNumerology() && (
+                    <div className="info-notice">
+                      <p>
+                        <strong>Note:</strong> For {formData.consultationType},
+                        accurate birth details (DOB/Time/Place) are required for
+                        precise analysis.
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Areas to Discuss */}
+                <div className="form-section">
+                  <h3 className="section-title">
+                    What would you like to focus on? (Optional)
+                  </h3>
+                  <p className="section-subtitle">
+                    Select areas you'd like to address during your consultation
+                  </p>
+
+                  <div className="areas-grid">
+                    {consultationAreas.map((area, index) => (
+                      <label key={index} className="area-checkbox">
+                        <input
+                          type="checkbox"
+                          checked={formData.consultationAreas.includes(area)}
+                          onChange={() => handleAreaToggle(area)}
+                        />
+                        <span className="area-label">{area}</span>
+                      </label>
                     ))}
                   </div>
                 </div>
 
-                {/* Consultation Topics */}
+                {/* Complaint/Concern */}
                 <div className="form-section">
                   <h3 className="section-title">
-                    <FaBookOpen /> Areas you want to discuss{" "}
+                    Concern / Reason for Consultation{" "}
                     <span className="required">*</span>
-                    <span className="sub-label">(Select at least one)</span>
                   </h3>
-                  {errors.consultationTopics && (
-                    <span className="error-message block-error">
-                      {errors.consultationTopics}
-                    </span>
+                  {errors.complaint && (
+                    <div className="error-message-with-icon block-error">
+                      <FaExclamationCircle />
+                      <span>{errors.complaint}</span>
+                    </div>
                   )}
 
-                  <div className="topics-grid">
-                    {consultationTopics.map((topic) => (
-                      <div
-                        key={topic.id}
-                        className={`topic-card ${formData.consultationTopics.includes(topic.id) ? "selected" : ""}`}
-                        onClick={() => handleTopicToggle(topic.id)}
-                      >
-                        <div className="topic-icon">{topic.icon}</div>
-                        <div className="topic-info">
-                          <h5>{topic.name}</h5>
-                          <div className="topic-checkbox">
-                            {formData.consultationTopics.includes(topic.id) && (
-                              <FaCheckCircle className="check-icon" />
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
+                  <div className="form-group">
+                    <textarea
+                      name="complaint"
+                      value={formData.complaint}
+                      onChange={handleInputChange}
+                      onBlur={() => handleBlur("complaint")}
+                      className={`form-textarea ${errors.complaint ? "error" : ""}`}
+                      placeholder="Please describe your concern in detail. What specific issues or challenges are you facing? What would you like to achieve through this consultation?"
+                      rows={4}
+                      required
+                    />
+                    <div className="char-count">
+                      {formData.complaint.length} characters (minimum 10
+                      required)
+                      {formData.complaint.length < 10 && (
+                        <span className="char-warning">
+                          {" "}
+                          - {10 - formData.complaint.length} more needed
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
 
                 {/* Additional Information */}
                 <div className="form-section">
-                  <h3 className="section-title">
-                    <FaCommentDots /> Additional Information
-                  </h3>
-
-                  <div className="form-group">
-                    <label>What would you like to discuss? (Optional)</label>
-                    <textarea
-                      name="concerns"
-                      value={formData.concerns}
-                      onChange={handleInputChange}
-                      className="form-textarea"
-                      placeholder="Briefly describe what you'd like guidance on..."
-                      rows={3}
-                    />
-                  </div>
+                  <h3 className="section-title">Additional Information</h3>
 
                   <div className="preferences-grid">
                     <div className="preference-group">
-                      <label>How soon do you need guidance?</label>
-                      <div className="options-group">
-                        {urgencyOptions.map((option) => (
-                          <label key={option.id} className="option-label">
-                            <input
-                              type="radio"
-                              name="urgency"
-                              value={option.id}
-                              checked={formData.urgency === option.id}
-                              onChange={handleInputChange}
-                            />
-                            <span className="option-content">
-                              <span className="option-icon">{option.icon}</span>
-                              <span className="option-text">{option.name}</span>
-                            </span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="preference-group">
                       <label>Preferred contact method</label>
-                      <div className="options-group contact-methods">
+                      <div className="contact-methods">
                         {contactMethods.map((method) => (
-                          <label key={method.id} className="option-label">
+                          <label key={method.id} className="method-option">
                             <input
                               type="radio"
                               name="preferredContactMethod"
@@ -643,17 +747,14 @@ const ConsultationPage = ({ darkMode }) => {
                               }
                               onChange={handleInputChange}
                             />
-                            <span className="option-content">
-                              <span className="option-icon">{method.icon}</span>
-                              <span className="option-text">{method.name}</span>
-                            </span>
+                            <span>{method.label}</span>
                           </label>
                         ))}
                       </div>
                     </div>
 
                     <div className="preference-group">
-                      <label>Best time to contact you</label>
+                      <label>Best time to contact</label>
                       <select
                         name="bestTimeToContact"
                         value={formData.bestTimeToContact}
@@ -662,25 +763,28 @@ const ConsultationPage = ({ darkMode }) => {
                       >
                         {contactTimes.map((time) => (
                           <option key={time.id} value={time.id}>
-                            {time.name}
+                            {time.label}
                           </option>
                         ))}
                       </select>
                     </div>
 
                     <div className="preference-group">
-                      <label>Preferred language</label>
-                      <select
-                        name="language"
-                        value={formData.language}
-                        onChange={handleInputChange}
-                        className="form-input"
-                      >
-                        <option value="english">English</option>
-                        <option value="hindi">Hindi</option>
-                        <option value="spanish">Spanish</option>
-                        <option value="french">French</option>
-                      </select>
+                      <label>How soon do you need guidance?</label>
+                      <div className="urgency-options">
+                        {urgencyOptions.map((option) => (
+                          <label key={option.id} className="urgency-option">
+                            <input
+                              type="radio"
+                              name="urgency"
+                              value={option.id}
+                              checked={formData.urgency === option.id}
+                              onChange={handleInputChange}
+                            />
+                            <span>{option.label}</span>
+                          </label>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
@@ -692,7 +796,7 @@ const ConsultationPage = ({ darkMode }) => {
                         checked={formData.receiveUpdates}
                         onChange={handleInputChange}
                       />
-                      <span>Send me helpful tips and updates (optional)</span>
+                      <span>Receive updates and tips via email (optional)</span>
                     </label>
                   </div>
                 </div>
@@ -702,28 +806,26 @@ const ConsultationPage = ({ darkMode }) => {
                   <button
                     type="submit"
                     className="submit-btn"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || Object.keys(errors).length > 0}
                   >
                     {isSubmitting ? (
                       <>
-                        <span className="spinner"></span>
-                        Sending Request...
+                        <span className="spinner"></span> Submitting...
                       </>
                     ) : (
                       <>
-                        <FaCheckCircle /> Submit Request
+                        <FaCheckCircle /> Submit Consultation Request
                       </>
                     )}
                   </button>
-
                   <p className="privacy-note">
-                    Your information is safe with us. We respect your privacy
-                    and never share your details.
+                    Your information is kept strictly confidential and secure.
                   </p>
                 </div>
 
                 {errors.submit && (
                   <div className="submit-error">
+                    <FaExclamationCircle className="submit-error-icon" />
                     <span className="error-message">{errors.submit}</span>
                   </div>
                 )}
@@ -732,43 +834,6 @@ const ConsultationPage = ({ darkMode }) => {
           </div>
         </div>
       </div>
-
-      {/* FAQ Section */}
-      <section className="consultation-faq">
-        <div className="faq-container">
-          <h2>Common Questions</h2>
-          <div className="faq-grid">
-            <div className="faq-item">
-              <h3>Is this really free?</h3>
-              <p>
-                Yes! The initial consultation connection is completely free.
-                You'll discuss your concerns with an expert at no cost.
-              </p>
-            </div>
-            <div className="faq-item">
-              <h3>How soon will someone contact me?</h3>
-              <p>
-                Typically within 24 hours. For urgent requests, we try to
-                connect you within 2-4 hours.
-              </p>
-            </div>
-            <div className="faq-item">
-              <h3>What happens after I submit?</h3>
-              <p>
-                Our team reviews your request and matches you with the most
-                suitable expert who will contact you directly.
-              </p>
-            </div>
-            <div className="faq-item">
-              <h3>Can I choose a specific expert?</h3>
-              <p>
-                Yes! Once we connect, you can request a different expert if you
-                prefer. We want you to feel completely comfortable.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };

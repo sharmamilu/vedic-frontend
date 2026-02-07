@@ -3,7 +3,7 @@
   min-height: 100vh;
   background: var(--cream);
   color: var(--light-text);
-  font-family: 'Cambria', 'Georgia', serif;
+  font-family: "Cambria", "Georgia", serif;
   transition: all 0.5s ease;
 }
 
@@ -15,18 +15,22 @@
 /* Hero Section */
 .about-hero-section {
   padding: 80px 20px;
-  background: linear-gradient(135deg, 
-    rgba(67, 160, 71, 0.1) 0%, 
-    rgba(142, 36, 170, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(67, 160, 71, 0.1) 0%,
+    rgba(142, 36, 170, 0.1) 100%
+  );
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
 .dark-mode .about-hero-section {
-  background: linear-gradient(135deg, 
-    rgba(67, 160, 71, 0.2) 0%, 
-    rgba(142, 36, 170, 0.2) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(67, 160, 71, 0.2) 0%,
+    rgba(142, 36, 170, 0.2) 100%
+  );
 }
 
 .about-hero-content {
@@ -138,9 +142,11 @@
 /* Story Section */
 .story-section {
   padding: 80px 20px;
-  background: linear-gradient(135deg, 
-    rgba(142, 36, 170, 0.05) 0%, 
-    rgba(67, 160, 71, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(142, 36, 170, 0.05) 0%,
+    rgba(67, 160, 71, 0.05) 100%
+  );
 }
 
 .story-container {
@@ -209,7 +215,7 @@
 }
 
 .timeline:before {
-  content: '';
+  content: "";
   position: absolute;
   left: 15px;
   top: 0;
@@ -224,7 +230,7 @@
 }
 
 .timeline-item:before {
-  content: '';
+  content: "";
   position: absolute;
   left: -33px;
   top: 0;
@@ -336,9 +342,11 @@
 /* Team Section */
 .team-section {
   padding: 80px 20px;
-  background: linear-gradient(135deg, 
-    rgba(67, 160, 71, 0.05) 0%, 
-    rgba(142, 36, 170, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(67, 160, 71, 0.05) 0%,
+    rgba(142, 36, 170, 0.05) 100%
+  );
 }
 
 .team-container {
@@ -423,99 +431,14 @@
   color: var(--dark-text);
 }
 
-/* Testimonials Section */
-.testimonials-section {
-  padding: 80px 20px;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.testimonials-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 50px;
-}
-
-.testimonial-card {
-  padding: 40px 30px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  border: 2px solid rgba(142, 36, 170, 0.2);
-  transition: all 0.3s ease;
-}
-
-.dark-mode .testimonial-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(142, 36, 170, 0.3);
-}
-
-.testimonial-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.testimonial-rating {
-  display: flex;
-  gap: 5px;
-  margin-bottom: 20px;
-}
-
-.star-filled {
-  color: var(--gold);
-  font-size: 1.2rem;
-}
-
-.star-empty {
-  color: rgba(142, 36, 170, 0.3);
-  font-size: 1.2rem;
-}
-
-.testimonial-text {
-  color: var(--light-text);
-  font-size: 1.1rem;
-  line-height: 1.7;
-  font-style: italic;
-  margin-bottom: 25px;
-  min-height: 100px;
-}
-
-.dark-mode .testimonial-text {
-  color: var(--dark-text);
-}
-
-.testimonial-author h4 {
-  color: var(--earth);
-  font-size: 1.2rem;
-  margin-bottom: 5px;
-}
-
-.dark-mode .testimonial-author h4 {
-  color: var(--purple);
-}
-
-.testimonial-author p {
-  color: var(--light-text);
-  font-size: 0.9rem;
-  opacity: 0.8;
-  margin: 0;
-}
-
-.dark-mode .testimonial-author p {
-  color: var(--dark-text);
-}
-
 /* Commitment Section */
 .commitment-section {
   padding: 80px 20px;
-  background: linear-gradient(135deg, 
-    rgba(142, 36, 170, 0.05) 0%, 
-    rgba(67, 160, 71, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(142, 36, 170, 0.05) 0%,
+    rgba(67, 160, 71, 0.05) 100%
+  );
 }
 
 .commitment-container {
@@ -617,9 +540,11 @@
 /* CTA Section */
 .about-cta-section {
   padding: 100px 20px;
-  background: linear-gradient(135deg, 
-    rgba(67, 160, 71, 0.1) 0%, 
-    rgba(142, 36, 170, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(67, 160, 71, 0.1) 0%,
+    rgba(142, 36, 170, 0.1) 100%
+  );
   text-align: center;
 }
 
@@ -676,7 +601,7 @@
   .about-hero-title {
     font-size: 2.5rem;
   }
-  
+
   .mission-card,
   .story-content,
   .value-card,
@@ -684,19 +609,19 @@
   .testimonial-card {
     padding: 30px 20px;
   }
-  
+
   .section-title {
     font-size: 1.8rem;
   }
-  
+
   .timeline {
     padding-left: 30px;
   }
-  
+
   .timeline:before {
     left: 10px;
   }
-  
+
   .timeline-item:before {
     left: -25px;
   }
@@ -706,20 +631,20 @@
   .about-hero-title {
     font-size: 2rem;
   }
-  
+
   .about-hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .mission-card h2,
   .commitment-content h2 {
     font-size: 1.8rem;
   }
-  
+
   .stat-number {
     font-size: 2rem;
   }
-  
+
   .about-cta-btn {
     padding: 15px 30px;
     font-size: 1rem;

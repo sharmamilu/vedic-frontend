@@ -120,31 +120,6 @@ const AboutPage = ({ darkMode }) => {
     },
   ];
 
-  // Testimonials
-  const testimonials = [
-    {
-      id: 1,
-      name: "Sarah Johnson",
-      location: "New York, USA",
-      text: "The guidance I received transformed my career path. Truly life-changing!",
-      rating: 5,
-    },
-    {
-      id: 2,
-      name: "Raj Patel",
-      location: "Mumbai, India",
-      text: "Authentic Vastu advice that improved my home's energy significantly.",
-      rating: 5,
-    },
-    {
-      id: 3,
-      name: "Maria Gonzalez",
-      location: "Madrid, Spain",
-      text: "Meditation sessions helped me find peace during challenging times.",
-      rating: 4,
-    },
-  ];
-
   return (
     <div className={`about-page-container ${darkMode ? "dark-mode" : ""}`}>
       {/* Hero Section */}
@@ -287,41 +262,6 @@ const AboutPage = ({ darkMode }) => {
                   <div className="team-details">
                     <p className="specialization">{member.description}</p>
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="testimonials-section">
-        <div className="testimonials-container">
-          <h2 className="section-title">
-            <FaQuoteLeft /> Voices of Transformation
-          </h2>
-          <p className="section-subtitle">
-            Stories from those who've found guidance and clarity through our
-            services
-          </p>
-
-          <div className="testimonials-grid">
-            {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="testimonial-card">
-                <div className="testimonial-rating">
-                  {[...Array(5)].map((_, i) => (
-                    <FaStar
-                      key={i}
-                      className={
-                        i < testimonial.rating ? "star-filled" : "star-empty"
-                      }
-                    />
-                  ))}
-                </div>
-                <p className="testimonial-text">"{testimonial.text}"</p>
-                <div className="testimonial-author">
-                  <h4>{testimonial.name}</h4>
-                  <p>{testimonial.location}</p>
                 </div>
               </div>
             ))}

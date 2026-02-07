@@ -9,6 +9,7 @@ import MeditationPage from "./pages/MeditationPage";
 import EnergyPage from "./pages/EnergyPage";
 import ConsultationPage from "./pages/ConsultationPage";
 import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -53,6 +54,10 @@ const App = () => {
             element={<ConsultationPage darkMode={darkMode} />}
           />
           <Route path="/about" element={<AboutPage darkMode={darkMode} />} />
+          <Route
+            path="/contact"
+            element={<ContactPage darkMode={darkMode} />}
+          />
         </Routes>
         <Footer />
       </div>

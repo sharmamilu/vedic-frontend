@@ -14,6 +14,7 @@ import {
   FaSun,
   FaInfo,
   FaYinYang,
+  FaPhone,
   FaGem,
 } from "react-icons/fa";
 import { GiLotus, GiMeditation } from "react-icons/gi";
@@ -62,6 +63,12 @@ const SpiritualNavbar = ({ darkMode, toggleDarkMode }) => {
       label: "Consultation",
       icon: <FaUserAlt />,
       path: "/consultation",
+    },
+    {
+      id: "contact",
+      label: "Contact",
+      icon: <FaPhone />,
+      path: "/contact",
     },
     // {
     //   id: "resources",
