@@ -27,12 +27,17 @@ import {
   GiAbstract047,
 } from "react-icons/gi";
 import "../styles/AstrologyPage.css";
+import { useNavigate } from "react-router-dom";
 
 const AstrologyPage = ({ darkMode }) => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("understanding");
   const [selectedZodiac, setSelectedZodiac] = useState("aries");
   const [showConsultModal, setShowConsultModal] = useState(false);
 
+  const handleConsultationClick = () => {
+    navigate("/consultation");
+  };
   // Zodiac Signs Data - Static, evergreen content
   const zodiacSigns = [
     {
@@ -404,7 +409,7 @@ const AstrologyPage = ({ darkMode }) => {
             <div className="astrology-hero-buttons">
               <button
                 className="astrology-btn-primary"
-                onClick={() => setShowConsultModal(true)}
+                onClick={handleConsultationClick}
               >
                 <FaCalendarAlt /> Book Consultation
               </button>

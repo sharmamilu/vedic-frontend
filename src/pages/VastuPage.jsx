@@ -39,8 +39,13 @@ import {
   GiWindHole,
 } from "react-icons/gi";
 import "../styles/VastuPage.css";
+import { useNavigate } from "react-router-dom";
 
 const VastuPage = ({ darkMode }) => {
+  const navigate = useNavigate();
+  const handleConsultationClick = () => {
+    navigate("/consultation");
+  };
   const [activeTab, setActiveTab] = useState("principles");
   const [selectedDirection, setSelectedDirection] = useState("north");
   const [showRemedyModal, setShowRemedyModal] = useState(false);
@@ -856,12 +861,15 @@ const VastuPage = ({ darkMode }) => {
               certified Vastu consultants.
             </p>
             <div className="vastu-cta-buttons">
-              <button className="vastu-btn-primary">
+              <button
+                className="vastu-btn-primary"
+                onClick={handleConsultationClick}
+              >
                 <FaCalendarAlt /> Book Consultation
               </button>
-              <button className="vastu-btn-secondary">
+              {/* <button className="vastu-btn-secondary">
                 <FaDownload /> Download Free Guide
-              </button>
+              </button> */}
             </div>
           </div>
           <div className="vastu-cta-decoration">
