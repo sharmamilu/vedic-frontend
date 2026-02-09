@@ -343,7 +343,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
             </div>
             <h3>Holistic Balance</h3>
             <p>
-              Addressing mind, body, and spirit as interconnected aspects of
+              Addressing mind, body, and soul as interconnected aspects of
               complete wellness and healing.
             </p>
           </div>

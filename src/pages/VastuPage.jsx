@@ -781,7 +781,7 @@ const VastuPage = ({ darkMode }) => {
       </div>
 
       {/* Testimonials Section */}
-      <section className="vastu-testimonials-section">
+      {/* <section className="vastu-testimonials-section">
         <div className="section-header">
           <h2>
             <FaUsers /> Vastu Success Stories
@@ -844,7 +844,7 @@ const VastuPage = ({ darkMode }) => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="vastu-cta-section">

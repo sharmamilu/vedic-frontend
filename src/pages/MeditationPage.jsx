@@ -528,8 +528,7 @@ const MeditationPage = ({ darkMode }) => {
                 <FaStar /> Meditation Benefits
               </h2>
               <p>
-                Transform your mind, body, and spirit through consistent
-                practice
+                Transform your mind, body, and soul through consistent practice
               </p>
             </div>
 
