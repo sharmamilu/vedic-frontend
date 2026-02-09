@@ -169,7 +169,7 @@ const AboutPage = ({ darkMode }) => {
   // Practitioner Qualifications - Nagaratna BN
   const nagaratnaQualifications = [
     {
-      category: "Acupuncture Specialization",
+      category: "Colour Therapy Specialisation",
       credentials: [
         "Certified in Acupuncture/Alternative Therapy D.A.T by ATAMA Acupuncture Training Centre",
         "Completed BSS Diploma in Acupuncture Therapy by ATAMA",

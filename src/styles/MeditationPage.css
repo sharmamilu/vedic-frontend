@@ -1,11 +1,13 @@
 /* Meditation Page Styles */
 .meditation-page-container {
   min-height: 100vh;
-  background: linear-gradient(180deg, 
+  background: linear-gradient(
+    180deg,
     rgba(252, 245, 255, 1) 0%,
-    rgba(255, 255, 255, 0.9) 100%);
+    rgba(255, 255, 255, 0.9) 100%
+  );
   color: var(--light-text);
-  font-family: 'Cambria', 'Georgia', serif;
+  font-family: "Cambria", "Georgia", serif;
   transition: all 0.5s ease;
 }
 
@@ -51,11 +53,26 @@
 }
 
 @keyframes floatElement {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0.05; }
-  25% { transform: translateY(-40px) rotate(90deg); opacity: 0.1; }
-  50% { transform: translateY(0) rotate(180deg); opacity: 0.05; }
-  75% { transform: translateY(40px) rotate(270deg); opacity: 0.1; }
-  100% { transform: translateY(0) rotate(360deg); opacity: 0.05; }
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.05;
+  }
+  25% {
+    transform: translateY(-40px) rotate(90deg);
+    opacity: 0.1;
+  }
+  50% {
+    transform: translateY(0) rotate(180deg);
+    opacity: 0.05;
+  }
+  75% {
+    transform: translateY(40px) rotate(270deg);
+    opacity: 0.1;
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+    opacity: 0.05;
+  }
 }
 
 .meditation-hero-content {
@@ -124,7 +141,8 @@
   flex-wrap: wrap;
 }
 
-.meditation-btn-primary, .meditation-btn-secondary {
+.meditation-btn-primary,
+.meditation-btn-secondary {
   padding: 15px 30px;
   border-radius: 50px;
   font-size: 1rem;
@@ -169,7 +187,7 @@
 /* Tabs Navigation */
 .meditation-tabs-container {
   position: sticky;
-  top: 0;
+  top: 70px;
   z-index: 100;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
@@ -282,7 +300,7 @@
   background: white;
   border-radius: 15px;
   padding: 25px;
-  border: 2px solid #E0E0E0;
+  border: 2px solid #e0e0e0;
   cursor: pointer;
   transition: all 0.3s;
   display: flex;
@@ -290,7 +308,7 @@
 }
 
 .dark-mode .technique-card {
-  background: #2D2D2D;
+  background: #2d2d2d;
   border-color: #444;
 }
 
@@ -330,7 +348,8 @@
   gap: 10px;
 }
 
-.difficulty, .duration {
+.difficulty,
+.duration {
   font-size: 0.85rem;
   padding: 4px 12px;
   border-radius: 15px;
@@ -338,13 +357,13 @@
 }
 
 .difficulty {
-  background: #FFF3E0;
-  color: #E65100;
+  background: #fff3e0;
+  color: #e65100;
 }
 
 .dark-mode .difficulty {
   background: var(--light-text);
-  color: #FFB74D;
+  color: #ffb74d;
 }
 
 .duration {
@@ -395,10 +414,10 @@
 
 /* Technique CTA */
 .technique-cta {
-  background: linear-gradient(135deg, #E8F5E9, #F1F8E9);
+  background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
   border-radius: 20px;
   padding: 40px;
-  border: 2px solid #C8E6C9;
+  border: 2px solid #c8e6c9;
   text-align: center;
 }
 
@@ -462,11 +481,11 @@
   background: white;
   border-radius: 15px;
   padding: 30px;
-  border: 2px solid #E0E0E0;
+  border: 2px solid #e0e0e0;
 }
 
 .dark-mode .path-card {
-  background: #2D2D2D;
+  background: #2d2d2d;
   border-color: #444;
 }
 
@@ -476,7 +495,7 @@
   gap: 15px;
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 2px solid #E0E0E0;
+  border-bottom: 2px solid #e0e0e0;
 }
 
 .dark-mode .path-header {
@@ -508,7 +527,7 @@
   display: flex;
   gap: 20px;
   padding: 20px;
-  background: #F9F9F9;
+  background: #f9f9f9;
   border-radius: 10px;
   border-left: 4px solid var(--green);
 }
@@ -581,7 +600,7 @@
 }
 
 .focus-tag {
-  background: #E8F5E9;
+  background: #e8f5e9;
   color: var(--green);
   padding: 4px 12px;
   border-radius: 15px;
@@ -613,12 +632,12 @@
   background: white;
   border-radius: 15px;
   padding: 40px;
-  border: 2px solid #E0E0E0;
+  border: 2px solid #e0e0e0;
   margin-bottom: 40px;
 }
 
 .dark-mode .benefits-tree {
-  background: #2D2D2D;
+  background: #2d2d2d;
   border-color: #444;
 }
 
@@ -626,7 +645,7 @@
   text-align: center;
   margin-bottom: 40px;
   padding-bottom: 30px;
-  border-bottom: 2px solid #E0E0E0;
+  border-bottom: 2px solid #e0e0e0;
 }
 
 .dark-mode .tree-root {
@@ -656,7 +675,7 @@
 
 .tree-branch {
   padding: 25px;
-  background: #F9F9F9;
+  background: #f9f9f9;
   border-radius: 10px;
   border-left: 4px solid var(--green);
 }
@@ -671,7 +690,7 @@
   font-size: 1.4rem;
   margin: 0 0 20px 0;
   padding-bottom: 15px;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .dark-mode .branch-header h4 {
@@ -739,12 +758,12 @@
   padding: 25px;
   background: white;
   border-radius: 10px;
-  border: 2px solid #E0E0E0;
+  border: 2px solid #e0e0e0;
   text-align: center;
 }
 
 .dark-mode .summary-card {
-  background: #2D2D2D;
+  background: #2d2d2d;
   border-color: #444;
 }
 
@@ -781,18 +800,18 @@
   background: white;
   border-radius: 15px;
   padding: 30px;
-  border: 2px solid #E0E0E0;
+  border: 2px solid #e0e0e0;
 }
 
 .dark-mode .tip-category {
-  background: #2D2D2D;
+  background: #2d2d2d;
   border-color: #444;
 }
 
 .category-header {
   margin-bottom: 25px;
   padding-bottom: 20px;
-  border-bottom: 2px solid #E0E0E0;
+  border-bottom: 2px solid #e0e0e0;
 }
 
 .dark-mode .category-header {
@@ -820,7 +839,7 @@
   padding: 12px 0;
   padding-left: 25px;
   position: relative;
-  border-bottom: 1px solid #F0F0F0;
+  border-bottom: 1px solid #f0f0f0;
   line-height: 1.5;
   font-size: 1rem;
 }
@@ -849,10 +868,10 @@
 
 /* Expert Guidance */
 .expert-guidance {
-  background: linear-gradient(135deg, #E8F5E9, #F1F8E9);
+  background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
   border-radius: 20px;
   padding: 40px;
-  border: 2px solid #C8E6C9;
+  border: 2px solid #c8e6c9;
 }
 
 .dark-mode .expert-guidance {
@@ -983,7 +1002,7 @@
 }
 
 .dark-mode .technique-modal {
-  background: #2D2D2D;
+  background: #2d2d2d;
   border-color: var(--green);
 }
 
@@ -1020,7 +1039,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  border-bottom: 2px solid #E0E0E0;
+  border-bottom: 2px solid #e0e0e0;
 }
 
 .dark-mode .modal-header {
@@ -1059,7 +1078,7 @@
   margin-bottom: 15px;
   font-size: 1.4rem;
   padding-bottom: 10px;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .dark-mode .modal-section h3 {
@@ -1078,7 +1097,8 @@
   color: var(--dark-text);
 }
 
-.steps-list, .benefits-list {
+.steps-list,
+.benefits-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -1183,56 +1203,57 @@
   .meditation-hero-title {
     font-size: 2.2rem;
   }
-  
+
   .meditation-hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .meditation-hero-buttons {
     flex-direction: column;
     align-items: center;
   }
-  
-  .meditation-btn-primary, .meditation-btn-secondary {
+
+  .meditation-btn-primary,
+  .meditation-btn-secondary {
     width: 100%;
     max-width: 300px;
   }
-  
+
   .section-header h2 {
     font-size: 2rem;
   }
-  
+
   .techniques-grid,
   .tree-branches,
   .benefits-summary,
   .tips-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .path-step {
     flex-direction: column;
     gap: 15px;
   }
-  
+
   .guidance-content {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .guidance-image {
     font-size: 6rem;
   }
-  
+
   .modal-header {
     flex-direction: column;
     text-align: center;
     padding: 30px 20px 20px;
   }
-  
+
   .modal-content {
     padding: 20px;
   }
-  
+
   .modal-actions {
     flex-direction: column;
   }
@@ -1242,22 +1263,22 @@
   .meditation-hero-title {
     font-size: 1.8rem;
   }
-  
+
   .meditation-hero-text {
     padding: 25px;
   }
-  
+
   .meditation-tabs {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .meditation-tab {
     width: 100%;
     max-width: 250px;
     justify-content: center;
   }
-  
+
   .technique-card,
   .path-card,
   .benefits-tree,

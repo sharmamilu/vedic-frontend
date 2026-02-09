@@ -1,6 +1,7 @@
 /* Spiritual & Vastu Navbar Styles */
 .spiritual-navbar {
-  position: relative;
+  position: sticky;
+  top: 0;
   height: 70px;
   width: calc(100% - 20px);
   max-width: 1500px;
@@ -15,12 +16,11 @@
   justify-content: space-between;
   padding: 0 20px;
   margin: 10px auto 0;
-  overflow: hidden;
   border-bottom: 3px solid #7b1fa2;
   box-shadow:
     0 4px 30px rgba(106, 27, 154, 0.15),
     0 2px 10px rgba(67, 160, 71, 0.1);
-  z-index: 100;
+  z-index: 9999;
   font-family: "Cambria", "Georgia", serif;
   transition: all 0.5s ease;
 }
@@ -691,26 +691,29 @@
 
   .spiritual-nav-menu {
     position: fixed;
-    top: 90px;
+    top: 80px;
     left: 0;
     right: 0;
     background: linear-gradient(
       135deg,
-      rgba(245, 245, 220, 0.98) 0%,
-      rgba(255, 250, 240, 0.98) 100%
+      rgba(255, 255, 255, 1) 0%,
+      rgba(252, 245, 255, 1) 100%
     );
     backdrop-filter: blur(10px);
     flex-direction: column;
     align-items: center;
-    padding: 30px 20px;
+    padding: 20px;
     box-shadow: 0 10px 30px rgba(139, 69, 19, 0.2);
     gap: 10px;
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
     transition: all 0.4s ease;
-    z-index: 99;
+    z-index: 10000;
     border-radius: 0 0 20px 20px;
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .dark-mode .spiritual-nav-menu {
@@ -811,6 +814,8 @@
   }
 
   .spiritual-nav-menu {
-    top: 70px;
+    top: 65px;
+    height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
   }
 }
