@@ -25,8 +25,9 @@ import {
   GiSpinningTop,
 } from "react-icons/gi";
 import "../styles/MeditationPage.css";
-
+import { useNavigate } from "react-router-dom";
 const MeditationPage = ({ darkMode }) => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("techniques");
   const [selectedTechnique, setSelectedTechnique] = useState(null);
   const [showTechniqueModal, setShowTechniqueModal] = useState(false);
@@ -322,7 +323,7 @@ const MeditationPage = ({ darkMode }) => {
 
   const handleBookConsultation = () => {
     // Redirect to consultation page
-    window.location.href = "/consultation";
+    navigate("/consultation");
   };
 
   return (

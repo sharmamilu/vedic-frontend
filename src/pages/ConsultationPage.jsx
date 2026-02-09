@@ -87,6 +87,9 @@ const ConsultationPage = ({ darkMode }) => {
 
   // Fetch countries and check success status
   useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+
     const fetchCountries = async () => {
       try {
         const response = await fetch(
