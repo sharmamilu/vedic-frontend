@@ -17,6 +17,11 @@ import {
   FaFire,
   FaWind,
   FaMountain,
+  FaHashtag,
+  FaBriefcase,
+  FaUserEdit,
+  FaPhoneAlt,
+  FaBuilding,
 } from "react-icons/fa";
 import {
   GiStarSwirl,
@@ -216,42 +221,68 @@ const AstrologyPage = ({ darkMode }) => {
   // Types of Astrology - Static content
   const astrologyTypes = [
     {
-      id: "vedic",
-      name: "Vedic Astrology",
-      icon: <GiLotus />,
+      id: "numerology",
+      name: "Numerology",
+      icon: <FaHashtag />,
       description:
-        "Ancient Indian system based on sidereal zodiac. Uses 27 nakshatras (lunar mansions) and dasha systems for timing events.",
+        "Ancient science of numbers that reveals life patterns, strengths, and destiny using your date of birth and name.",
       features: [
-        "Focuses on karma and destiny",
-        "Uses Moon sign as primary indicator",
-        "Includes remedies and rituals",
-        "Detailed dashas (planetary periods)",
+        "Life Path & Destiny numbers",
+        "Personality and soul analysis",
+        "Strengths and challenges",
+        "Lucky numbers and dates",
       ],
     },
     {
-      id: "western",
-      name: "Western Astrology",
-      icon: <FaStar />,
+      id: "career-prediction",
+      name: "Career Prediction",
+      icon: <FaBriefcase />,
       description:
-        "Based on tropical zodiac. Emphasizes psychological interpretation and personal growth.",
+        "Career guidance and future predictions based on Date of Birth using numerology calculations.",
       features: [
-        "Focus on Sun signs",
-        "Psychological approach",
-        "Horary astrology for questions",
-        "Modern planetary interpretations",
+        "Best-suited career paths",
+        "Timing for job change or growth",
+        "Success periods and challenges",
+        "Financial growth indicators",
       ],
     },
     {
-      id: "chinese",
-      name: "Chinese Astrology",
-      icon: <GiAbstract047 />,
+      id: "phone-number-correction",
+      name: "Phone Number Correction",
+      icon: <FaPhoneAlt />,
       description:
-        "Based on lunar calendar and 12-year animal cycle. Incorporates five elements theory.",
+        "Phone number analysis and correction using numerology to enhance communication, success, and positive vibrations.",
       features: [
-        "12 animal zodiac signs",
-        "Five elements (Wood, Fire, Earth, Metal, Water)",
-        "Yin and Yang balance",
-        "Compatibility based on birth year",
+        "Mobile number vibration analysis",
+        "Correction for luck and stability",
+        "Business & personal number guidance",
+        "Alignment with DOB and name",
+      ],
+    },
+    {
+      id: "name-correction",
+      name: "Name Correction",
+      icon: <FaUserEdit />,
+      description:
+        "Numerological correction of name to align vibrations with success, health, and harmony.",
+      features: [
+        "Spelling correction analysis",
+        "Name number balancing",
+        "Removal of negative vibrations",
+        "Personalized recommendations",
+      ],
+    },
+    {
+      id: "business-name",
+      name: "Business Name Suggestion",
+      icon: <FaBuilding />,
+      description:
+        "Powerful numerology-based name suggestions for new or existing businesses to enhance growth and prosperity.",
+      features: [
+        "Business name numerology",
+        "Brand vibration alignment",
+        "Success and expansion focus",
+        "New & ongoing business support",
       ],
     },
   ];

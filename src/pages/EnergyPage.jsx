@@ -748,8 +748,16 @@ const EnergyPage = ({ darkMode }) => {
                 <div className="chakra-human-outline">
                   {/* Simplified human shape for context */}
                   <svg viewBox="0 0 100 200" className="human-svg">
+                    {/* Human body */}
                     <path
-                      d="M50,10 C60,10 65,18 65,28 C65,38 58,45 50,45 C42,45 35,38 35,28 C35,18 40,10 50,10 Z M50,45 C70,50 80,60 80,100 L80,160 C80,170 70,170 70,160 L70,120 L55,120 L55,190 C55,200 45,200 45,190 L45,120 L30,120 L30,160 C30,170 20,170 20,160 L20,100 C20,60 30,50 50,45 Z"
+                      d="M50,10 C60,10 65,18 65,28 C65,38 58,45 50,45
+       C42,45 35,38 35,28 C35,18 40,10 50,10 Z
+       M50,45 C70,50 80,60 80,100 L80,160
+       C80,170 70,170 70,160 L70,120
+       L55,120 L55,190 C55,200 45,200 45,190
+       L45,120 L30,120 L30,160
+       C30,170 20,170 20,160 L20,100
+       C20,60 30,50 50,45 Z"
                       fill="rgba(142, 36, 170, 0.1)"
                     />
                   </svg>
@@ -760,7 +768,7 @@ const EnergyPage = ({ darkMode }) => {
                       key={chakra.id}
                       className={`chakra-point ${activeEnergy?.id === chakra.id ? "active" : ""}`}
                       style={{
-                        top: `${15 + index * 12}%`,
+                        top: `${5 + index * 12}%`,
                         "--chakra-color": chakra.color,
                       }}
                       onClick={() => handleElementClick(chakra)}

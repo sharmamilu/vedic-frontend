@@ -873,7 +873,7 @@
     rgba(142, 36, 170, 0.1) 0%,
     rgba(67, 160, 71, 0.1) 100%);
   border-radius: 10px;
-  border: 2px solid rgba(142, 36, 170, 0.2); */
+  border: 2px solid rgba(142, 36, 170, 0.2); 
   /* Removing boxy borders to fit human shape better */
 }
 

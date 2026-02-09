@@ -67,7 +67,7 @@ const SpiritualNavbar = ({ darkMode, toggleDarkMode }) => {
     },
     {
       id: "meditation",
-      label: "Meditation",
+      label: "Chakra Balancing",
       icon: <GiMeditation />,
       path: "/meditation",
     },
