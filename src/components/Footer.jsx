@@ -36,7 +36,7 @@ const Footer = () => {
               <strong>Phone:</strong> +91 9876543210
             </p>
             <p className="contact-info">
-              <strong>Email:</strong> info@holisticharmony.com
+              <strong>Email:</strong>sales@vahc.in
             </p>
           </div>
         </div>
