@@ -349,7 +349,7 @@ const EnergyPage = ({ darkMode }) => {
       id: "crown",
       name: "Crown Chakra",
       location: "Top of head",
-      color: "Violet/White",
+      color: "Violet",
       element: "Space",
       function: "Spiritual connection, enlightenment",
       imbalance: "Spiritual disconnect, cynicism",
@@ -432,7 +432,7 @@ const EnergyPage = ({ darkMode }) => {
   };
 
   const handleConsultation = () => {
-    Navigate("/consultation");
+    navigate("/consultation");
   };
 
   const handleElementClick = (element) => {
@@ -516,12 +516,12 @@ const EnergyPage = ({ darkMode }) => {
           >
             <GiWindmill /> Five Elements
           </button>
-          <button
+          {/* <button
             className={`energy-tab ${activeTab === "brain" ? "active" : ""}`}
             onClick={() => handleTabChange("brain")}
           >
             <FaBrain /> Energy Centers
-          </button>
+          </button> */}
           <button
             className={`energy-tab ${activeTab === "remedies" ? "active" : ""}`}
             onClick={() => handleTabChange("remedies")}
@@ -763,20 +763,33 @@ const EnergyPage = ({ darkMode }) => {
                   </svg>
                 </div>
                 <div className="chakra-spine">
-                  {brainEnergyCenters.map((chakra, index) => (
-                    <div
-                      key={chakra.id}
-                      className={`chakra-point ${activeEnergy?.id === chakra.id ? "active" : ""}`}
-                      style={{
-                        top: `${5 + index * 12}%`,
-                        "--chakra-color": chakra.color,
-                      }}
-                      onClick={() => handleElementClick(chakra)}
-                    >
-                      <div className="chakra-dot"></div>
-                      <span className="chakra-label">{chakra.name}</span>
-                    </div>
-                  ))}
+                  {brainEnergyCenters.map((chakra) => {
+                    // Proper positioning for each chakra along the human body
+                    const positions = {
+                      crown: "4%", // Top of head
+                      "third-eye": "12%", // Forehead
+                      throat: "22%", // Throat
+                      heart: "30%", // Heart center
+                      solar: "42%", // Upper abdomen
+                      sacral: "55%", // Lower abdomen
+                      root: "68%", // Base of spine
+                    };
+
+                    return (
+                      <div
+                        key={chakra.id}
+                        className={`chakra-point ${activeEnergy?.id === chakra.id ? "active" : ""}`}
+                        style={{
+                          top: positions[chakra.id],
+                          "--chakra-color": chakra.color,
+                        }}
+                        onClick={() => handleElementClick(chakra)}
+                      >
+                        <div className="chakra-dot"></div>
+                        <span className="chakra-label">{chakra.name}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -789,7 +802,7 @@ const EnergyPage = ({ darkMode }) => {
                         style={{ backgroundColor: activeEnergy.color }}
                       ></div>
                       <div className="chakra-info">
-                        <h3>{activeEnergy.name} Chakra</h3>
+                        <h3>{activeEnergy.name}</h3>
                         <div className="chakra-meta">
                           <span className="location">
                             <FaTree /> {activeEnergy.location}

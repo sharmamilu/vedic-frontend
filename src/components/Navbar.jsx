@@ -66,10 +66,10 @@ const SpiritualNavbar = ({ darkMode, toggleDarkMode }) => {
       path: "/astrology",
     },
     {
-      id: "meditation",
+      id: "chakra-balancing",
       label: "Chakra Balancing",
       icon: <GiMeditation />,
-      path: "/meditation",
+      path: "/chakra-balancing",
     },
     { id: "energy", label: "Energy", icon: <FaHands />, path: "/energy" },
     {

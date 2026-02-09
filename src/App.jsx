@@ -10,6 +10,7 @@ import EnergyPage from "./pages/EnergyPage";
 import ConsultationPage from "./pages/ConsultationPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
+import ChakraBalancingPage from "./pages/ChakraBalancingPage";
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -57,6 +58,10 @@ const App = () => {
           <Route
             path="/contact"
             element={<ContactPage darkMode={darkMode} />}
+          />
+          <Route
+            path="/chakra-balancing"
+            element={<ChakraBalancingPage darkMode={darkMode} />}
           />
         </Routes>
         <Footer />

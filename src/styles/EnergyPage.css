@@ -888,7 +888,7 @@
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 30px; /* Increased gap for labels */
+  gap: 30px;
   cursor: pointer;
   transition: all 0.3s;
   width: 100%;
@@ -900,7 +900,7 @@
   transform: translateX(-50%) scale(1.05); /* Reduced scale to prevent shifting */
   z-index: 10;
 }
-
+/* 
 .chakra-dot {
   width: 30px;
   height: 30px;
@@ -918,21 +918,20 @@
   transform: translateX(-50%) scale(1.3);
   box-shadow: 0 0 30px var(--chakra-color);
   border-color: var(--cream);
-}
-
+} */
+/* 
 .chakra-label {
-  color: var(--earth); /* Darker text */
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.85); /* Light background for contrast */
+  color: var(--earth); 
+  background: rgba(255, 255, 255, 0.85);
   padding: 8px 15px;
   border-radius: 20px;
   white-space: nowrap;
   position: absolute;
-  left: 65%; /* Position to the right of the dot */
+  left: 65%; 
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(142, 36, 170, 0.2);
-}
-
+} */
+/* 
 .dark-mode .chakra-label {
   color: var(--dark-text);
   background: rgba(30, 30, 50, 0.9);
@@ -1006,7 +1005,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
+} */
 
 .function-section h4 {
   color: var(--earth);
