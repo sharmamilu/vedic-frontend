@@ -449,9 +449,9 @@ const AboutPage = ({ darkMode }) => {
             how our blend of ancient wisdom and modern energetic science can
             transform your wellbeing.
           </p>
-          <a href="" className="about-cta-btn" onClick={navigateToConsultation}>
+          <button className="about-cta-btn" onClick={navigateToConsultation}>
             Book Your Session
-          </a>
+          </button>
         </div>
       </section>
     </div>
