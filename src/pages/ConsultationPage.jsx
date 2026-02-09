@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import {
   FaUser,
@@ -8,6 +8,8 @@ import {
   FaCommentDots,
   FaCheckCircle,
   FaExclamationCircle,
+  FaSearch,
+  FaChevronDown,
 } from "react-icons/fa";
 import "../styles/ConsultationPage.css";
 
@@ -16,35 +18,142 @@ emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
 
 const ConsultationPage = ({ darkMode }) => {
   const form = useRef();
-  const [formData, setFormData] = useState({
-    // Personal Information
+
+  const countryCodes = [
+    { code: "+91", name: "India (+91)" },
+    { code: "+1", name: "USA/Canada (+1)" },
+    { code: "+44", name: "UK (+44)" },
+    { code: "+61", name: "Australia (+61)" },
+    { code: "+971", name: "UAE (+971)" },
+    { code: "+65", name: "Singapore (+65)" },
+    { code: "+49", name: "Germany (+49)" },
+    { code: "+33", name: "France (+33)" },
+    { code: "+81", name: "Japan (+81)" },
+    { code: "+86", name: "China (+86)" },
+  ];
+
+  const initialFormData = {
+    // Personal Information (existing fields)
     name: "",
     dob: "",
     age: "",
     timeOfBirth: "",
     placeOfBirth: "",
+    countryCode: "+91",
     phone: "",
     email: "",
     address: "",
 
-    // Consultation Details
+    // Health Information
+    height: "",
+    weight: "",
+    sleep: "",
+    appetite: "",
+    dietPreference: "vegetarian", // or "non-vegetarian"
+    bowelMovement: "",
+    bloodGlucose: "",
+    bloodPressure: "",
+    medications: "",
+
+    // Emotional State
+    mood: "",
+    tastePreference: "",
+
+    // Consultation Details (existing)
     consultationType: "",
     consultationAreas: [],
     urgency: "within-week",
 
-    // Complaint/Concern
+    // Complaint/Concern (existing)
     complaint: "",
 
-    // Additional Information
+    // Additional Information (existing)
     preferredContactMethod: "email",
     bestTimeToContact: "morning",
     receiveUpdates: true,
-  });
+  };
 
+  const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [fieldTouched, setFieldTouched] = useState({});
+
+  const [countries, setCountries] = useState([]);
+  const [filteredCountries, setFilteredCountries] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Fetch countries and check success status
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch(
+          "https://restcountries.com/v3.1/all?fields=name,idd,flags",
+        );
+        if (!response.ok) throw new Error("Failed to fetch countries");
+
+        const data = await response.json();
+
+        if (!Array.isArray(data)) {
+          throw new Error("Invalid response format");
+        }
+
+        const formattedCountries = data
+          .map((country) => {
+            const root = country.idd?.root || "";
+            const suffix = country.idd?.suffixes ? country.idd.suffixes[0] : "";
+            return {
+              name: country.name.common,
+              code: root + (country.idd?.suffixes?.length > 1 ? "" : suffix),
+              flag: country.flags?.png || "",
+            };
+          })
+          .filter((c) => c.code && c.code.length > 1)
+          .sort((a, b) => a.name.localeCompare(b.name));
+
+        setCountries(formattedCountries);
+        setFilteredCountries(formattedCountries);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+        // Fallback
+        const fallback = [
+          { name: "India", code: "+91", flag: "" },
+          { name: "United States", code: "+1", flag: "" },
+          { name: "United Kingdom", code: "+44", flag: "" },
+        ];
+        setCountries(fallback);
+        setFilteredCountries(fallback);
+      }
+    };
+
+    fetchCountries();
+
+    const successStatus = localStorage.getItem("vahc_form_success");
+    if (successStatus === "true") {
+      setShowSuccess(true);
+    }
+
+    // Click outside listener for dropdown
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Filter countries when searchTerm changes
+  useEffect(() => {
+    const filtered = countries.filter(
+      (c) =>
+        c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        c.code.includes(searchTerm),
+    );
+    setFilteredCountries(filtered);
+  }, [searchTerm, countries]);
 
   // Services offered (as dropdown options)
   const services = [
@@ -215,6 +324,48 @@ const ConsultationPage = ({ darkMode }) => {
       case "age":
         if (value && !formData.dob) error = validateAge(value);
         break;
+      case "height":
+        if (value) {
+          const heightValue = value.toLowerCase().trim();
+          const isFeet =
+            heightValue.includes("ft") || heightValue.includes("'");
+          const isCm = heightValue.includes("cm");
+          const numericValue = parseFloat(heightValue);
+
+          if (isNaN(numericValue)) {
+            error = "Please enter a valid height (e.g., 165cm or 5.5ft)";
+          } else if (isFeet && (numericValue < 1 || numericValue > 10)) {
+            error = "Please enter a valid height in feet (1-10 ft)";
+          } else if (!isFeet && (numericValue < 40 || numericValue > 250)) {
+            error = "Please enter a valid height (40-250 cm)";
+          }
+        }
+        break;
+      case "weight":
+        if (value) {
+          const weightNum = parseFloat(value);
+          if (isNaN(weightNum) || weightNum < 1 || weightNum > 300) {
+            error = "Please enter a valid weight (1-300 kg)";
+          }
+        }
+        break;
+      case "bloodPressure":
+        if (value) {
+          const bpRegex = /^\d{2,3}\/\d{2,3}$/;
+          if (!bpRegex.test(value)) {
+            error = "Please enter BP in format: 120/80";
+          }
+        }
+        break;
+
+      case "bloodGlucose":
+        if (value) {
+          const glucoseNum = parseFloat(value);
+          if (isNaN(glucoseNum) || glucoseNum < 50 || glucoseNum > 1000) {
+            error = "Please enter a valid blood glucose level (50-1000 mg/dL)";
+          }
+        }
+        break;
       case "consultationType":
         if (!value) error = "Please select a consultation type";
         break;
@@ -317,7 +468,9 @@ const ConsultationPage = ({ darkMode }) => {
         from_name: formData.name.trim(),
         from_email: formData.email.trim(),
         reply_to: formData.email.trim(),
-        from_phone: formatPhoneNumber(formData.phone),
+        from_phone: `${formData.countryCode} ${formData.phone}`,
+
+        // Consultation Details
         consultation_type: formData.consultationType,
         concern: formData.complaint.trim(),
         areas_of_discussion:
@@ -325,11 +478,45 @@ const ConsultationPage = ({ darkMode }) => {
         urgency:
           urgencyOptions.find((opt) => opt.id === formData.urgency)?.label ||
           formData.urgency,
+
+        // Personal Information
         date_of_birth: formData.dob || "Not provided",
         age: formData.age || "Not provided",
         time_of_birth: formData.timeOfBirth || "Not applicable",
         place_of_birth: formData.placeOfBirth.trim() || "Not applicable",
         address: formData.address.trim() || "Not provided",
+
+        // NEW: Health Information
+        height: formData.height || "Not provided",
+        weight: formData.weight ? `${formData.weight} kg` : "Not provided",
+        sleep_pattern:
+          formData.sleep.charAt(0).toUpperCase() + formData.sleep.slice(1),
+        appetite: formData.appetite
+          .split("-")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" "),
+        diet_preference:
+          formData.dietPreference === "vegetarian"
+            ? "Vegetarian"
+            : "Non-Vegetarian",
+        bowel_movement: formData.bowelMovement
+          .split("-")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" "),
+        blood_glucose: formData.bloodGlucose.trim() || "Not provided",
+        blood_pressure: formData.bloodPressure.trim() || "Not provided",
+        medications: formData.medications.trim() || "None reported",
+
+        // NEW: Emotional State
+        mood: formData.mood
+          ? formData.mood.charAt(0).toUpperCase() + formData.mood.slice(1)
+          : "Not provided",
+        taste_preference: formData.tastePreference
+          ? formData.tastePreference.charAt(0).toUpperCase() +
+            formData.tastePreference.slice(1)
+          : "Not provided",
+
+        // Contact Preferences
         preferred_contact:
           contactMethods.find(
             (method) => method.id === formData.preferredContactMethod,
@@ -337,6 +524,8 @@ const ConsultationPage = ({ darkMode }) => {
         best_time:
           contactTimes.find((time) => time.id === formData.bestTimeToContact)
             ?.label || formData.bestTimeToContact,
+
+        // Submission Info
         submission_date: new Date().toLocaleString(),
         receive_updates: formData.receiveUpdates ? "Yes" : "No",
       };
@@ -349,30 +538,8 @@ const ConsultationPage = ({ darkMode }) => {
       );
 
       console.log("Email sent successfully:", result.text);
+      localStorage.setItem("vahc_form_success", "true");
       setShowSuccess(true);
-
-      setTimeout(() => {
-        setFormData({
-          name: "",
-          dob: "",
-          age: "",
-          timeOfBirth: "",
-          placeOfBirth: "",
-          phone: "",
-          email: "",
-          address: "",
-          consultationType: "",
-          consultationAreas: [],
-          urgency: "within-week",
-          complaint: "",
-          preferredContactMethod: "email",
-          bestTimeToContact: "morning",
-          receiveUpdates: true,
-        });
-        setErrors({});
-        setFieldTouched({});
-        setShowSuccess(false);
-      }, 3000);
     } catch (error) {
       console.error("Submission error:", error);
       setErrors({
@@ -397,8 +564,9 @@ const ConsultationPage = ({ darkMode }) => {
             Book a<span className="consultation-highlight"> Consultation</span>
           </h1>
           <p className="consultation-hero-subtitle">
-            Fill in your details to book a consultation session with our
-            experts.
+            Schedule a guided consultation to align your mindset, energy, and
+            overall wellness with expert support with VAHC (Vibrant Aura
+            Holistic Center).
           </p>
         </div>
       </section>
@@ -422,7 +590,13 @@ const ConsultationPage = ({ darkMode }) => {
                 </p>
                 <button
                   className="success-back-btn"
-                  onClick={() => setShowSuccess(false)}
+                  onClick={() => {
+                    localStorage.removeItem("vahc_form_success");
+                    setFormData(initialFormData);
+                    setErrors({});
+                    setFieldTouched({});
+                    setShowSuccess(false);
+                  }}
                 >
                   Book Another Consultation
                 </button>
@@ -574,16 +748,74 @@ const ConsultationPage = ({ darkMode }) => {
                       <label>
                         Contact Number <span className="required">*</span>
                       </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        onBlur={() => handleBlur("phone")}
-                        className={`form-input ${errors.phone ? "error" : ""}`}
-                        placeholder="+1 (555) 123-4567"
-                        required
-                      />
+                      <div className="phone-input-container">
+                        <div
+                          className="custom-country-dropdown"
+                          ref={dropdownRef}
+                        >
+                          <div
+                            className="dropdown-selected"
+                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                          >
+                            <span>{formData.countryCode}</span>
+                            <FaChevronDown
+                              className={isDropdownOpen ? "open" : ""}
+                            />
+                          </div>
+
+                          {isDropdownOpen && (
+                            <div className="dropdown-panel">
+                              <div className="search-box">
+                                <FaSearch />
+                                <input
+                                  type="text"
+                                  placeholder="Search country..."
+                                  value={searchTerm}
+                                  onChange={(e) =>
+                                    setSearchTerm(e.target.value)
+                                  }
+                                  onClick={(e) => e.stopPropagation()}
+                                />
+                              </div>
+                              <div className="country-list scrollable">
+                                {filteredCountries.map((c, index) => (
+                                  <div
+                                    key={`${c.code}-${index}`}
+                                    className="country-item"
+                                    onClick={() => {
+                                      setFormData({
+                                        ...formData,
+                                        countryCode: c.code,
+                                      });
+                                      setIsDropdownOpen(false);
+                                      setSearchTerm("");
+                                    }}
+                                  >
+                                    <span className="country-info">
+                                      {c.name} ({c.code})
+                                    </span>
+                                  </div>
+                                ))}
+                                {filteredCountries.length === 0 && (
+                                  <div className="no-results">
+                                    No countries found
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          onBlur={() => handleBlur("phone")}
+                          className={`form-input phone-main-input ${errors.phone ? "error" : ""}`}
+                          placeholder="555-123-4567"
+                          required
+                        />
+                      </div>
                       {errors.phone && (
                         <div className="error-message-with-icon">
                           <FaExclamationCircle />
@@ -628,6 +860,249 @@ const ConsultationPage = ({ darkMode }) => {
                   </div>
                 </div>
 
+                {/* Add this section after the address field in the Personal Information section */}
+
+                {/* Health Information Section */}
+                <div className="form-section">
+                  <h3 className="section-title">
+                    Health Information (Optional)
+                  </h3>
+                  <p className="section-subtitle">
+                    This information helps provide more personalized guidance
+                  </p>
+
+                  <div className="form-grid">
+                    <div className="form-group">
+                      <label>Height (ft/cm)</label>
+                      <input
+                        type="text"
+                        name="height"
+                        value={formData.height}
+                        onChange={handleInputChange}
+                        onBlur={() => handleBlur("height")}
+                        className={`form-input ${errors.height ? "error" : ""}`}
+                        placeholder="e.g., 5.8ft or 165cm"
+                      />
+                      {errors.height && (
+                        <div className="error-message-with-icon">
+                          <FaExclamationCircle />
+                          <span>{errors.height}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="form-group">
+                      <label>Weight (kg)</label>
+                      <input
+                        type="number"
+                        name="weight"
+                        value={formData.weight}
+                        onChange={handleInputChange}
+                        onBlur={() => handleBlur("weight")}
+                        className={`form-input ${errors.weight ? "error" : ""}`}
+                        placeholder="e.g., 65"
+                        min="10"
+                        max="300"
+                        step="0.1"
+                      />
+                      {errors.weight && (
+                        <div className="error-message-with-icon">
+                          <FaExclamationCircle />
+                          <span>{errors.weight}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="form-group">
+                      <label>Sleep Pattern</label>
+                      <select
+                        name="sleep"
+                        value={formData.sleep}
+                        onChange={handleInputChange}
+                        className="form-select"
+                      >
+                        <option value="">-- Select Sleep Pattern --</option>
+                        <option value="normal">Normal</option>
+                        <option value="sound">Sound</option>
+                        <option value="disturbed">Disturbed</option>
+                        <option value="insomnia">Insomnia</option>
+                        <option value="oversleeping">Oversleeping</option>
+                      </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label>Appetite</label>
+                      <select
+                        name="appetite"
+                        value={formData.appetite}
+                        onChange={handleInputChange}
+                        className="form-select"
+                      >
+                        <option value="">-- Select Appetite --</option>
+                        <option value="normal">Normal</option>
+                        <option value="low">Low</option>
+                        <option value="no-hunger">Do not feel hungry</option>
+                        <option value="increased">Increased</option>
+                        <option value="irregular">Irregular</option>
+                      </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label>Diet Preference</label>
+                      <div className="diet-options">
+                        <label className="diet-option">
+                          <input
+                            type="radio"
+                            name="dietPreference"
+                            value="vegetarian"
+                            checked={formData.dietPreference === "vegetarian"}
+                            onChange={handleInputChange}
+                          />
+                          <span>Vegetarian</span>
+                        </label>
+                        <label className="diet-option">
+                          <input
+                            type="radio"
+                            name="dietPreference"
+                            value="non-vegetarian"
+                            checked={
+                              formData.dietPreference === "non-vegetarian"
+                            }
+                            onChange={handleInputChange}
+                          />
+                          <span>Non-Vegetarian</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div className="form-group">
+                      <label>Bowel Movement (Stool Information)</label>
+                      <select
+                        name="bowelMovement"
+                        value={formData.bowelMovement}
+                        onChange={handleInputChange}
+                        className="form-select"
+                      >
+                        <option value="">-- Select Bowel Movement --</option>
+                        <option value="normal">Normal</option>
+                        <option value="constipation">Constipation</option>
+                        <option value="loose-stools">Loose Stools</option>
+                        <option value="irregular">Irregular</option>
+                        <option value="diarrhea">Diarrhea</option>
+                      </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label>Recent Blood Glucose / HbA1c</label>
+                      <input
+                        type="text"
+                        name="bloodGlucose"
+                        value={formData.bloodGlucose}
+                        onChange={handleInputChange}
+                        onBlur={() => handleBlur("bloodGlucose")}
+                        className={`form-input ${errors.bloodGlucose ? "error" : ""}`}
+                        placeholder="e.g., 120 mg/dL or 6.5%"
+                      />
+                      <small className="field-hint">
+                        Enter value with units (mg/dL or %)
+                      </small>
+                      {errors.bloodGlucose && (
+                        <div className="error-message-with-icon">
+                          <FaExclamationCircle />
+                          <span>{errors.bloodGlucose}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="form-group">
+                      <label>Blood Pressure</label>
+                      <input
+                        type="text"
+                        name="bloodPressure"
+                        value={formData.bloodPressure}
+                        onChange={handleInputChange}
+                        onBlur={() => handleBlur("bloodPressure")}
+                        className={`form-input ${errors.bloodPressure ? "error" : ""}`}
+                        placeholder="e.g., 120/80"
+                      />
+                      <small className="field-hint">
+                        Format: systolic/diastolic
+                      </small>
+                      {errors.bloodPressure && (
+                        <div className="error-message-with-icon">
+                          <FaExclamationCircle />
+                          <span>{errors.bloodPressure}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="form-group full-width">
+                      <label>Medications (If any)</label>
+                      <textarea
+                        name="medications"
+                        value={formData.medications}
+                        onChange={handleInputChange}
+                        className="form-textarea"
+                        placeholder="List any current medications, supplements, or treatments..."
+                        rows={3}
+                      />
+                      <small className="field-hint">
+                        Include dosage and frequency if known
+                      </small>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Emotional State Section */}
+                <div className="form-section">
+                  <h3 className="section-title">
+                    Emotional State & Preferences
+                  </h3>
+                  <p className="section-subtitle">
+                    Understanding your emotional state helps in holistic
+                    assessment
+                  </p>
+
+                  <div className="form-grid">
+                    <div className="form-group">
+                      <label>Predominant Mood</label>
+                      <select
+                        name="mood"
+                        value={formData.mood}
+                        onChange={handleInputChange}
+                        className="form-select"
+                      >
+                        <option value="">-- Select Current Mood --</option>
+                        <option value="happy">Happy / Content</option>
+                        <option value="calm">Calm / Peaceful</option>
+                        <option value="anxious">Anxious / Worried</option>
+                        <option value="sad">Sad / Low</option>
+                        <option value="angry">Angry / Frustrated</option>
+                        <option value="irritable">Irritable</option>
+                        <option value="lethargic">Lethargic / Dull</option>
+                        <option value="stressed">Stressed / Overwhelmed</option>
+                      </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label>Preferred Taste</label>
+                      <select
+                        name="tastePreference"
+                        value={formData.tastePreference}
+                        onChange={handleInputChange}
+                        className="form-select"
+                      >
+                        <option value="">-- Select Preferred Taste --</option>
+                        <option value="sweet">Sweet</option>
+                        <option value="sour">Sour</option>
+                        <option value="salty">Salty</option>
+                        <option value="spicy">Spicy / Pungent</option>
+                        <option value="bitter">Bitter</option>
+                        <option value="astringent">Astringent</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
                 {/* Consultation Type */}
                 <div className="form-section">
                   <h3 className="section-title">

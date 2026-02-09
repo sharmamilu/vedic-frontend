@@ -225,10 +225,10 @@ const AboutPage = ({ darkMode }) => {
             <h2>Our Mission</h2>
             <p>
               To empower every individual to take charge of their health through
-              natural, holistic, and vibrationally-aligned therapies. We bridge
-              the gap between ancient wisdom and modern energetic science,
-              offering a diverse spectrum of non-invasive therapies designed to
-              restore balance and ignite your inner vitality.
+              natural, holistic, and vibrationally-aligned therapies. VAHC
+              bridge the gap between ancient wisdom and modern energetic
+              science, offering a diverse spectrum of non-invasive therapies
+              designed to restore balance and ignite your inner vitality.
             </p>
           </div>
 
@@ -239,7 +239,7 @@ const AboutPage = ({ darkMode }) => {
             <h2>Our Vision</h2>
             <p>
               A world where every person recognizes and harnesses their innate
-              healing potential. We envision a future where the alignment of
+              healing potential. VAHC envision a future where the alignment of
               body, mind, and soul is the foundation of true wellness, and where
               ancient wisdom seamlessly integrates with modern science.
             </p>
@@ -438,7 +438,7 @@ const AboutPage = ({ darkMode }) => {
       {/* Call to Action */}
       <section className="about-cta-section">
         <div className="about-cta-content">
-          <h2>Begin Your Healing Journey Today</h2>
+          <h2>Begin Your Healing Journey Toda With VAHC</h2>
           <p>
             Experience the perfect alignment of body, mind, and soul. Discover
             how our blend of ancient wisdom and modern energetic science can

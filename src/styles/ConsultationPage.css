@@ -618,3 +618,229 @@
 .section-title + .section-subtitle {
   margin-top: -5px;
 }
+
+/* Add to ConsultationPage.css */
+
+/* Diet options */
+.diet-options {
+  display: flex;
+  gap: 15px;
+  margin-top: 8px;
+}
+
+.diet-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.diet-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Health information section */
+.health-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+/* Number input styling */
+.form-input[type="number"] {
+  appearance: textfield;
+}
+
+.form-input[type="number"]::-webkit-inner-spin-button,
+.form-input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Responsive adjustments for health section */
+@media (max-width: 768px) {
+  .diet-options {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .health-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Phone Input Container */
+.phone-input-container {
+  display: flex;
+  gap: 10px;
+}
+
+/* Custom Country Dropdown */
+.custom-country-dropdown {
+  position: relative;
+  flex: 0 0 120px;
+}
+
+.dropdown-selected {
+  padding: 10px 12px;
+  border: 1px solid rgba(142, 36, 170, 0.3);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--light-text);
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  height: 100%;
+}
+
+.dark-mode .dropdown-selected {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--dark-text);
+}
+
+.dropdown-selected:hover {
+  border-color: var(--green);
+}
+
+.dropdown-selected svg {
+  font-size: 0.8rem;
+  transition: transform 0.3s;
+  opacity: 0.7;
+}
+
+.dropdown-selected svg.open {
+  transform: rotate(180deg);
+}
+
+.dropdown-panel {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 300px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow: hidden;
+  border: 1px solid rgba(142, 36, 170, 0.2);
+  animation: slideDown 0.3s ease-out;
+}
+
+.dark-mode .dropdown-panel {
+  background: #2a2a40;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-box {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.dark-mode .search-box {
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.search-box svg {
+  color: var(--green);
+  opacity: 0.7;
+}
+
+.search-box input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 0.9rem;
+  outline: none;
+  color: inherit;
+}
+
+.country-list {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.country-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.country-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.country-list::-webkit-scrollbar-thumb {
+  background: rgba(67, 160, 71, 0.2);
+  border-radius: 10px;
+}
+
+.country-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.country-item:hover {
+  background: rgba(67, 160, 71, 0.1);
+  color: var(--green);
+}
+
+.no-results {
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+
+.phone-main-input {
+  flex: 1;
+}
+
+@media (max-width: 480px) {
+  .dropdown-panel {
+    width: 100%;
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 20px 20px 0 0;
+    max-height: 70vh;
+  }
+
+  .custom-country-dropdown {
+    flex: none;
+    width: 100%;
+  }
+
+  .phone-input-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

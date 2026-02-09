@@ -331,8 +331,8 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
             <GiLotus /> Our Healing Philosophy
           </h2>
           <p>
-            Three fundamental principles guide every healing journey at our
-            center
+            Three fundamental principles guide every healing journey at Vibrant
+            Aura Holistic Center (VAHC)
           </p>
         </div>
 
@@ -496,7 +496,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       <section className="cta-section">
         <div className="cta-container">
           <div className="cta-content">
-            <h2>Begin Your Healing Journey Today</h2>
+            <h2>Begin Your Healing Journey Today With VAHC</h2>
             <p>
               Experience personalized healing tailored to your unique energy
               patterns and wellness goals. Our expert practitioners are ready to
