@@ -62,6 +62,7 @@ const ConsultationPage = ({ darkMode }) => {
     "Reiki Healing",
     "Astrology Consultation",
     "Numerology Consultation",
+    "Other",
   ];
 
   // Updated Consultation Areas based on services offered

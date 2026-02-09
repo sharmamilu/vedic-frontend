@@ -50,8 +50,8 @@ const ContactPage = ({ darkMode }) => {
             Get in<span className="contact-highlight"> Touch</span>
           </h1>
           <p className="contact-hero-subtitle">
-            Reach out to us for appointments, consultations, or any queries.
-            We're here to help you on your healing journey.
+            VAHC Provides you a platform to connect with our experts for any
+            queries or consultations.
           </p>
         </div>
       </section>
@@ -170,13 +170,13 @@ const ContactPage = ({ darkMode }) => {
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Holistic Harmony Healing Center Location"
+                title="Vibrant Aura Holistic Center Location"
                 className="google-map"
               ></iframe>
 
               <div className="map-overlay-info">
                 <div className="overlay-content">
-                  <h4>Holistic Harmony Healing Center</h4>
+                  <h4>Vibrant Aura Holistic Center</h4>
                   <p className="overlay-address">{address}</p>
                   <div className="overlay-actions">
                     <a

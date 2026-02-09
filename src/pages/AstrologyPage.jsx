@@ -747,7 +747,7 @@ const AstrologyPage = ({ darkMode }) => {
                 ))}
               </div>
 
-              <div className="consultation-cta">
+              {/* <div className="consultation-cta">
                 <div className="cta-content">
                   <GiEgyptianTemple className="cta-icon" />
                   <div className="cta-text">
@@ -780,7 +780,7 @@ const AstrologyPage = ({ darkMode }) => {
                     <FaWhatsapp /> Chat Now
                   </button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </section>
         )}

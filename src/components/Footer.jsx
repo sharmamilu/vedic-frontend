@@ -18,12 +18,12 @@ const Footer = () => {
           <div className="footer-logo">
             <img
               src="/logo.png"
-              alt="Holistic Harmony Healing Center"
+              alt="Vibrant Aura Holistic Center"
               className="footer-logo-image"
             />
             <div className="footer-logo-text">
-              <span className="footer-logo-main">Holistic Harmony</span>
-              <span className="footer-logo-sub">Healing Center</span>
+              <span className="footer-logo-main">Vibrant Aura</span>
+              <span className="footer-logo-sub">Holistic Center</span>
             </div>
           </div>
 
@@ -84,18 +84,56 @@ const Footer = () => {
           </div>
           <div className="link-group">
             <h4>Consultations</h4>
-            <a href="#astrology">Astrology Consultation</a>
-            <a href="#numerology">Numerology Consultation</a>
-            <a href="#bachflower">Bach Flower Remedy</a>
-            <a href="#pendulum">Pendulum Dowsing</a>
+            <a
+              href=""
+              onClick={() => navigate("/consultation")}
+              className="pointer"
+            >
+              Astrology Consultation
+            </a>
+            <a
+              href=""
+              onClick={() => navigate("/consultation")}
+              className="pointer"
+            >
+              Numerology Consultation
+            </a>
+            <a
+              href=""
+              onClick={() => navigate("/consultation")}
+              className="pointer"
+            >
+              Bach Flower Remedy
+            </a>
+            <a
+              href=""
+              onClick={() => navigate("/consultation")}
+              className="pointer"
+            >
+              Pendulum Dowsing
+            </a>
           </div>
           <div className="link-group">
             <h4>Company</h4>
-            <a href="#about">About Us</a>
-            <a href="#contact">Contact</a>
-            <a href="#privacy">Privacy Policy</a>
-            <a href="#terms">Terms of Service</a>
-            <a href="#faq">FAQ</a>
+            <a onClick={() => navigate("/")} href="" className="pointer">
+              Home
+            </a>
+            <a onClick={() => navigate("/about")} href="" className="pointer">
+              About Us
+            </a>
+            <a onClick={() => navigate("/contact")} href="" className="pointer">
+              Contact
+            </a>
+            <a
+              onClick={() => navigate("/consultation")}
+              href=""
+              className="pointer"
+            >
+              Consultation
+            </a>
+            {/* <a onClick={() => navigate("/privacy")}>Privacy Policy</a>
+            <a onClick={() => navigate("/terms")}>Terms of Service</a>
+            <a onClick={() => navigate("/faq")}>FAQ</a> */}
           </div>
         </div>
       </div>
@@ -110,11 +148,11 @@ const Footer = () => {
         </div>
 
         <p className="copyright">
-          © {new Date().getFullYear()} Holistic Harmony Healing Center. All
-          rights reserved.
+          © {new Date().getFullYear()} Vibrant Aura Holistic Center. All rights
+          reserved.
         </p>
 
-        <div className="footer-social">
+        {/* <div className="footer-social">
           <a href="#facebook" className="social-icon" aria-label="Facebook">
             <svg viewBox="0 0 24 24" width="24" height="24">
               <path
@@ -147,7 +185,7 @@ const Footer = () => {
               />
             </svg>
           </a>
-        </div>
+        </div> */}
       </div>
     </footer>
   );

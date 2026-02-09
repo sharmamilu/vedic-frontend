@@ -10,6 +10,9 @@ import {
   FaMedal,
   FaStar,
   FaQuoteLeft,
+  FaGraduationCap,
+  FaCertificate,
+  FaUserMd,
 } from "react-icons/fa";
 import {
   GiSpiralBottle,
@@ -120,6 +123,80 @@ const AboutPage = ({ darkMode }) => {
     },
   ];
 
+  // Practitioner Qualifications - Vidya KS
+  const vidyaQualifications = [
+    {
+      category: "Advanced Acupressure & Acupuncture",
+      credentials: [
+        "Completed 6 Semester Master Advanced Acupressure Therapy course from ASPEUS, Prayagraj",
+        "Certificate in Diploma in Acupuncture from ATAMA, BSS Certificate",
+        "Completed Diploma in Traditional Energy Medicine (TEM) by Basava Acu Academy",
+        "Completed course on Auricular Therapy by Basava Acu Academy",
+      ],
+    },
+    {
+      category: "Quantum & Energy Healing",
+      credentials: [
+        "IMPH Level 1 Certified practitioner of Neurochakra Quantum Healing from Miindtraa",
+        "Pranic Healing - Basic, Advanced and Pranic Psychotherapy from Yoga Vidya Pranic Healing",
+      ],
+    },
+    {
+      category: "Vibrational & Alternative Therapies",
+      credentials: [
+        "Completed Colour Therapy program by Vedavyasa Adhyatmika Shikshana Kendra",
+        "Completed Seed and Magnet Therapy program by Vedavyasa Adhyatmika Shikshana Kendra",
+        "Completed Bach Flower Remedies program by Vedavyasa Adhyatmika Shikshana Kendra",
+        "Pendulum Dowsing program by Vedavyasa Adhyatmika Shikshana Kendra",
+        "Completed course in Distance Healing by Vedavyasa Adhyatmika Shikshana Kendra",
+      ],
+    },
+    {
+      category: "Professional Recognition",
+      credentials: [
+        "Awarded in Natural and Drugless Healing Science Training Program covering acupressure, color therapy, seed therapy, auricular therapy by Ayushya Mandalam",
+        "Took part in Acupuncture Integrated Conference by Institution of Agricultural Technologist",
+        "Completed course on Marma and Rekhi",
+      ],
+    },
+  ];
+
+  // Practitioner Qualifications - Nagaratna BN
+  const nagaratnaQualifications = [
+    {
+      category: "Acupuncture Specialization",
+      credentials: [
+        "Certified in Acupuncture/Alternative Therapy D.A.T by ATAMA Acupuncture Training Centre",
+        "Completed BSS Diploma in Acupuncture Therapy by ATAMA",
+      ],
+    },
+    {
+      category: "Energy Medicine",
+      credentials: [
+        "Completed Diploma in Traditional Energy Medicine (TEM) by Basava Acu Academy",
+        "Completed course on Auricular Therapy by Basava Acu Academy",
+      ],
+    },
+    {
+      category: "Holistic Therapies",
+      credentials: [
+        "Completed Colour Therapy program by Vedavyasa Adhyatmika Shikshana Kendra",
+        "Completed Seed and Magnet Therapy program by Vedavyasa Adhyatmika Shikshana Kendra",
+        "Completed Bach Flower Remedies program by Vedavyasa Adhyatmika Shikshana Kendra",
+        "Pendulum Dowsing program by Vedavyasa Adhyatmika Shikshana Kendra",
+        "Completed course on Marma and Rekhi",
+        "Completed course in Distance Healing by Vedavyasa Adhyatmika Shikshana Kendra",
+      ],
+    },
+    {
+      category: "Professional Development",
+      credentials: [
+        "Awarded in Natural and Drugless Healing Science Training Program covering acupressure, color therapy, seed therapy, auricular therapy by Ayushya Mandalam",
+        "Took part in Acupuncture Integrated Conference by Institution of Agricultural Technologist",
+      ],
+    },
+  ];
+
   return (
     <div className={`about-page-container ${darkMode ? "dark-mode" : ""}`}>
       {/* Hero Section */}
@@ -214,8 +291,10 @@ const AboutPage = ({ darkMode }) => {
             <FaHeart /> Why Choose Vibrant Aura?
           </h2>
           <p className="section-subtitle">
-            Our approach addresses the whole person—whether you're dealing with
-            chronic pain, emotional stress, or seeking spiritual growth
+            ​Our approach is rooted in the "Whole-Person" philosophy. Whether
+            you are dealing with chronic pain, emotional stress, or simply
+            looking to enhance your spiritual growth, we provide a supportive
+            environment where science meets intuition.
           </p>
 
           <div className="values-grid">
@@ -236,6 +315,59 @@ const AboutPage = ({ darkMode }) => {
         </div>
       </section>
 
+      {/* Practitioner Qualifications */}
+      <section className="qualifications-section">
+        <div className="qualifications-container">
+          <h2 className="section-title">
+            <FaUserMd /> Our Certified Practitioners
+          </h2>
+          <p className="section-subtitle">
+            Qualified professionals with extensive training in holistic and
+            energy healing
+          </p>
+
+          {/* Vidya KS */}
+          <div className="practitioner-card vertical-card">
+            <h3 className="practitioner-name">Vidya KS</h3>
+            <p className="practitioner-role">Master Practitioner & Founder</p>
+
+            {vidyaQualifications.map((group, index) => (
+              <details key={index} className="toggle-card">
+                <summary className="toggle-header">
+                  <FaCertificate /> {group.category}
+                </summary>
+                <ul className="toggle-list">
+                  {group.credentials.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              </details>
+            ))}
+          </div>
+
+          {/* Nagaratna BN */}
+          <div className="practitioner-card vertical-card">
+            <h3 className="practitioner-name">Nagaratna BN</h3>
+            <p className="practitioner-role">
+              Senior Therapist & Holistic Healing Specialist
+            </p>
+
+            {nagaratnaQualifications.map((group, index) => (
+              <details key={index} className="toggle-card">
+                <summary className="toggle-header">
+                  <FaCertificate /> {group.category}
+                </summary>
+                <ul className="toggle-list">
+                  {group.credentials.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Our Team */}
       <section className="team-section">
         <div className="team-container">
@@ -243,8 +375,9 @@ const AboutPage = ({ darkMode }) => {
             <FaUsers /> Our Core Modalities
           </h2>
           <p className="section-subtitle">
-            A diverse spectrum of non-invasive therapies designed to restore
-            balance and ignite your inner vitality
+            We don't believe in a one-size-fits-all approach. By blending
+            physical, energetic, and cosmic sciences, we create a personalized
+            roadmap for your wellbeing
           </p>
 
           <div className="team-grid">
@@ -279,10 +412,9 @@ const AboutPage = ({ darkMode }) => {
             <div className="commitment-content">
               <h2>Ready to Reclaim Your Radiance?</h2>
               <p>
-                Your journey toward a more vibrant version of yourself begins
+                ​Your journey toward a more vibrant version of yourself begins
                 with a single step. Let us help you unlock the healing potential
-                that already exists within you. We provide a supportive
-                environment where your body's natural intelligence can flourish.
+                that already exists within you.
               </p>
               <div className="commitment-stats">
                 <div className="stat-item">

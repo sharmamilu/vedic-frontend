@@ -12,18 +12,12 @@ import {
   FaBalanceScale,
   FaGem,
   FaUser,
-  FaCalendarAlt,
+  FaLightbulb,
   FaQuoteRight,
   FaArrowRight,
   FaLeaf,
   FaBookOpen,
   FaPlayCircle,
-  FaStar,
-  FaHome,
-  FaWater,
-  FaFire,
-  FaSun,
-  FaMoon,
 } from "react-icons/fa";
 import {
   GiLotus,
@@ -53,7 +47,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       id: 1,
       title: "Acupressure Therapy",
       description:
-        "Traditional healing technique using pressure points to relieve pain and restore energy flow.",
+        "Acupressure is a holistic healing technique that uses gentle pressure on specific points of the body to stimulate natural energy flow. It helps release tension, reduce pain, and restore balance—promoting overall physical and emotional wellness without needles or medication.",
       icon: <FaHands />,
       color: "var(--earth)",
       category: "therapy",
@@ -62,7 +56,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       id: 2,
       title: "Acupuncture Therapy",
       description:
-        "Fine needles inserted at specific points to balance energy flow and promote natural healing.",
+        "Acupuncture involves inserting very fine, sterile needles at strategic points on the body to enhance energy circulation and support healing. It is widely used to relieve pain, improve internal organ function, and harmonize the mind–body system.",
       icon: <GiDirectionSigns />,
       color: "#ff6b6b",
       category: "therapy",
@@ -71,7 +65,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       id: 3,
       title: "Auricular Therapy",
       description:
-        "Ear acupuncture therapy focusing on reflex points to treat various conditions.",
+        "Auricular therapy focuses on stimulating specific points on the ear that correspond to different organs and systems. By activating these points through pressure or needles, this therapy helps reduce stress, pain, addictions, and emotional imbalances.",
       icon: <MdHealing />,
       color: "var(--purple)",
       category: "therapy",
@@ -80,7 +74,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       id: 4,
       title: "Byol Magnet Therapy",
       description:
-        "Using magnetic fields to improve circulation, reduce inflammation, and accelerate healing.",
+        "Byol magnet therapy uses therapeutic magnets placed on meridian points to balance the body's bio-energy. It helps regulate circulation, reduce inflammation, and restore energetic harmony, offering a safe and non-invasive healing method.",
       icon: <FaMagnet />,
       color: "#3cb371",
       category: "energy",
@@ -89,7 +83,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       id: 5,
       title: "Seed Therapy",
       description:
-        "Application of seeds on pressure points to stimulate healing and balance body systems.",
+        "Seed therapy involves applying natural seeds on acupressure points to gently stimulate healing. The seeds exert mild pressure that enhances energy flow, making this therapy effective for pain relief, digestion issues, hormonal balance, and stress reduction.",
       icon: <FaSeedling />,
       color: "var(--green)",
       category: "therapy",
@@ -98,7 +92,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       id: 6,
       title: "Colour Therapy",
       description:
-        "Using colors and light to balance energy centers and promote physical and emotional healing.",
+        "Colour therapy uses different colors and light frequencies to influence mental, emotional, and physical well-being. Each color has a specific vibration that can help uplift mood, calm the mind, energize the body, or promote spiritual balance.",
       icon: <FaPalette />,
       color: "#9370db",
       category: "energy",
@@ -107,7 +101,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       id: 7,
       title: "Marma Therapy",
       description:
-        "Ancient Ayurvedic vital point therapy for rejuvenation and healing.",
+        "Marma therapy is an ancient Ayurvedic technique that works on vital energy points known as “marma.” Gentle stimulation of these points helps detoxify the body, calm the nervous system, improve circulation, and support natural healing.",
       icon: <TbMassage />,
       color: "var(--gold)",
       category: "therapy",
@@ -116,7 +110,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       id: 8,
       title: "Neurochakra Quantum Healing",
       description:
-        "Advanced healing combining neuroscience, chakra balancing, and quantum principles.",
+        "This powerful healing approach combines chakra balancing with quantum energy techniques to restore energetic alignment. It helps clear deep-rooted emotional blockages, enhance mental clarity, and elevate spiritual well-being.",
       icon: <FaBrain />,
       color: "#00bcd4",
       category: "healing",
@@ -125,7 +119,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       id: 9,
       title: "Pranic Healing",
       description:
-        "Energy healing technique that cleanses and energizes the body's bio-magnetic field.",
+        "Pranic Healing works by cleansing and energizing the body's aura and chakras. By removing stagnant or diseased energy and replacing it with fresh prana, this therapy promotes physical healing, emotional stability, and inner peace.",
       icon: <FaWind />,
       color: "#4caf50",
       category: "healing",
@@ -134,7 +128,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       id: 10,
       title: "Bach Flower Remedy",
       description:
-        "Natural flower essences to address emotional imbalances and promote wellbeing.",
+        "Bach Flower Remedies are natural, gentle plant-based essences that support emotional harmony. They help address issues like stress, fear, anxiety, indecisiveness, and emotional overwhelm—allowing the mind to regain clarity and balance.",
       icon: <GiFlowerPot />,
       color: "#ff9800",
       category: "natural",
@@ -143,7 +137,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       id: 11,
       title: "Pendulum Dowsing",
       description:
-        "Ancient divination technique for energy assessment and decision guidance.",
+        "Pendulum dowsing is an energy-based diagnostic tool used to gain insights into health, emotions, and decision-making. It helps identify energy imbalances and guide healing processes by tapping into the subconscious and universal energy field.",
       icon: <GiSpiralArrow />,
       color: "#795548",
       category: "divination",
@@ -152,7 +146,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       id: 12,
       title: "Reiki Healing",
       description:
-        "Japanese energy healing technique for stress reduction and relaxation.",
+        "Reiki healing channels universal life force energy through the practitioner’s hands to the client. This soothing therapy promotes deep relaxation, reduces stress, enhances emotional well-being, and supports the body’s natural healing abilities.",
       icon: <MdHealing />,
       color: "#e91e63",
       category: "healing",
@@ -161,7 +155,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       id: 13,
       title: "Astrology Consultation",
       description:
-        "Detailed astrological readings and guidance based on your birth chart.",
+        "Astrology consultation analyses your birth chart to reveal personality traits, life patterns, opportunities, and challenges. It offers guidance on relationships, career, health, and life purpose—helping you make informed and aligned decisions.",
       icon: <GiCrystalBall />,
       color: "#9c27b0",
       category: "consultation",
@@ -170,7 +164,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       id: 14,
       title: "Numerology Consultation",
       description:
-        "Personalized guidance based on the mystical significance of numbers.",
+        "Numerology interprets the vibrational meaning of numbers in your date of birth and name. It provides insights into your strengths, life path, destiny, challenges, and favorable periods—supporting your journey with clarity and direction",
       icon: <FaGem />,
       color: "#2196f3",
       category: "consultation",
@@ -281,8 +275,8 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
         <div className="hero-content">
           <div className="hero-text">
             <div className="hero-branding">
-              <span className="brand-name">Holistic Harmony</span>
-              <span className="brand-tagline">Healing Center</span>
+              <span className="brand-name">Vibrant Aura</span>
+              <span className="brand-tagline">Holistic Center</span>
             </div>
             <h1 className="hero-title">
               Embrace
@@ -463,7 +457,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
       </section>
 
       {/* Featured Articles */}
-      <section className="articles-section">
+      {/* <section className="articles-section">
         <div className="section-header">
           <h2>
             <FaBookOpen /> Wellness Wisdom
@@ -496,7 +490,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="cta-section">
@@ -506,14 +500,14 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
             <p>
               Experience personalized healing tailored to your unique energy
               patterns and wellness goals. Our expert practitioners are ready to
-              guide you.
+              guide you. We bridge the gap between ancient wisdom and modern
+              energetic science, offering a diverse spectrum of non-invasive
+              therapies designed to restore balance and ignite your inner
+              vitality.
             </p>
             <div className="cta-buttons">
               <button className="btn-primary" onClick={handleConsultationClick}>
                 <FaUser /> Book Free Assessment
-              </button>
-              <button className="btn-secondary">
-                <FaCalendarAlt /> View Schedule
               </button>
             </div>
           </div>
