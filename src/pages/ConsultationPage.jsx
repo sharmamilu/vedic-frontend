@@ -423,17 +423,21 @@ const ConsultationPage = ({ darkMode }) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Mark all fields as touched for validation
+    // List of all fields that have validation logic
     const allFields = [
       "name",
-      "email",
+      "dob",
+      "age",
+      "timeOfBirth",
+      "placeOfBirth",
       "phone",
+      "email",
+      "height",
+      "weight",
+      "bloodPressure",
+      "bloodGlucose",
       "consultationType",
       "complaint",
-      ...(isAstrologyNumerology() ? ["timeOfBirth", "placeOfBirth"] : []),
-      ...(!formData.dob && !formData.age && isAstrologyNumerology()
-        ? ["dob"]
-        : []),
     ];
 
     setFieldTouched(
@@ -445,7 +449,7 @@ const ConsultationPage = ({ darkMode }) => {
       validateField(field, formData[field]),
     );
 
-    // Validate DOB/Age for astrology/numerology
+    // Special case: DOB/Age for astrology/numerology
     let dobAgeError = "";
     if (isAstrologyNumerology() && !formData.dob && !formData.age) {
       dobAgeError = "Please provide either Date of Birth or Age";
@@ -457,6 +461,36 @@ const ConsultationPage = ({ darkMode }) => {
 
     if (hasErrors) {
       setIsSubmitting(false);
+
+      // Find the first field name that has an error
+      const failedFieldIndex = validationResults.indexOf(false);
+      let firstErrorField = "";
+
+      if (failedFieldIndex !== -1) {
+        firstErrorField = allFields[failedFieldIndex];
+      } else if (dobAgeError) {
+        firstErrorField = "dob";
+      }
+
+      // Scroll to the first error field
+      if (firstErrorField) {
+        setTimeout(() => {
+          const errorElement = document.querySelector(
+            `[name="${firstErrorField}"]`,
+          );
+          if (errorElement) {
+            const yOffset = -150; // Sticky header offset
+            const elementY =
+              errorElement.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+              top: elementY + yOffset,
+              behavior: "smooth",
+            });
+            // Try to focus after scroll
+            setTimeout(() => errorElement.focus({ preventScroll: true }), 600);
+          }
+        }, 100);
+      }
       return;
     }
 

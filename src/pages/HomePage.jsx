@@ -420,12 +420,12 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
                   {service.category.charAt(0).toUpperCase() +
                     service.category.slice(1)}
                 </span>
-                <button
+                {/* <button
                   className="service-action"
                   onClick={() => handleServiceLearnMore(service.id)}
                 >
                   Learn More <FaArrowRight />
-                </button>
+                </button> */}
               </div>
             </div>
           ))}

@@ -1,20 +1,20 @@
 /* Global CSS Variables and Reset */
 :root {
   /* Color Palette - Updated to Match VAHC Image */
-  --gold: #43A047; /* Replaced Gold with Vibrant Green */
-  --dark-gold: #2E7D32; /* Replaced Dark Gold with Darker Green */
-  --purple: #8E24AA; /* Updated to Vibrant Purple */
-  --green: #43A047; /* Primary Green */
-  --earth: #6A1B9A; /* Replaced Earth with Deep Purple */
-  --light-text: #4A148C; /* Dark Purple Text */
+  --gold: #43a047; /* Replaced Gold with Vibrant Green */
+  --dark-gold: #2e7d32; /* Replaced Dark Gold with Darker Green */
+  --purple: #8e24aa; /* Updated to Vibrant Purple */
+  --green: #43a047; /* Primary Green */
+  --earth: #6a1b9a; /* Replaced Earth with Deep Purple */
+  --light-text: #4a148c; /* Dark Purple Text */
   --dark-text: #e6d8a9;
   --dark-bg: #191932;
-  
+
   /* Font Settings */
-  font-family: 'Cambria', 'Georgia', serif;
+  font-family: "Cambria", "Georgia", serif;
   line-height: 1.5;
   font-weight: 400;
-  
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -32,20 +32,36 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
   /* Updated Background to Light Lavender/White */
-  background: linear-gradient(180deg, 
+  background: linear-gradient(
+    180deg,
     rgba(252, 245, 255, 1) 0%,
-    rgba(255, 255, 255, 0.9) 100%);
+    rgba(255, 255, 255, 0.9) 100%
+  );
   color: var(--light-text);
-  font-family: 'Cambria', 'Georgia', serif;
+  font-family: "Cambria", "Georgia", serif;
   transition: all 0.5s ease;
+}
+
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Dark Mode for Body */
 body.spiritual-dark-mode {
-  background: linear-gradient(180deg, 
+  background: linear-gradient(
+    180deg,
     var(--dark-bg) 0%,
-    rgba(40, 40, 70, 0.9) 100%);
+    rgba(40, 40, 70, 0.9) 100%
+  );
   color: var(--dark-text);
 }
 
@@ -53,7 +69,11 @@ body.spiritual-dark-mode {
 .theme-transition {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 0%, rgba(212, 175, 55, 0.3) 100%);
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(212, 175, 55, 0.3) 100%
+  );
   pointer-events: none;
   z-index: 9999;
   animation: themeTransition 0.6s ease-out forwards;
@@ -76,12 +96,13 @@ body.spiritual-dark-mode {
 
 /* Gentle Pulse Animation */
 @keyframes gentlePulse {
-  0%, 100% { 
-    transform: scale(1); 
+  0%,
+  100% {
+    transform: scale(1);
     opacity: 1;
   }
-  50% { 
-    transform: scale(1.05); 
+  50% {
+    transform: scale(1.05);
     opacity: 0.8;
   }
 }

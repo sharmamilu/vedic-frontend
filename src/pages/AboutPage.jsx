@@ -22,8 +22,13 @@ import {
   GiStoneCrafting,
 } from "react-icons/gi";
 import "../styles/AboutPage.css";
+import { useNavigate } from "react-router-dom";
 
 const AboutPage = ({ darkMode }) => {
+  const navigate = useNavigate();
+  const navigateToConsultation = () => {
+    navigate("/consultation");
+  };
   // Core Modalities Data
   const coreModalities = [
     {
@@ -444,7 +449,7 @@ const AboutPage = ({ darkMode }) => {
             how our blend of ancient wisdom and modern energetic science can
             transform your wellbeing.
           </p>
-          <a href="/consultation" className="about-cta-btn">
+          <a href="" className="about-cta-btn" onClick={navigateToConsultation}>
             Book Your Session
           </a>
         </div>
