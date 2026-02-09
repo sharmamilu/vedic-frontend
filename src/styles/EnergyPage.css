@@ -3,7 +3,7 @@
   min-height: 100vh;
   background: var(--cream);
   color: var(--light-text);
-  font-family: 'Cambria', 'Georgia', serif;
+  font-family: "Cambria", "Georgia", serif;
   transition: all 0.5s ease;
 }
 
@@ -21,17 +21,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, 
-    rgba(67, 160, 71, 0.1) 0%, 
+  background: linear-gradient(
+    135deg,
+    rgba(67, 160, 71, 0.1) 0%,
     rgba(142, 36, 170, 0.1) 50%,
-    rgba(255, 179, 0, 0.1) 100%);
+    rgba(255, 179, 0, 0.1) 100%
+  );
 }
 
 .dark-mode .energy-hero-section {
-  background: linear-gradient(135deg, 
-    rgba(67, 160, 71, 0.2) 0%, 
+  background: linear-gradient(
+    135deg,
+    rgba(67, 160, 71, 0.2) 0%,
     rgba(142, 36, 170, 0.2) 50%,
-    rgba(255, 179, 0, 0.2) 100%);
+    rgba(255, 179, 0, 0.2) 100%
+  );
 }
 
 .energy-hero-background {
@@ -104,9 +108,19 @@
 }
 
 @keyframes pulseOrb {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-  33% { transform: translate(60px, -60px) scale(1.3); opacity: 0.4; }
-  66% { transform: translate(-40px, 40px) scale(0.7); opacity: 0.2; }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  33% {
+    transform: translate(60px, -60px) scale(1.3);
+    opacity: 0.4;
+  }
+  66% {
+    transform: translate(-40px, 40px) scale(0.7);
+    opacity: 0.2;
+  }
 }
 
 .energy-hero-content {
@@ -159,7 +173,8 @@
   flex-wrap: wrap;
 }
 
-.energy-btn-primary, .energy-btn-secondary {
+.energy-btn-primary,
+.energy-btn-secondary {
   padding: 15px 30px;
   border-radius: 50px;
   font-size: 1rem;
@@ -215,8 +230,12 @@
 }
 
 @keyframes rotateSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Tabs Navigation */
@@ -571,9 +590,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(var(--angle)) translate(200px) rotate(calc(-1 * var(--angle)));
-  width: 100px;
-  height: 100px;
+  transform: translate(-50%, -50%) rotate(var(--angle)) translate(200px)
+    rotate(calc(-1 * var(--angle)));
+  width: 130px;
+  height: 130px;
   background: color-mix(in srgb, var(--element-color) 20%, transparent 80%);
   border-radius: 50%;
   border: 3px solid var(--element-color);
@@ -586,8 +606,10 @@
   z-index: 1;
 }
 
-.wheel-element:hover, .wheel-element.active {
-  transform: translate(-50%, -50%) rotate(var(--angle)) translate(200px) rotate(calc(-1 * var(--angle))) scale(1.2);
+.wheel-element:hover,
+.wheel-element.active {
+  transform: translate(-50%, -50%) rotate(var(--angle)) translate(200px)
+    rotate(calc(-1 * var(--angle))) scale(1.2);
   box-shadow: 0 0 20px var(--element-color);
 }
 
@@ -686,13 +708,15 @@
   color: var(--gold);
 }
 
-.benefits-list, .imbalances-list {
+.benefits-list,
+.imbalances-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.benefits-list li, .imbalances-list li {
+.benefits-list li,
+.imbalances-list li {
   color: var(--light-text);
   padding: 8px 0;
   padding-left: 30px;
@@ -730,9 +754,11 @@
 
 /* Elements CTA */
 .elements-cta {
-  background: linear-gradient(135deg, 
-    rgba(67, 160, 71, 0.1) 0%, 
-    rgba(142, 36, 170, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(67, 160, 71, 0.1) 0%,
+    rgba(142, 36, 170, 0.1) 100%
+  );
   border-radius: 20px;
   padding: 40px;
   border: 2px solid rgba(142, 36, 170, 0.3);
@@ -814,8 +840,13 @@
 }
 
 @keyframes pulseText {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .chakra-human-outline {
@@ -842,7 +873,7 @@
     rgba(142, 36, 170, 0.1) 0%,
     rgba(67, 160, 71, 0.1) 100%);
   border-radius: 10px;
-  border: 2px solid rgba(142, 36, 170, 0.2); */ 
+  border: 2px solid rgba(142, 36, 170, 0.2); */
   /* Removing boxy borders to fit human shape better */
 }
 
@@ -864,7 +895,8 @@
   justify-content: center;
 }
 
-.chakra-point:hover, .chakra-point.active {
+.chakra-point:hover,
+.chakra-point.active {
   transform: translateX(-50%) scale(1.05); /* Reduced scale to prevent shifting */
   z-index: 10;
 }
@@ -897,7 +929,7 @@
   white-space: nowrap;
   position: absolute;
   left: 65%; /* Position to the right of the dot */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(142, 36, 170, 0.2);
 }
 
@@ -1524,7 +1556,8 @@
   color: var(--dark-text);
 }
 
-.steps-list, .tips-list {
+.steps-list,
+.tips-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -1630,45 +1663,48 @@
   .energy-hero-title {
     font-size: 2.5rem;
   }
-  
+
   .energy-hero-content {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .energy-hero-buttons {
     justify-content: center;
   }
-  
+
   .section-header h2 {
     font-size: 2rem;
   }
-  
+
   .energy-tabs {
     justify-content: center;
   }
-  
+
   .elements-wheel {
     width: 300px;
     height: 300px;
   }
-  
+
   .wheel-element {
-    transform: translate(-50%, -50%) rotate(var(--angle)) translate(120px) rotate(calc(-1 * var(--angle)));
+    transform: translate(-50%, -50%) rotate(var(--angle)) translate(120px)
+      rotate(calc(-1 * var(--angle)));
   }
-  
-  .wheel-element:hover, .wheel-element.active {
-    transform: translate(-50%, -50%) rotate(var(--angle)) translate(120px) rotate(calc(-1 * var(--angle))) scale(1.2);
+
+  .wheel-element:hover,
+  .wheel-element.active {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translate(120px)
+      rotate(calc(-1 * var(--angle))) scale(1.2);
   }
-  
+
   .chakra-system {
     flex-direction: column;
   }
-  
+
   .chakra-spine {
     height: 400px;
   }
-  
+
   .remedies-grid,
   .benefits-grid,
   .practices-grid,
@@ -1678,17 +1714,17 @@
   .benefits-list {
     grid-template-columns: 1fr;
   }
-  
+
   .modal-header {
     flex-direction: column;
     text-align: center;
     padding: 30px 20px 20px;
   }
-  
+
   .modal-content {
     padding: 20px;
   }
-  
+
   .modal-actions {
     flex-direction: column;
   }
@@ -1698,17 +1734,18 @@
   .energy-hero-title {
     font-size: 2rem;
   }
-  
-  .energy-btn-primary, .energy-btn-secondary {
+
+  .energy-btn-primary,
+  .energy-btn-secondary {
     width: 100%;
     min-width: auto;
   }
-  
+
   .energy-tabs {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .energy-tab {
     width: 100%;
     max-width: 250px;

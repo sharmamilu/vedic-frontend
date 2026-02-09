@@ -33,12 +33,14 @@ import {
   GiCrystalGrowth,
 } from "react-icons/gi";
 import "../styles/EnergyPage.css";
+import { useNavigate } from "react-router-dom";
 
 const EnergyPage = ({ darkMode }) => {
   const [activeTab, setActiveTab] = useState("vastu");
   const [activeEnergy, setActiveEnergy] = useState(null);
   const [showRemedyModal, setShowRemedyModal] = useState(false);
   const [selectedRemedy, setSelectedRemedy] = useState(null);
+  const navigate = useNavigate();
 
   // Energy Elements - Tree structure
   const energyElements = [
@@ -430,7 +432,7 @@ const EnergyPage = ({ darkMode }) => {
   };
 
   const handleConsultation = () => {
-    window.location.href = "/consultation";
+    Navigate("/consultation");
   };
 
   const handleElementClick = (element) => {
