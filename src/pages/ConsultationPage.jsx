@@ -12,7 +12,7 @@ import {
   FaChevronDown,
 } from "react-icons/fa";
 import "../styles/ConsultationPage.css";
-
+import CustomDecadeDatePicker from "../components/CustomDecadeDatePicker.jsx";
 // Initialize EmailJS
 emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
 
@@ -679,15 +679,24 @@ const ConsultationPage = ({ darkMode }) => {
                     <div className="form-group">
                       <label>Date of Birth</label>
                       <div className="input-with-hint">
-                        <input
-                          type="date"
-                          name="dob"
-                          value={formData.dob}
-                          onChange={handleInputChange}
-                          onBlur={() => handleBlur("dob")}
-                          className={`form-input ${errors.dob ? "error" : ""}`}
-                          max={new Date().toISOString().split("T")[0]}
-                          min={
+                        <CustomDecadeDatePicker
+                          selected={
+                            formData.dob ? new Date(formData.dob) : null
+                          }
+                          onChange={(date) => {
+                            const dateString = date
+                              ? date.toISOString().split("T")[0]
+                              : "";
+                            setFormData((prev) => ({
+                              ...prev,
+                              dob: dateString,
+                            }));
+                            if (errors.dob) {
+                              setErrors((prev) => ({ ...prev, dob: "" }));
+                            }
+                          }}
+                          error={errors.dob}
+                          minDate={
                             new Date(
                               new Date().setFullYear(
                                 new Date().getFullYear() - 120,
@@ -696,19 +705,14 @@ const ConsultationPage = ({ darkMode }) => {
                               .toISOString()
                               .split("T")[0]
                           }
+                          maxDate={new Date().toISOString().split("T")[0]}
+                          placeholder="Select your birth date"
                         />
-                        <small className="field-hint">
-                          Click calendar icon or use date picker
-                        </small>
+                        {/* <small className="field-hint">
+                          Click to open decade selector first
+                        </small> */}
                       </div>
-                      {errors.dob && (
-                        <div className="error-message-with-icon">
-                          <FaExclamationCircle />
-                          <span>{errors.dob}</span>
-                        </div>
-                      )}
                     </div>
-
                     <div className="form-group">
                       <label>Age (if DOB unknown)</label>
                       <div className="input-with-hint">
@@ -748,6 +752,7 @@ const ConsultationPage = ({ darkMode }) => {
                             value={formData.timeOfBirth}
                             onChange={handleInputChange}
                             onBlur={() => handleBlur("timeOfBirth")}
+                            onClick={(e) => e.target.showPicker?.()}
                             className={`form-input ${errors.timeOfBirth ? "error" : ""}`}
                           />
                           {errors.timeOfBirth && (
