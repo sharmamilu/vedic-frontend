@@ -134,12 +134,18 @@ const ConsultationPage = ({ darkMode }) => {
 
     // Validate file types and sizes
     const validFiles = uniqueFiles.filter((file) => {
-      const validTypes = ["image/jpeg", "image/png", "image/jpg", "image/webp"];
+      const validTypes = [
+        "application/pdf",
+        "image/jpeg",
+        "image/png",
+        "image/jpg",
+        "image/webp",
+      ];
 
       // Check file type
       if (!validTypes.includes(file.type)) {
         alert(
-          `Invalid file type: ${file.name}. Please upload JPG, PNG, or WEBP images only.`,
+          `Invalid file type: ${file.name}. Please upload PDF, JPG, PNG, or WEBP images.`,
         );
         return false;
       }
@@ -169,8 +175,8 @@ const ConsultationPage = ({ darkMode }) => {
         // You can add tags for better organization
         formData.append("tags", "medical_reports,consultation");
 
-        // Use 'image' resource type explicitly as requested
-        const uploadUrl = `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`;
+        // Use 'auto' to allow Cloudinary to correctly categorize PDFs and images
+        const uploadUrl = `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/raw/upload`;
         const response = await fetch(uploadUrl, {
           method: "POST",
           body: formData,
@@ -181,6 +187,14 @@ const ConsultationPage = ({ darkMode }) => {
         }
 
         const data = await response.json();
+
+        // Log access link for testing
+        console.log("Uploaded File Details:", {
+          name: file.name,
+          url: data.secure_url,
+          publicId: data.public_id,
+        });
+
         // Update progress
         setUploadProgress(((index + 1) / validFiles.length) * 100);
 
@@ -1479,7 +1493,7 @@ const ConsultationPage = ({ darkMode }) => {
                       results
                       <br />
                       <small>
-                        Max file size: 10MB each. Supported: JPG, PNG, WEBP
+                        Max file size: 10MB each. Supported: PDF, JPG, PNG, WEBP
                       </small>
                     </p>
 
@@ -1498,7 +1512,7 @@ const ConsultationPage = ({ darkMode }) => {
                           ref={fileInputRef}
                           onChange={handleFileSelect}
                           multiple
-                          accept=".jpg,.jpeg,.png,.webp"
+                          accept=".pdf,.jpg,.jpeg,.png,.webp"
                           style={{ display: "none" }}
                           disabled={isUploading}
                         />
