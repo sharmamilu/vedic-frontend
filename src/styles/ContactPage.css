@@ -258,6 +258,7 @@
 .hour-time {
   color: var(--green);
   font-weight: 500;
+  padding-left: 30px;
 }
 
 /* Maps Section */

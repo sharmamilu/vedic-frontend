@@ -36,9 +36,8 @@ const ContactPage = ({ darkMode }) => {
 
   // Opening hours
   const openingHours = [
-    { day: "Monday - Friday", time: "9:00 AM - 7:00 PM" },
-    { day: "Saturday", time: "9:00 AM - 5:00 PM" },
-    { day: "Sunday", time: "10:00 AM - 2:00 PM" },
+    { day: "Monday - Saturday", time: "10:30 AM - 8:00 PM" },
+    { day: "Sunday", time: "Service Available Only on Prior Appointment" },
   ];
 
   return (
@@ -146,7 +145,7 @@ const ContactPage = ({ darkMode }) => {
                       </div>
                     ))}
                   </div>
-                  <p className="contact-note">By appointment only</p>
+                  {/* <p className="contact-note">By appointment only</p> */}
                 </div>
               </div>
             </div>

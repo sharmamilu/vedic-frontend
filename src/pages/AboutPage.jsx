@@ -133,16 +133,18 @@ const AboutPage = ({ darkMode }) => {
     {
       category: "Advanced Acupressure & Acupuncture",
       credentials: [
-        "Completed 6 Semester Master Advanced Acupressure Therapy course from ASPEUS, Prayagraj",
+        "6 Semester Master Advanced Acupressure Therapy course from ASPEUS, Prayagraj",
         "Certificate in Diploma in Acupuncture from ATAMA, BSS Approved Certificate",
-        "Completed course on Auricular Therapy from Vedavyasa Adhyatmika Shikshana Kendra",
+        "Course on Auricular Therapy from Vedavyasa Adhyatmika Shikshana Kendra",
       ],
     },
     {
       category: "Quantum & Energy Healing",
       credentials: [
         "IMPH Level 1 Certified practitioner of Neurochakra Quantum Healing from Miindtraa",
-        "Pranic Healing - Basic, Advanced and Pranic Psychotherapy from Yoga Vidya Pranic Healing",
+        "Basic Pranic Healing from Yoga Vidya Pranic Healing",
+        "Advanced Pranic Healing from Yoga Vidya Pranic Healing",
+        "Pranic Psychotherapy from Yoga Vidya Pranic Healing",
       ],
     },
     // {
@@ -171,25 +173,25 @@ const AboutPage = ({ darkMode }) => {
       category: "Colour Therapy Specialisation",
       credentials: [
         "Certified in Acupuncture/Alternative Therapy D.A.T by ATAMA Acupuncture Training Centre",
-        "Completed BSS Diploma in Acupuncture Therapy by ATAMA",
+        "BSS Diploma in Acupuncture Therapy by ATAMA",
       ],
     },
     {
       category: "Energy Medicine",
       credentials: [
-        "Completed Diploma in Traditional Energy Medicine (TEM) by Basava Acu Academy",
-        "Completed course on Auricular Therapy by Basava Acu Academy",
+        "Diploma in Traditional Energy Medicine (TEM) by Basava Acu Academy",
+        "Course on Auricular Therapy by Basava Acu Academy",
       ],
     },
     {
       category: "Holistic Therapies",
       credentials: [
-        "Completed Colour Therapy program by Vedavyasa Adhyatmika Shikshana Kendra",
-        "Completed Seed and Magnet Therapy program by Vedavyasa Adhyatmika Shikshana Kendra",
-        "Completed Bach Flower Remedies program by Vedavyasa Adhyatmika Shikshana Kendra",
+        "Colour Therapy program by Vedavyasa Adhyatmika Shikshana Kendra",
+        "Seed and Magnet Therapy program by Vedavyasa Adhyatmika Shikshana Kendra",
+        "Bach Flower Remedies program by Vedavyasa Adhyatmika Shikshana Kendra",
         "Pendulum Dowsing program by Vedavyasa Adhyatmika Shikshana Kendra",
-        "Completed course on Marma and Rekhi",
-        "Completed course in Distance Healing by Vedavyasa Adhyatmika Shikshana Kendra",
+        "Course on Marma and Rekhi",
+        "Course in Distance Healing by Vedavyasa Adhyatmika Shikshana Kendra",
       ],
     },
     {

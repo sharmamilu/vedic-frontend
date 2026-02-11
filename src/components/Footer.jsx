@@ -142,9 +142,8 @@ const Footer = () => {
       <div className="footer-bottom">
         <div className="footer-hours">
           <h5>Center Hours</h5>
-          <p>Monday - Saturday: 9:00 AM - 7:00 PM</p>
-          <p>Sunday: 10:00 AM - 5:00 PM</p>
-          <p className="note">(Prior appointment recommended)</p>
+          <p>Monday - Saturday: 10:30 AM - 8:00 PM</p>
+          <p>Sunday: Service Available Only on Prior Appointment</p>
         </div>
 
         <p className="copyright">
