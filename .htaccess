@@ -1,0 +1,10 @@
+# Enable rewrite engine
+RewriteEngine On
+RewriteBase /
+
+# Don't rewrite existing files or directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirect everything else to index.html
+RewriteRule ^ index.html [L]
