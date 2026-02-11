@@ -134,9 +134,8 @@ const AboutPage = ({ darkMode }) => {
       category: "Advanced Acupressure & Acupuncture",
       credentials: [
         "Completed 6 Semester Master Advanced Acupressure Therapy course from ASPEUS, Prayagraj",
-        "Certificate in Diploma in Acupuncture from ATAMA, BSS Certificate",
-        "Completed Diploma in Traditional Energy Medicine (TEM) by Basava Acu Academy",
-        "Completed course on Auricular Therapy by Basava Acu Academy",
+        "Certificate in Diploma in Acupuncture from ATAMA, BSS Approved Certificate",
+        "Completed course on Auricular Therapy from Vedavyasa Adhyatmika Shikshana Kendra",
       ],
     },
     {
@@ -146,24 +145,24 @@ const AboutPage = ({ darkMode }) => {
         "Pranic Healing - Basic, Advanced and Pranic Psychotherapy from Yoga Vidya Pranic Healing",
       ],
     },
-    {
-      category: "Vibrational & Alternative Therapies",
-      credentials: [
-        "Completed Colour Therapy program by Vedavyasa Adhyatmika Shikshana Kendra",
-        "Completed Seed and Magnet Therapy program by Vedavyasa Adhyatmika Shikshana Kendra",
-        "Completed Bach Flower Remedies program by Vedavyasa Adhyatmika Shikshana Kendra",
-        "Pendulum Dowsing program by Vedavyasa Adhyatmika Shikshana Kendra",
-        "Completed course in Distance Healing by Vedavyasa Adhyatmika Shikshana Kendra",
-      ],
-    },
-    {
-      category: "Professional Recognition",
-      credentials: [
-        "Awarded in Natural and Drugless Healing Science Training Program covering acupressure, color therapy, seed therapy, auricular therapy by Ayushya Mandalam",
-        "Took part in Acupuncture Integrated Conference by Institution of Agricultural Technologist",
-        "Completed course on Marma and Rekhi",
-      ],
-    },
+    // {
+    //   category: "Vibrational & Alternative Therapies",
+    //   credentials: [
+    //     "Completed Colour Therapy program by Vedavyasa Adhyatmika Shikshana Kendra",
+    //     "Completed Seed and Magnet Therapy program by Vedavyasa Adhyatmika Shikshana Kendra",
+    //     "Completed Bach Flower Remedies program by Vedavyasa Adhyatmika Shikshana Kendra",
+    //     "Pendulum Dowsing program by Vedavyasa Adhyatmika Shikshana Kendra",
+    //     "Completed course in Distance Healing by Vedavyasa Adhyatmika Shikshana Kendra",
+    //   ],
+    // },
+    // {
+    //   category: "Professional Recognition",
+    //   credentials: [
+    //     "Awarded in Natural and Drugless Healing Science Training Program covering acupressure, color therapy, seed therapy, auricular therapy by Ayushya Mandalam",
+    //     "Took part in Acupuncture Integrated Conference by Institution of Agricultural Technologist",
+    //     "Completed course on Marma and Rekhi",
+    //   ],
+    // },
   ];
 
   // Practitioner Qualifications - Nagaratna BN
@@ -333,7 +332,7 @@ const AboutPage = ({ darkMode }) => {
 
           {/* Vidya KS */}
           <div className="practitioner-card vertical-card">
-            <h3 className="practitioner-name">Vidya KS</h3>
+            <h3 className="practitioner-name">Vidya Nagendra</h3>
             <p className="practitioner-role">Master Practitioner & Founder</p>
 
             {vidyaQualifications.map((group, index) => (

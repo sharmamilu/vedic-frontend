@@ -10,14 +10,25 @@ import {
   FaExclamationCircle,
   FaSearch,
   FaChevronDown,
+  FaFileUpload,
+  FaTimes,
 } from "react-icons/fa";
 import "../styles/ConsultationPage.css";
 import CustomDecadeDatePicker from "../components/CustomDecadeDatePicker.jsx";
+import { Cloudinary } from "@cloudinary/url-gen";
+
 // Initialize EmailJS
 emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
 
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
+  },
+});
+
 const ConsultationPage = ({ darkMode }) => {
   const form = useRef();
+  const fileInputRef = useRef(null);
 
   const countryCodes = [
     { code: "+91", name: "India (+91)" },
@@ -71,6 +82,8 @@ const ConsultationPage = ({ darkMode }) => {
     preferredContactMethod: "email",
     bestTimeToContact: "morning",
     receiveUpdates: true,
+
+    uploadedFiles: [],
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -78,6 +91,8 @@ const ConsultationPage = ({ darkMode }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [fieldTouched, setFieldTouched] = useState({});
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const [countries, setCountries] = useState([]);
   const [filteredCountries, setFilteredCountries] = useState([]);
@@ -85,6 +100,125 @@ const ConsultationPage = ({ darkMode }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      const event = { target: { files } };
+      handleFileSelect(event);
+    }
+  };
+
+  const handleFileSelect = async (event) => {
+    const files = Array.from(event.target.files);
+
+    // Check for duplicates
+    const uniqueFiles = files.filter((file) => {
+      const isDuplicate = formData.uploadedFiles.some(
+        (uploaded) =>
+          uploaded.name === file.name && uploaded.size === file.size,
+      );
+      if (isDuplicate) {
+        alert(`File "${file.name}" is already added.`);
+        return false;
+      }
+      return true;
+    });
+
+    // Validate file types and sizes
+    const validFiles = uniqueFiles.filter((file) => {
+      const validTypes = ["image/jpeg", "image/png", "image/jpg", "image/webp"];
+
+      // Check file type
+      if (!validTypes.includes(file.type)) {
+        alert(
+          `Invalid file type: ${file.name}. Please upload JPG, PNG, or WEBP images only.`,
+        );
+        return false;
+      }
+
+      // Check file size (10MB max)
+      if (file.size > 10 * 1024 * 1024) {
+        alert(`File too large: ${file.name}. Maximum size is 10MB.`);
+        return false;
+      }
+
+      return true;
+    });
+    if (validFiles.length === 0) return;
+
+    setIsUploading(true);
+    setUploadProgress(0);
+
+    try {
+      const uploadPromises = validFiles.map(async (file, index) => {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append(
+          "upload_preset",
+          import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET,
+        );
+
+        // You can add tags for better organization
+        formData.append("tags", "medical_reports,consultation");
+
+        // Use 'image' resource type explicitly as requested
+        const uploadUrl = `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`;
+        const response = await fetch(uploadUrl, {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to upload ${file.name}`);
+        }
+
+        const data = await response.json();
+        // Update progress
+        setUploadProgress(((index + 1) / validFiles.length) * 100);
+
+        return {
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          url: data.secure_url,
+          publicId: data.public_id,
+          uploadedAt: new Date().toISOString(),
+        };
+      });
+      const uploadedFiles = await Promise.all(uploadPromises);
+
+      setFormData((prev) => ({
+        ...prev,
+        uploadedFiles: [...prev.uploadedFiles, ...uploadedFiles],
+      }));
+
+      setIsUploading(false);
+      setUploadProgress(0);
+    } catch (error) {
+      console.error("Upload error:", error);
+      alert(`Failed to upload files: ${error.message}`);
+      setIsUploading(false);
+      setUploadProgress(0);
+    }
+
+    // Reset file input
+    event.target.value = "";
+  };
+
+  const handleRemoveFile = (index) => {
+    setFormData((prev) => ({
+      ...prev,
+      uploadedFiles: prev.uploadedFiles.filter((_, i) => i !== index),
+    }));
+  };
   // Fetch countries and check success status
   useEffect(() => {
     // Scroll to top when component mounts
@@ -565,6 +699,20 @@ const ConsultationPage = ({ darkMode }) => {
         // Submission Info
         submission_date: new Date().toLocaleString(),
         receive_updates: formData.receiveUpdates ? "Yes" : "No",
+        // In the emailData object:
+        uploaded_files_list:
+          formData.uploadedFiles.length > 0
+            ? formData.uploadedFiles
+                .map(
+                  (file, index) =>
+                    `<a href="${file.url}" target="_blank" class="file-link">
+              ${file.name} (${formatFileSize(file.size)})
+            </a>`,
+                )
+                .join("")
+            : "<p>No medical reports uploaded.</p>",
+
+        files_count: formData.uploadedFiles.length.toString(),
       };
 
       const result = await emailjs.send(
@@ -588,6 +736,21 @@ const ConsultationPage = ({ darkMode }) => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const formatFileSize = (bytes) => {
+    if (bytes === 0) return "0 Bytes";
+    const k = 1024;
+    const sizes = ["Bytes", "KB", "MB", "GB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+  };
+
+  const getFileIcon = (type) => {
+    if (type.includes("pdf")) return "📄";
+    if (type.includes("image")) return "🖼️";
+    if (type.includes("word")) return "📝";
+    return "📎";
   };
 
   return (
@@ -1303,6 +1466,103 @@ const ConsultationPage = ({ darkMode }) => {
                           </label>
                         ))}
                       </div>
+                    </div>
+                  </div>
+
+                  {/* Add Medical Reports Upload Section */}
+                  <div className="form-section">
+                    <h3 className="section-title">
+                      Medical Reports & Documents (Optional)
+                    </h3>
+                    <p className="section-subtitle">
+                      Upload relevant medical reports, prescriptions, or test
+                      results
+                      <br />
+                      <small>
+                        Max file size: 10MB each. Supported: JPG, PNG, WEBP
+                      </small>
+                    </p>
+
+                    <div className="file-upload-container">
+                      {/* Upload Area */}
+                      <div
+                        className={`upload-area ${isUploading ? "uploading" : ""}`}
+                        onDragOver={handleDragOver}
+                        onDrop={handleDrop}
+                        onClick={() =>
+                          !isUploading && fileInputRef.current?.click()
+                        }
+                      >
+                        <input
+                          type="file"
+                          ref={fileInputRef}
+                          onChange={handleFileSelect}
+                          multiple
+                          accept=".jpg,.jpeg,.png,.webp"
+                          style={{ display: "none" }}
+                          disabled={isUploading}
+                        />
+
+                        {isUploading ? (
+                          <div className="upload-progress">
+                            <div className="progress-bar">
+                              <div
+                                className="progress-fill"
+                                style={{ width: `${uploadProgress}%` }}
+                              ></div>
+                            </div>
+                            <p>Uploading... {Math.round(uploadProgress)}%</p>
+                          </div>
+                        ) : (
+                          <>
+                            <FaFileUpload className="upload-icon" />
+                            <h4>Upload Medical Reports</h4>
+                            <p>Drag & drop files or click to browse</p>
+                            <p className="upload-hint">
+                              You can upload multiple files
+                            </p>
+                          </>
+                        )}
+                      </div>
+
+                      {/* Uploaded Files List */}
+                      {formData.uploadedFiles.length > 0 && (
+                        <div className="uploaded-files">
+                          <h4>
+                            Uploaded Files ({formData.uploadedFiles.length})
+                          </h4>
+                          <div className="files-list">
+                            {formData.uploadedFiles.map((file, index) => (
+                              <div key={index} className="file-item">
+                                <div className="file-info">
+                                  <span className="file-icon">
+                                    {getFileIcon(file.type)}
+                                  </span>
+                                  <div className="file-details">
+                                    <span className="file-name">
+                                      {file.name}
+                                    </span>
+                                    <span className="file-size">
+                                      {formatFileSize(file.size)}
+                                    </span>
+                                  </div>
+                                </div>
+                                <button
+                                  type="button"
+                                  className="remove-file"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleRemoveFile(index);
+                                  }}
+                                  title="Remove file"
+                                >
+                                  <FaTimes />
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
 

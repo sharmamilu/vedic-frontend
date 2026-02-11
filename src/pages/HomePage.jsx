@@ -318,7 +318,7 @@ const Homepage = ({ darkMode, toggleDarkMode }) => {
             <div className="stat-label">Client Satisfaction</div>
           </div>
           <div className="stat-item">
-            <div className="stat-number">15+</div>
+            <div className="stat-number">10+</div>
             <div className="stat-label">Years Experience</div>
           </div>
         </div>
