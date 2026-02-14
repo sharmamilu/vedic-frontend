@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 import {
   FaStar,
   FaUser,
@@ -32,6 +33,8 @@ import {
   GiAbstract047,
 } from "react-icons/gi";
 import "../styles/AstrologyPage.css";
+import CustomDecadeDatePicker from "../components/CustomDecadeDatePicker";
+import CustomTimePicker from "../components/CustomTimePicker";
 import { useNavigate } from "react-router-dom";
 
 const AstrologyPage = ({ darkMode }) => {
@@ -39,6 +42,107 @@ const AstrologyPage = ({ darkMode }) => {
   const [activeTab, setActiveTab] = useState("understanding");
   const [selectedZodiac, setSelectedZodiac] = useState("aries");
   const [showConsultModal, setShowConsultModal] = useState(false);
+
+  // Form State
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    consultationType: "",
+    dob: "",
+    timeOfBirth: "",
+    age: "",
+    message: "", // Added message field
+  });
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState({ type: "", message: "" });
+
+  const calculateAge = (dateString) => {
+    if (!dateString) return "";
+    const today = new Date();
+    const birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
+  const handleDateChange = (date) => {
+    const dateString = date ? date.toISOString().split("T")[0] : "";
+    setFormData((prev) => {
+      const newData = { ...prev, dob: dateString };
+      const calculatedAge = calculateAge(dateString);
+      newData.age = calculatedAge >= 0 ? calculatedAge : "";
+      return newData;
+    });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => {
+      const newData = { ...prev, [name]: value };
+      if (name === "dob") {
+        const calculatedAge = calculateAge(value);
+        newData.age = calculatedAge >= 0 ? calculatedAge : "";
+      }
+      return newData;
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus({ type: "", message: "" });
+
+    try {
+      const templateParams = {
+        to_name: import.meta.env.VITE_OWNER_NAME || "Admin",
+        from_name: formData.name,
+        from_email: formData.email,
+        reply_to: formData.email,
+        from_phone: formData.phone,
+        consultation_type: formData.consultationType,
+        date_of_birth: formData.dob || "Not provided",
+        time_of_birth: formData.timeOfBirth || "Not provided",
+        age: formData.age || "Not provided",
+        message:
+          formData.message ||
+          `New Astrology Consultation Request from ${formData.name}`,
+      };
+
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID_ASTRO,
+        templateParams,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      );
+
+      setStatus({
+        type: "success",
+        message: "Your consultation request has been sent successfully!",
+      });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        consultationType: "",
+        dob: "",
+        timeOfBirth: "",
+        age: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      setStatus({
+        type: "error",
+        message: "Failed to send request. Please try again later.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleConsultationClick = () => {
     navigate("/consultation");
@@ -847,20 +951,17 @@ const AstrologyPage = ({ darkMode }) => {
               <div className="consult-options">
                 <div className="consult-option">
                   <h3>Basic Reading</h3>
-                  <p className="price">$49</p>
                   <ul className="option-features">
                     <li>Detailed birth chart analysis</li>
                     <li>Sun, Moon, Rising sign interpretation</li>
                     <li>Key planetary aspects explained</li>
                     <li>30-minute consultation</li>
                   </ul>
-                  <button className="option-select-btn">Select Plan</button>
                 </div>
 
                 <div className="consult-option featured">
                   <div className="featured-badge">Most Popular</div>
                   <h3>Comprehensive Analysis</h3>
-                  <p className="price">$99</p>
                   <ul className="option-features">
                     <li>Complete birth chart with all houses</li>
                     <li>Career and relationship insights</li>
@@ -868,14 +969,10 @@ const AstrologyPage = ({ darkMode }) => {
                     <li>Personalized remedies if needed</li>
                     <li>60-minute detailed consultation</li>
                   </ul>
-                  <button className="option-select-btn primary">
-                    Select Plan
-                  </button>
                 </div>
 
                 <div className="consult-option">
                   <h3>Yearly Forecast</h3>
-                  <p className="price">$149</p>
                   <ul className="option-features">
                     <li>Complete birth chart analysis</li>
                     <li>Detailed 12-month forecast</li>
@@ -883,51 +980,153 @@ const AstrologyPage = ({ darkMode }) => {
                     <li>Personal growth guidance</li>
                     <li>Two 60-minute sessions</li>
                   </ul>
-                  <button className="option-select-btn">Select Plan</button>
                 </div>
               </div>
 
-              <div className="consult-form">
+              <form className="consult-form" onSubmit={handleSubmit}>
                 <h3>Schedule Your Consultation</h3>
+                {status.message && (
+                  <div
+                    className={`status-message ${status.type}`}
+                    style={{
+                      padding: "10px",
+                      borderRadius: "5px",
+                      marginBottom: "15px",
+                      backgroundColor:
+                        status.type === "success" ? "#d4edda" : "#f8d7da",
+                      color: status.type === "success" ? "#155724" : "#721c24",
+                    }}
+                  >
+                    {status.message}
+                  </div>
+                )}
+
                 <div className="form-group">
                   <input
                     type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
                     placeholder="Your Name"
                     className="form-input"
+                    required
                   />
                 </div>
                 <div className="form-group">
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     placeholder="Email Address"
                     className="form-input"
+                    required
                   />
                 </div>
                 <div className="form-group">
                   <input
                     type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
                     placeholder="Phone Number"
+                    className="form-input"
+                    required
+                  />
+                </div>
+
+                <div
+                  className="form-row"
+                  style={{ display: "flex", gap: "10px" }}
+                >
+                  <div className="form-group" style={{ flex: 1 }}>
+                    <label
+                      style={{
+                        fontSize: "0.8rem",
+                        marginBottom: "5px",
+                        display: "block",
+                      }}
+                    >
+                      Date of Birth
+                    </label>
+                    <CustomDecadeDatePicker
+                      selected={formData.dob ? new Date(formData.dob) : null}
+                      onChange={handleDateChange}
+                      placeholder="Select Date of Birth"
+                    />
+                  </div>
+                  <div className="form-group" style={{ flex: 1 }}>
+                    <label
+                      style={{
+                        fontSize: "0.8rem",
+                        marginBottom: "5px",
+                        display: "block",
+                      }}
+                    >
+                      Time of Birth
+                    </label>
+                    <CustomTimePicker
+                      name="timeOfBirth"
+                      value={formData.timeOfBirth}
+                      onChange={handleInputChange}
+                      placeholder="Select Time"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <input
+                    type="number"
+                    name="age"
+                    value={formData.age}
+                    onChange={handleInputChange}
+                    placeholder="Age (if DOB unknown)"
                     className="form-input"
                   />
                 </div>
+
                 <div className="form-group">
-                  <select className="form-input">
-                    <option>Select Consultation Type</option>
-                    <option>Basic Reading ($49)</option>
-                    <option>Comprehensive Analysis ($99)</option>
-                    <option>Yearly Forecast ($149)</option>
+                  <select
+                    name="consultationType"
+                    value={formData.consultationType}
+                    onChange={handleInputChange}
+                    className="form-input"
+                    required
+                  >
+                    <option value="">Select Consultation Type</option>
+                    <option value="Basic Reading">Basic Reading</option>
+                    <option value="Comprehensive Analysis">
+                      Comprehensive Analysis
+                    </option>
+                    <option value="Yearly Forecast">Yearly Forecast</option>
                   </select>
                 </div>
-                <button className="submit-consult-btn">
-                  <FaCalendarAlt /> Schedule Now
+
+                <div className="form-group">
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    placeholder="Describe your concern or reason for consultation..."
+                    className="form-input"
+                    rows="4"
+                    style={{ resize: "vertical" }}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="submit-consult-btn"
+                  disabled={loading}
+                >
+                  <FaCalendarAlt /> {loading ? "Scheduling..." : "Schedule Now"}
                 </button>
-              </div>
+              </form>
             </div>
 
             <div className="modal-footer">
               <p className="footer-note">
                 <FaPhone /> Need immediate assistance? Call us at{" "}
-                <strong>+1 (555) 123-4567</strong>
+                <strong>+91 9148056161</strong>
               </p>
             </div>
           </div>

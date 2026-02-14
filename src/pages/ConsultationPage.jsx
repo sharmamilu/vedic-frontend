@@ -15,6 +15,7 @@ import {
 } from "react-icons/fa";
 import "../styles/ConsultationPage.css";
 import CustomDecadeDatePicker from "../components/CustomDecadeDatePicker.jsx";
+import CustomTimePicker from "../components/CustomTimePicker.jsx";
 import { Cloudinary } from "@cloudinary/url-gen";
 
 // Initialize EmailJS
@@ -923,14 +924,11 @@ const ConsultationPage = ({ darkMode }) => {
                           <label>
                             Time of Birth <span className="required">*</span>
                           </label>
-                          <input
-                            type="time"
+                          <CustomTimePicker
                             name="timeOfBirth"
                             value={formData.timeOfBirth}
                             onChange={handleInputChange}
-                            onBlur={() => handleBlur("timeOfBirth")}
-                            onClick={(e) => e.target.showPicker?.()}
-                            className={`form-input ${errors.timeOfBirth ? "error" : ""}`}
+                            placeholder="Select Time"
                           />
                           {errors.timeOfBirth && (
                             <div className="error-message-with-icon">
