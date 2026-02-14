@@ -33,7 +33,7 @@ const Footer = () => {
             <p className="address-line">Ganapati Road, Arehalli</p>
             <p className="address-line">Bangalore - 560061</p>
             <p className="contact-info">
-              <strong>Phone:</strong> +91 9876543210
+              <strong>Phone:</strong> +91 9148056161
             </p>
             <p className="contact-info">
               <strong>Email:</strong>sales@vahc.in
