@@ -918,48 +918,50 @@ const ConsultationPage = ({ darkMode }) => {
                       )}
                     </div>
 
-                    {isAstrologyNumerology() && (
-                      <>
-                        <div className="form-group">
-                          <label>
-                            Time of Birth <span className="required">*</span>
-                          </label>
-                          <CustomTimePicker
-                            name="timeOfBirth"
-                            value={formData.timeOfBirth}
-                            onChange={handleInputChange}
-                            placeholder="Select Time"
-                          />
-                          {errors.timeOfBirth && (
-                            <div className="error-message-with-icon">
-                              <FaExclamationCircle />
-                              <span>{errors.timeOfBirth}</span>
-                            </div>
-                          )}
+                    <div className="form-group">
+                      <label>
+                        Time of Birth{" "}
+                        {isAstrologyNumerology() && (
+                          <span className="required">*</span>
+                        )}
+                      </label>
+                      <CustomTimePicker
+                        name="timeOfBirth"
+                        value={formData.timeOfBirth}
+                        onChange={handleInputChange}
+                        placeholder="Select Time"
+                      />
+                      {errors.timeOfBirth && (
+                        <div className="error-message-with-icon">
+                          <FaExclamationCircle />
+                          <span>{errors.timeOfBirth}</span>
                         </div>
+                      )}
+                    </div>
 
-                        <div className="form-group">
-                          <label>
-                            Place of Birth <span className="required">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            name="placeOfBirth"
-                            value={formData.placeOfBirth}
-                            onChange={handleInputChange}
-                            onBlur={() => handleBlur("placeOfBirth")}
-                            className={`form-input ${errors.placeOfBirth ? "error" : ""}`}
-                            placeholder="City, State, Country"
-                          />
-                          {errors.placeOfBirth && (
-                            <div className="error-message-with-icon">
-                              <FaExclamationCircle />
-                              <span>{errors.placeOfBirth}</span>
-                            </div>
-                          )}
+                    <div className="form-group">
+                      <label>
+                        Place of Birth{" "}
+                        {isAstrologyNumerology() && (
+                          <span className="required">*</span>
+                        )}
+                      </label>
+                      <input
+                        type="text"
+                        name="placeOfBirth"
+                        value={formData.placeOfBirth}
+                        onChange={handleInputChange}
+                        onBlur={() => handleBlur("placeOfBirth")}
+                        className={`form-input ${errors.placeOfBirth ? "error" : ""}`}
+                        placeholder="City, State, Country"
+                      />
+                      {errors.placeOfBirth && (
+                        <div className="error-message-with-icon">
+                          <FaExclamationCircle />
+                          <span>{errors.placeOfBirth}</span>
                         </div>
-                      </>
-                    )}
+                      )}
+                    </div>
 
                     <div className="form-group">
                       <label>
