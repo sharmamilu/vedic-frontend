@@ -51,6 +51,7 @@ const AstrologyPage = ({ darkMode }) => {
     consultationType: "",
     dob: "",
     timeOfBirth: "",
+    placeOfBirth: "",
     age: "",
     message: "", // Added message field
   });
@@ -106,6 +107,7 @@ const AstrologyPage = ({ darkMode }) => {
         consultation_type: formData.consultationType,
         date_of_birth: formData.dob || "Not provided",
         time_of_birth: formData.timeOfBirth || "Not provided",
+        place_of_birth: formData.placeOfBirth || "Not provided",
         age: formData.age || "Not provided",
         message:
           formData.message ||
@@ -130,6 +132,7 @@ const AstrologyPage = ({ darkMode }) => {
         consultationType: "",
         dob: "",
         timeOfBirth: "",
+        placeOfBirth: "",
         age: "",
         message: "",
       });
@@ -1072,6 +1075,17 @@ const AstrologyPage = ({ darkMode }) => {
                       placeholder="Select Time"
                     />
                   </div>
+                </div>
+
+                <div className="form-group">
+                  <input
+                    type="text"
+                    name="placeOfBirth"
+                    value={formData.placeOfBirth}
+                    onChange={handleInputChange}
+                    placeholder="Place of Birth (City, State, Country)"
+                    className="form-input"
+                  />
                 </div>
 
                 <div className="form-group">
