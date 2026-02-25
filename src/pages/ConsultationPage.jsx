@@ -47,6 +47,7 @@ const ConsultationPage = ({ darkMode }) => {
   const initialFormData = {
     // Personal Information (existing fields)
     name: "",
+    gender: "",
     dob: "",
     age: "",
     timeOfBirth: "",
@@ -464,6 +465,9 @@ const ConsultationPage = ({ darkMode }) => {
         else if (value.trim().length < 2)
           error = "Name must be at least 2 characters";
         break;
+      case "gender":
+        if (!value) error = "Gender is required";
+        break;
       case "email":
         error = validateEmail(value);
         break;
@@ -578,6 +582,7 @@ const ConsultationPage = ({ darkMode }) => {
     // List of all fields that have validation logic
     const allFields = [
       "name",
+      "gender",
       "dob",
       "age",
       "timeOfBirth",
@@ -655,6 +660,7 @@ const ConsultationPage = ({ darkMode }) => {
         from_email: formData.email.trim(),
         reply_to: formData.email.trim(),
         from_phone: `${formData.countryCode} ${formData.phone}`,
+        gender: formData.gender,
 
         // Consultation Details
         consultation_type: formData.consultationType,
@@ -850,6 +856,31 @@ const ConsultationPage = ({ darkMode }) => {
                         <div className="error-message-with-icon">
                           <FaExclamationCircle />
                           <span>{errors.name}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="form-group">
+                      <label>
+                        Gender <span className="required">*</span>
+                      </label>
+                      <select
+                        name="gender"
+                        value={formData.gender}
+                        onChange={handleInputChange}
+                        onBlur={() => handleBlur("gender")}
+                        className={`form-select ${errors.gender ? "error" : ""}`}
+                        required
+                      >
+                        <option value="">-- Select Gender --</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
+                      {errors.gender && (
+                        <div className="error-message-with-icon">
+                          <FaExclamationCircle />
+                          <span>{errors.gender}</span>
                         </div>
                       )}
                     </div>

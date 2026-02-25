@@ -54,6 +54,7 @@ const AstrologyPage = ({ darkMode }) => {
     placeOfBirth: "",
     age: "",
     message: "", // Added message field
+    gender: "",
   });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState({ type: "", message: "" });
@@ -109,6 +110,7 @@ const AstrologyPage = ({ darkMode }) => {
         time_of_birth: formData.timeOfBirth || "Not provided",
         place_of_birth: formData.placeOfBirth || "Not provided",
         age: formData.age || "Not provided",
+        gender: formData.gender || "Not provided",
         message:
           formData.message ||
           `New Astrology Consultation Request from ${formData.name}`,
@@ -135,6 +137,7 @@ const AstrologyPage = ({ darkMode }) => {
         placeOfBirth: "",
         age: "",
         message: "",
+        gender: "",
       });
     } catch (error) {
       console.error("EmailJS Error:", error);
@@ -1014,6 +1017,20 @@ const AstrologyPage = ({ darkMode }) => {
                     className="form-input"
                     required
                   />
+                </div>
+                <div className="form-group">
+                  <select
+                    name="gender"
+                    value={formData.gender}
+                    onChange={handleInputChange}
+                    className="form-input"
+                    required
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
                 <div className="form-group">
                   <input
