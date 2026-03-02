@@ -743,6 +743,23 @@
   color: var(--dark-text);
 }
 
+/* Practitioner Specialties */
+.practitioner-specialties {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--light-text);
+  background: rgba(67, 160, 71, 0.1);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.dark-mode .practitioner-specialties {
+  color: var(--dark-text);
+  background: rgba(142, 36, 170, 0.15);
+}
+
 /* Mobile */
 @media (max-width: 600px) {
   .vertical-card {
@@ -752,4 +769,60 @@
   .practitioner-name {
     font-size: 1.5rem;
   }
+}
+
+/* Nadiswara Analysis Section */
+.nadiswara-section {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 20px;
+  margin-top: 25px;
+  border-left: 4px solid var(--earth);
+}
+
+.dark-mode .nadiswara-section {
+  border-left-color: var(--gold);
+}
+
+.nadiswara-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--earth);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.dark-mode .nadiswara-title {
+  color: var(--gold);
+}
+
+.nadiswara-image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.nadiswara-image {
+  max-width: 100%;
+  max-height: 280px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: block;
+  object-fit: cover;
+}
+
+.nadiswara-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--light-text);
+  margin: 0;
+}
+
+.dark-mode .nadiswara-description {
+  color: var(--dark-text);
 }

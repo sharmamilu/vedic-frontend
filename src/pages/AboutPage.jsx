@@ -23,6 +23,7 @@ import {
 } from "react-icons/gi";
 import "../styles/AboutPage.css";
 import { useNavigate } from "react-router-dom";
+import nadiswaraImg from "../assets/images/nadiswara_new_cropped.jpg";
 
 const AboutPage = ({ darkMode }) => {
   const navigate = useNavigate();
@@ -297,9 +298,9 @@ const AboutPage = ({ darkMode }) => {
             <FaHeart /> Why Choose Vibrant Aura?
           </h2>
           <p className="section-subtitle">
-            ​Our approach is rooted in the "Whole-Person" philosophy. Whether
-            you are dealing with chronic pain, emotional stress, or simply
-            looking to enhance your spiritual growth, we provide a supportive
+            Our approach is rooted in the "Whole-Person" philosophy. Whether you
+            are dealing with chronic pain, emotional stress, or simply looking
+            to enhance your spiritual growth, we provide a supportive
             environment where science meets intuition.
           </p>
 
@@ -335,7 +336,14 @@ const AboutPage = ({ darkMode }) => {
           {/* Vidya KS */}
           <div className="practitioner-card vertical-card">
             <h3 className="practitioner-name">Vidya Nagendra</h3>
-            <p className="practitioner-role">Master Practitioner & Founder</p>
+            <p className="practitioner-role">
+              Master Practitioner & Founder
+              <br />
+              <span className="practitioner-specialties">
+                Pranic Crystal Healing | Bach Flower Remedy | Advanced
+                Acupressure
+              </span>
+            </p>
 
             {vidyaQualifications.map((group, index) => (
               <details key={index} className="toggle-card">
@@ -370,6 +378,25 @@ const AboutPage = ({ darkMode }) => {
                 </ul>
               </details>
             ))}
+
+            {/* Nadiswara Analysis Section */}
+            <div className="nadiswara-section">
+              <h4 className="nadiswara-title">
+                <FaHandsHelping /> Nadiswara Analysis and Reports
+              </h4>
+              <div className="nadiswara-image-container">
+                <img
+                  src={nadiswaraImg}
+                  alt="Nadiswara Hand Image"
+                  className="nadiswara-image"
+                />
+              </div>
+              <p className="nadiswara-description">
+                Experience advanced health analysis through Nadiswara - an
+                innovative non-invasive pulse diagnosis system that provides
+                comprehensive health reports.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -418,7 +445,7 @@ const AboutPage = ({ darkMode }) => {
             <div className="commitment-content">
               <h2>Ready to Reclaim Your Radiance?</h2>
               <p>
-                ​Your journey toward a more vibrant version of yourself begins
+                Your journey toward a more vibrant version of yourself begins
                 with a single step. Let us help you unlock the healing potential
                 that already exists within you.
               </p>
